@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="./login/login.css">
+    <link rel="shortcut icon" href="#">
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">
+            <!-- <img src="assets/Dmanaged.svg" alt=""> -->
+            <h2>Logo</h2>
+        </a>
+    </header>
+
+    <div class="container">
+        <div class="form_box login">
+            <span class="login_title">Đăng nhập</span>
+            <form action="#">
+                <div class="input_box">
+                    <span><img src="assets/person.svg" alt=""></span>
+                    <input type="text" id="username" autocomplete="on" required>
+                    <label>Tên đăng nhập</label>
+                </div>
+                <div class="input_box">
+                    <span><img src="assets/lock-closed.svg" alt=""></span>
+                    <input type="password" id="password" required>
+                    <label>Mật khẩu</label>
+                </div>
+                <div class="remember_forgot">
+                    <label><input type="checkbox" id="remember" >Lưu tài khoản</label>
+                    <a href="#">Quên mật khẩu?</a>
+                </div>
+                <button type="submit" class="btn" id="submit">Đăng nhập</button>
+                <div class="login_register">
+                    <p id="mess"></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="form_box register">
+            <span class="register_title">Đăng ký</span>
+            <form action="#">
+                <div class="input_box">
+                    <span><img src="assets/id-card.svg" alt=""></span>
+                    <input type="text" required>
+                    <label>Họ và tên đệm</label>
+                </div>
+                <div class="input_box">
+                    <span><img src="assets/id-card.svg" alt=""></span>
+                    <input type="text" required>
+                    <label>Tên</label>
+                </div>
+                <div class="input_box">
+                    <span><img src="assets/mail.svg" alt=""></span>
+                    <input type="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="remember_forgot">
+                    <label><input type="checkbox">Tôi đồng ý với các điều khoản & điều kiện</label>
+                </div>
+                <button type="submit" id="btn_register" class="btn">Đăng ký</button>
+                <div class="login_register">
+                    <p>Đã có tài khoản? <a href="#" class="login_link">Đăng nhập</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="form_box success_register">
+            <span class="success_register_title">Thông báo</span>
+            <div class="announcement">
+                <p>Liên kết đăng nhập đã được gửi về email của bạn, vui lòng đăng nhập bằng cách nhấn vào liên kết.</p>
+                <p>Trong trường hợp không nhận được được email hãy nhấn vào <a href="#" class="register_support">đây</a> để được hỗ trợ.</p>
+                <p>Lưu ý: Liên kết chỉ có hiệu lực trong vòng 1 phút.</p>
+            </div>
+            <button type="button" id="btn_done" class="btn">Đóng</button>
+        </div>
+    </div>
+    <script type="module" src="login/login.js"></script>
+</body>
+</html>
