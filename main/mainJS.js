@@ -62,32 +62,32 @@ export function createCookie(username, daysToExpire) {
 }
 
 
-export function getAllCookies() {
-    var username = "username"; // Tên cookie cần tìm
+// export function getAllCookies() {
+//     var username = "username"; // Tên cookie cần tìm
 
-    // Lấy chuỗi cookie
-    var cookies = document.cookie;
+//     // Lấy chuỗi cookie
+//     var cookies = document.cookie;
     
-    // Phân tách chuỗi cookie thành các cặp tên/giá trị
-    var cookieArray = cookies.split(';');
+//     // Phân tách chuỗi cookie thành các cặp tên/giá trị
+//     var cookieArray = cookies.split(';');
     
-    // Duyệt qua mỗi cặp tên/giá trị
-    for (var i = 0; i < cookieArray.length; i++) {
-        var cookie = cookieArray[i].trim(); // Xóa khoảng trắng dư thừa
-        var separatorIndex = cookie.indexOf('=');
-        var name = cookie.substring(0, separatorIndex); // Tên của cookie
-        var value = cookie.substring(separatorIndex + 1); // Giá trị của cookie
+//     // Duyệt qua mỗi cặp tên/giá trị
+//     for (var i = 0; i < cookieArray.length; i++) {
+//         var cookie = cookieArray[i].trim(); // Xóa khoảng trắng dư thừa
+//         var separatorIndex = cookie.indexOf('=');
+//         var name = cookie.substring(0, separatorIndex); // Tên của cookie
+//         var value = cookie.substring(separatorIndex + 1); // Giá trị của cookie
         
-        // Nếu tên của cookie trùng khớp với tên cookie cần tìm
-        if (name === username) {
-            // Giải mã giá trị của cookie và in ra
-            var decodedValue = decodeURIComponent(value);
-            console.log("Value of cookie " + username + ": " + decodedValue);
-            return decodedValue;
-        }
-    }
+//         // Nếu tên của cookie trùng khớp với tên cookie cần tìm
+//         if (name === username) {
+//             // Giải mã giá trị của cookie và in ra
+//             var decodedValue = decodeURIComponent(value);
+//             console.log("Value of cookie " + username + ": " + decodedValue);
+//             return decodedValue;
+//         }
+//     }
     
-    // Nếu không tìm thấy cookie có tên như username
-    console.log("Cookie " + username + " not found.");
-    return null;
-}
+//     // Nếu không tìm thấy cookie có tên như username
+//     console.log("Cookie " + username + " not found.");
+//     return null;
+// }

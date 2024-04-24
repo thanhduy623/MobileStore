@@ -35,11 +35,13 @@ var password = document.getElementById('password');
 var remember = document.getElementById('remember');
 var mess = document.getElementById('mess');
 
+
 //Khi click vào nút ĐĂNG NHẬP
 submit.addEventListener('click', function(event) {
     //Chan su kien
     event.preventDefault();
 
+    //Kiểm tra dữ liệu đầu vào
     if(JS.checkEmpty(username)) {
         JS.printMess(username, mess, "Vui lòng nhập username");
         return;
@@ -65,17 +67,15 @@ function toSent() {
 
 
 //Xử lí dữ liệu trả về từ PHP
-function handle() {
+function handle(xhr) {
     var response = JSON.parse(xhr.responseText);
+    console.log(response);
+    if(response[0] == false) {
+        mess.textContent = response[1];
+        return;
+    }
 
-        if(response[0] == false) {
-            mess.textContent = response[1];
-            return;
-        }
-
-        if(remember.checked) {
-            JS.createCookie(username.value, 3);
-        }
+    if(remember.checked) {
+        JS.createCookie(username.value, 3);
+    }
 }
-
-JS.getAllCookies();

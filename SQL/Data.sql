@@ -5,23 +5,15 @@ use STORE;
 
 create table STAFF
 (
-	username	varchar(99)			PRIMARY KEY,
+	username	varchar(50)			PRIMARY KEY,
     fullname	nvarchar(50)		NOT NULL,
-    email		varchar(254)		NOT NULL,
+    email		varchar(50)		NOT NULL,
     gender		boolean				NOT NULL,
     dateBirth	date				NOT NULL,
     phone		varchar(10)			NOT NULL,
-    role		varchar(10)			NOT NULL
-);
-
-
-create table ACCOUNT
-(
-	username	varchar(99)			PRIMARY KEY,
+    roled		varchar(10)			NOT NULL,
     pwd			varchar(22)			NOT NULL,
-    actived		int					NOT NULL,
-    
-    FOREIGN KEY (username) REFERENCES STAFF(username) ON DELETE CASCADE
+    actived		int					NOT NULL
 );
 
 
@@ -105,6 +97,24 @@ create table QUANTITY
     FOREIGN KEY (idProduct) REFERENCES PRODUCT(idProduct) ON DELETE CASCADE
 );
 
-create trigger ADD_ACCOUNT
-after insert on STAFF for each row
-insert into ACCOUNT values (LEFT(NEW.email, LOCATE('@', NEW.email) - 1), "Abc@123", -1);
+insert into STAFF values
+(
+	"nguyenduy.6203",
+	"Nguyễn Thanh Duy",
+    "nguyenduy.6203@gmail.com",
+    1,
+    "2004/01/01",
+    "0834828525",
+    "QL",
+    "a123",
+    1
+);
+
+SELECT
+    `Host`,
+    `User`,
+    `Password`
+FROM
+    `mysql`.`user`
+WHERE
+    `User` = 'root';
