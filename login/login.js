@@ -28,7 +28,7 @@ DoneBtn.addEventListener('click', () => {
 //XỬ LÍ DỮ LIỆU
 //
 //
-//
+// 
 var submit = document.getElementById('submit');
 var username = document.getElementById('username');
 var password = document.getElementById('password');
@@ -36,12 +36,31 @@ var remember = document.getElementById('remember');
 var mess = document.getElementById('mess');
 
 
+//XỬ LÍ SỰ KIỆN_______________________________________________________________________
+
+document.addEventListener("DOMContentLoaded", function() {
+    //Check session
+    checkSession();
+
+
+    //Check cookie
+    var cookies = document.cookie.split(';');
+    var username = document.getElementById('username');
+
+    for(var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim().split('=');
+        if (cookie[0] === "user") {
+            username.value = cookie[1];
+            console.log(cookie[1]);
+            break;
+        }
+    }
+})
+
 //Khi click vào nút ĐĂNG NHẬP
 submit.addEventListener('click', function(event) {
-    //Chan su kien
     event.preventDefault();
 
-    //Kiểm tra dữ liệu đầu vào
     if(JS.checkEmpty(username)) {
         JS.printMess(username, mess, "Vui lòng nhập username");
         return;
@@ -52,30 +71,44 @@ submit.addEventListener('click', function(event) {
         return;
     }
 
+    //Gửi thực thi php
     toSent();
 })
 
 
-//Gửi thông tin kết nối tới PHP
+//KẾT NỐI PHP_______________________________________________________________________
 function toSent() {
-    var path = "login/login.php";
+    var path = "./login/login.php";
     var data =  "username=" + encodeURIComponent(username.value) + 
                 "&password=" + encodeURIComponent(password.value);
-
     JS.connectToPHP(path, data, function(xhr) {handle(xhr);});
 }
 
 
-//Xử lí dữ liệu trả về từ PHP
+//XỬ LÍ TRẢ VỀ______________________________________________________________________
 function handle(xhr) {
     var response = JSON.parse(xhr.responseText);
-    console.log(response);
     if(response[0] == false) {
         mess.textContent = response[1];
         return;
     }
 
     if(remember.checked) {
-        JS.createCookie(username.value, 3);
+        var expires = "";
+        if (daysToExpire) {
+            var date = new Date();
+            date.setTime(date.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = "user= " + encodeURIComponent(username) + expires + "; path=/MobileStore/";
     }
+
+    window.location.href = "./staff/index.html";
+}
+
+function checkSession() {
+    JS.connectToPHP("./main/checkSession.php", "", function(xhr) {
+        var response = xhr.responseText;
+        if(response == true) {window.location.replace("./staff");}
+    });
 }

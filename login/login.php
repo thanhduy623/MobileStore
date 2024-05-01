@@ -1,20 +1,7 @@
 <?php
-    // //Khởi tạo
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "STORE";
-    $conn = mysqli_connect($servername, $username, $password, $database);
+    include '../main/connectSQL.php';
+    $conn = connectDB();     
 
-
-    if (!$conn) {
-        echo json_encode([false, "Lỗi kết nối hệ thống"]);     
-        exit();
-    }
-
-   
-
-    //Lay du lieu tu JS
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -30,7 +17,7 @@
         echo json_encode([false, "Tài khoản không tồn tại"]);
         exit();
     }
-    
+
 
     //Lấy dữ liệu
     $row = $result->fetch_assoc();
@@ -40,27 +27,27 @@
     $roled_db = $row['roled'];
     $pwd_db = $row['pwd'];
 
+
     //Kiem tra mật khẩu
     if ($password != $pwd_db) {
         echo json_encode([false,"Sai mật khẩu"]);
         exit();
     }
-    
 
     //Bị khóa tài khoản
     if ($actived_db == 0) {
-        echo json_encode([false, "Tài khoản của bạn đã bị khóa"]);
+        echo json_encode([false, "Tài khoản của bạn đang bị khóa"]);
         exit();
     }
-
+    
+    
     //Tao session
     session_start();
-    $_SESSION['username'] = $username_db;
-    $_SESSION['fullname'] = $fullname_db;
-    $_SESSION['username'] = $roled_db;
+    $_SESSION['username']   = $username_db;
+    $_SESSION['fullname']   = $fullname_db;
+    $_SESSION['role']       = $roled_db;
     session_write_close();
 
     echo json_encode([true]);
-
     exit();
 ?>
