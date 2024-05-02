@@ -8,7 +8,7 @@ create table STAFF
 	username	varchar(50)			PRIMARY KEY,
     fullname	nvarchar(50),
     email		varchar(50)	,
-    gender		boolean	,
+    gender		nvarchar(3),
     dateBirth	date,
     phone		varchar(10)	,
     roled		varchar(10)	,
@@ -103,7 +103,7 @@ insert into STAFF values
 	"nguyenduy.6203",
 	"Nguyễn Thanh Duy",
     "nguyenduy.6203@gmail.com",
-    1,
+    "Nam",
     "2000/01/01",
     "0834828525",
     "QL",
@@ -112,11 +112,4 @@ insert into STAFF values
     "s"
 );
 
-SELECT
-    `Host`,
-    `User`,
-    `Password`
-FROM
-    `mysql`.`user`
-WHERE
-    `User` = 'root';
+select * from STAFF

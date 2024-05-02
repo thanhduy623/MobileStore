@@ -25,7 +25,6 @@
     $fullname_db = $row['fullname'];
     $actived_db = $row['actived'];
     $roled_db = $row['roled'];
-    $pwd_db = $row['pwd'];
 
 
     //Kiem tra mật khẩu
@@ -46,8 +45,10 @@
     $_SESSION['username']   = $username_db;
     $_SESSION['fullname']   = $fullname_db;
     $_SESSION['role']       = $roled_db;
+    $_SESSION['img']        = $username_db . ".png";
+    $_SESSION['actived']    = $actived_db;
+    
     session_write_close();
-
     echo json_encode([true]);
     exit();
 ?>

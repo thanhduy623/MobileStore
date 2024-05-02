@@ -204,10 +204,8 @@ var dd = document.getElementById("upload_date");
 var mm = document.getElementById("upload_month");
 var yy = document.getElementById("upload_year");
 var btnAvatar = document.getElementById("upload_photo");
-var role = JS.getSelected("upload_role");
-var mess = document.getElementById("mess");
 var newAvatar = document.getElementById("avatar_upload"); 
-var urlNewAvatar;
+
 
 btnCreate.addEventListener('click', function(event){
     event.preventDefault();
@@ -220,9 +218,14 @@ btnCreate.addEventListener('click', function(event){
                 "&phone=" + encodeURIComponent(phone.value) +
                 "&email=" + encodeURIComponent(email.value) +
                 "&gender=" + encodeURIComponent(JS.getRadio('gender').value) +
-                "&birth=" + encodeURIComponent(yy.value +"/"+mm.value+"/"+dd.value);
-    JS.connectToPHP(path, data, function(xhr) {
-        var response = JSON.parse(xhr.responseText);
+                "&birth=" + encodeURIComponent(yy.value +"/"+mm.value+"/"+dd.value) +
+                "&roled=" + encodeURIComponent(JS.getSelected("upload_role").value);
+
+    
+    JS.connectToPHP(path, data, function(xhr) 
+    {
+        var response = (xhr.responseText);
+        console.log(response);
         if(response[0] == false) {
             alert(response[1]);
         }
@@ -299,7 +302,7 @@ btnAvatar.addEventListener('click', function(event){
                 var path = "../staff/uploadAvatar.php";
                 var data = 'image=' + encodeURIComponent(imageData);
                 JS.connectToPHP(path, data, function(xhr) {
-                    urlNewAvatar = xhr.responseText;
+                    var urlNewAvatar = xhr.responseText;
                     newAvatar.src = urlNewAvatar;
                 });
             };
