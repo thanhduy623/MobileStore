@@ -8,8 +8,8 @@
     
         // Kiểm tra kết nối
         if (!$conn) {
-            die("Kết nối đến cơ sở dữ liệu thất bại: " . mysqli_connect_error());
-            return false;
+            echo json_encode([false, "Tài khoản không tồn tại"]);
+            die();
         }
     
         return $conn;

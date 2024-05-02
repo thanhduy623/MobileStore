@@ -1,6 +1,6 @@
 <?php
     include '../main/connectSQL.php';
-    $conn = connectDB();     
+    $conn = connectDB();
 
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -10,7 +10,8 @@
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
-    
+
+
 
     //Tài khoản không tồn tại
     if ($result->num_rows == 0) {
@@ -25,16 +26,17 @@
     $fullname_db = $row['fullname'];
     $actived_db = $row['actived'];
     $roled_db = $row['roled'];
+    $pwd_db = $row['pwd'];
 
 
     //Kiem tra mật khẩu
-    if ($password != $pwd_db) {
+    if(!password_verify($password, $pwd_db)) {
         echo json_encode([false,"Sai mật khẩu"]);
         exit();
     }
 
     //Bị khóa tài khoản
-    if ($actived_db == 0) {
+    if ($actived_db == -1) {
         echo json_encode([false, "Tài khoản của bạn đang bị khóa"]);
         exit();
     }
@@ -44,7 +46,7 @@
     session_start();
     $_SESSION['username']   = $username_db;
     $_SESSION['fullname']   = $fullname_db;
-    $_SESSION['role']       = $roled_db;
+    $_SESSION['roled']       = $roled_db;
     $_SESSION['img']        = $username_db . ".png";
     $_SESSION['actived']    = $actived_db;
     

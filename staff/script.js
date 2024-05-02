@@ -205,6 +205,7 @@ var mm = document.getElementById("upload_month");
 var yy = document.getElementById("upload_year");
 var btnAvatar = document.getElementById("upload_photo");
 var newAvatar = document.getElementById("avatar_upload"); 
+var btnCancel = document.getElementById("cancel");
 
 
 btnCreate.addEventListener('click', function(event){
@@ -224,12 +225,11 @@ btnCreate.addEventListener('click', function(event){
     
     JS.connectToPHP(path, data, function(xhr) 
     {
-        var response = (xhr.responseText);
-        console.log(response);
-        if(response[0] == false) {
-            alert(response[1]);
-        }
+        var response = JSON.parse(xhr.responseText);
+        alert(response[1]);
     })
+
+    btnCancel.click();
 })
 
 function checkInput() {
@@ -308,6 +308,4 @@ btnAvatar.addEventListener('click', function(event){
             };
         }
     });
-
-    input.click();
 })

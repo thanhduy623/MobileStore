@@ -10,11 +10,11 @@
     $phone = $_POST['phone'];
     $roled = $_POST['roled'];
     $img = $username . ".png";
-    $pwd = $username;
-    $actived = 0;
+    $pwd = password_hash($username, PASSWORD_DEFAULT);
+    $actived = -1;
 
 
-    //Kiểm tra tài khoản đã tồn tại
+    // Kiểm tra tài khoản đã tồn tại
     $query = "SELECT username FROM STAFF WHERE username = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("s", $username);
@@ -36,29 +36,9 @@
 
     //Kiểm tra tình trạng thêm tài khoản
     if (!($stmt->execute())) {
-        echo json_encode([true, "Đã thêm đối tượng thành công"]);
+        echo json_encode([false, "Thêm đối tượng không thành công"]);
     }
 
-    ini_set("SMTP", "mail.example.com");
-    ini_set("smtp_port", "25");
-
-    // Tạo mã token ngẫu nhiên
-    $token = bin2hex(random_bytes(16));
-    $expiryTime = time() + 60;
-
-    // Tạo đường link kèm token
-    $activationLink = "http://localhost/MobileStore/activate.php?username=$username&token=$token&expiry=$expiryTime";
-
-    // Gửi email kèm đường link
-    $to = $email;
-    $subject = "Kích hoạt tài khoản của bạn";
-    $message = "Nhấp vào đường link sau để kích hoạt tài khoản của bạn: $activationLink";
-    $headers = "From: your@example.com";
-
-    // Gửi email
-    if (mail($to, $subject, $message, $headers)) {
-        echo "Email đã được gửi thành công!";
-    } else {
-        echo "Không thể gửi email. Vui lòng thử lại sau.";
-    }
+    include '../staff/sentMail.php';
+    sentMail($username, $email, $name);
 ?>

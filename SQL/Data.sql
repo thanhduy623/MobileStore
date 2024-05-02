@@ -12,9 +12,23 @@ create table STAFF
     dateBirth	date,
     phone		varchar(10)	,
     roled		varchar(10)	,
-    pwd			varchar(22)	,
+    pwd			varchar(100),
     actived		int,
     img			varchar(50)
+);
+
+insert into STAFF values
+(
+	"admin",
+	"Quản trị viên",
+    "admin@gmail.com",
+    "Nam",
+    "2004/01/01",
+    "0000000000",
+    "Quản lí",
+    "$2y$10$931OhhXYyK9kXsVDJg.agOR01FaPCW1V35afsWXHCSbwCKtdADgrG",
+    1,
+    "../avatar/admin.png"
 );
 
 
@@ -98,18 +112,4 @@ create table QUANTITY
     FOREIGN KEY (idProduct) REFERENCES PRODUCT(idProduct) ON DELETE CASCADE
 );
 
-insert into STAFF values
-(
-	"nguyenduy.6203",
-	"Nguyễn Thanh Duy",
-    "nguyenduy.6203@gmail.com",
-    "Nam",
-    "2000/01/01",
-    "0834828525",
-    "QL",
-    "a123",
-    1,
-    "s"
-);
-
-select * from STAFF
+select * from STAFF;

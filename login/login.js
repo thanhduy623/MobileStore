@@ -88,6 +88,7 @@ function toSent() {
 //XỬ LÍ TRẢ VỀ______________________________________________________________________
 function handle(xhr) {
     var response = JSON.parse(xhr.responseText);
+    console.log(response);
 
     if(response[0] == false) {
         mess.textContent = response[1];
@@ -109,7 +110,6 @@ function handle(xhr) {
 
 function checkSession() {
     JS.connectToPHP("./main/checkSession.php", "", function(xhr) {
-        var response = xhr.responseText;
-        if(response == true) {window.location.replace("./staff");}
+        window.location.href = xhr.responseText;
     });
 }
