@@ -135,6 +135,8 @@ document.addEventListener('DOMContentLoaded', function() {
     cancel.addEventListener('click', function(){
         create_account_modal.style.display = 'none';
         document.body.style.overflow = "auto";
+        var newAvatar = document.getElementById("avatar_upload");
+        newAvatar.src = "../assets/logo_square.png" 
     })
 
     window.addEventListener('click', function(event){
@@ -201,19 +203,30 @@ var email = document.getElementById("upload_email");
 var dd = document.getElementById("upload_date");
 var mm = document.getElementById("upload_month");
 var yy = document.getElementById("upload_year");
-var avatar = document.getElementById("upload_photo")
+var btnAvatar = document.getElementById("upload_photo");
 var role = JS.getSelected("upload_role");
-var gender = JS.getRadio("gender");
 var mess = document.getElementById("mess");
-
+var newAvatar = document.getElementById("avatar_upload"); 
+var urlNewAvatar;
 
 btnCreate.addEventListener('click', function(event){
     event.preventDefault();
-
     if(!checkInput()) {
         return;
     }
 
+    var path = "../staff/addStaff.php";
+    var data =  "name=" + encodeURIComponent(lName.value + " " + fName.value) + 
+                "&phone=" + encodeURIComponent(phone.value) +
+                "&email=" + encodeURIComponent(email.value) +
+                "&gender=" + encodeURIComponent(JS.getRadio('gender').value) +
+                "&birth=" + encodeURIComponent(yy.value +"/"+mm.value+"/"+dd.value);
+    JS.connectToPHP(path, data, function(xhr) {
+        var response = JSON.parse(xhr.responseText);
+        if(response[0] == false) {
+            alert(response[1]);
+        }
+    })
 })
 
 function checkInput() {
@@ -250,18 +263,48 @@ function checkInput() {
         return false;
     }
 
-    if(JS.getRadio(gender)) {
+    if(!JS.getRadio('gender')) {
+        alert("Vui lòng chọn giới tính của nhân viên");
+        return false;
+    } 
+
+    if(JS.checkDate(dd, mm, yy)) {
+        alert("Vui lòng chọn ngày sinh của nhân viên");
         return false;
     }
 
-    if(JS.getDate(dd, mm, yy)) {
-        return false;
-    }
-
+    
     return true;
 }
 
-avatar.addEventListener('click', function(event){
-    
+btnAvatar.addEventListener('click', function(event){
+    var input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
 
+    var input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+
+    // Khi người dùng chọn file ảnh
+    input.addEventListener('change', function() {
+        var file = this.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function() 
+            {
+                var imageData = reader.result;
+                var path = "../staff/uploadAvatar.php";
+                var data = 'image=' + encodeURIComponent(imageData);
+                JS.connectToPHP(path, data, function(xhr) {
+                    urlNewAvatar = xhr.responseText;
+                    newAvatar.src = urlNewAvatar;
+                });
+            };
+        }
+    });
+
+    input.click();
 })

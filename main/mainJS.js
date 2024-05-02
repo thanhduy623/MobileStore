@@ -41,16 +41,13 @@ export function printMess(element, mess, messError) {
 
 //Lấy dữ liệu của radio
 export function getRadio(element) {
-    const genderRadioButtons = document.getElementsByName(element);
-    const selectedRadio = Array.from(genderRadioButtons).find(radio => radio.checked);
-
-    if (!selectedRadio) {
-        console.log("Không có lựa chọn nào được chọn.");
-        return null;
+    const genderRadios = document.querySelectorAll(`input[name="${element}"]`);
+    for (let radio of genderRadios) {
+        if (radio.checked) {
+            return radio;
+        }
     }
-
-    // Trả về radio được chọn
-    return selectedRadio;
+    return false;
 }
 
 
@@ -66,29 +63,41 @@ export function getSelected(name) {
 
 export function checkPhone(element) {
     var regex = /^0\d{9}$/;
-    console.log(regex.test(element.value));
     return regex.test(element.value);
 }
 
-export function getDate(day, month, year) {
-    const date = new Date(year, month - 1, day);
+export function checkDate(day, month, year) {
+    // Chuyển đổi ngày, tháng, năm từ chuỗi sang số nguyên
+    day = day.valuel
+    month = month.value;
+    year = year.value;
 
-    if (
-        date.getDate() === day &&
-        date.getMonth() === month - 1 &&
-        date.getFullYear() === year
-    ) {
-        const formattedDay = String(day).padStart(2, '0');
-        const formattedMonth = String(month).padStart(2, '0');
-        return `${formattedDay}/${formattedMonth}/${year}`;
-    } else {
-        return null;
+    // Kiểm tra xem ngày, tháng, năm có hợp lệ không
+    if (isNaN(day) || isNaN(month) || isNaN(year)) {
+        return false; // Ngày, tháng, năm không phải là số
     }
+
+    if (month < 1 || month > 12) {
+        return false; // Tháng không hợp lệ
+    }
+
+    // Kiểm tra số ngày trong tháng
+    var daysInMonth = new Date(year, month, 0).getDate();
+    if (day < 1 || day > daysInMonth) {
+        return false; // Ngày không hợp lệ cho tháng và năm đã cho
+    }
+
+    if (year < 0) {
+        return false; // Năm không được âm
+    }
+
+    // Nếu tất cả các điều kiện đều đúng, ngày là hợp lệ
+    return true;
 }
 
 
 //Kiểm tra cấu trúc mail
 export function checkEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    return emailRegex.test(email.value);
 }
