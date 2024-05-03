@@ -23,16 +23,22 @@
             $mail->Port = 587;
         
             //Recipients
-            $mail->setFrom('fourDuStore@gmail.com', 'Mailer');
+            $mail->setFrom('fourDuStore@gmail.com', 'FOUR DU STORE');
             $mail->addAddress($email, $name);
             $expires = time() + 60;
+            $username = json_decode($username);
+            $expires = json_decode($expires);
             $activationLink = "http://localhost/MobileStore/staff/actived_0.php?username=$username&expires=$expires";
 
         
             //Content
             $mail->isHTML(true);
             $mail->Subject = 'Here is the subject';
-            $mail->Body    = "Click <a href=\"$activationLink\">here</a> to activate your account.";
+            $mail->Body    = "
+                            Chào $username,\n \n
+                            Chúc mừng bạn đã trở thành thành viên của Four Du Store!\n \n
+                            Vui lòng chọn vào <a href=\"$activationLink\">đây</a> để kích hoạt tài khoản.
+                            ";
 
         
             $mail->send();

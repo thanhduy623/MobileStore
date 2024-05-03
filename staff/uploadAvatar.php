@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    $username = $_POST['username'];
     $imageData = $_POST['image'];
     $imageData = str_replace('data:image/png;base64,', '', $imageData);
     $imageData = str_replace(' ', '+', $imageData);
@@ -9,7 +9,7 @@
 
     // Thiết lập đường dẫn và tên tệp để lưu ảnh
     $directory = '../avatar/'; // Thư mục lưu ảnh
-    $fileName = $_SESSION['username'] . '_temp.png';
+    $fileName = $username . '_temp.png';
     $filePath = $directory . $fileName;
 
     // Kiểm tra và tạo thư mục nếu nó không tồn tại

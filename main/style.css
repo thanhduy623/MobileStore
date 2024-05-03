@@ -13,11 +13,16 @@
     background-image: linear-gradient(to bottom right, #924BFF, #54DAFF);
 }
 
+#grad2{
+    background-image: linear-gradient(to right, #0047FF, #C67EFF);
+}
+
 body{
     /* min-height: 300vh; */
-    background: url('../assets/R550.jpg');
+    /* background: url('R550.jpg'); */
     background-size: cover;
     overflow: auto;
+    background-color: #F5F5F7;
 }
 
 header{
@@ -30,12 +35,23 @@ header{
     align-items: center;
     justify-content: space-between;
     background: transparent;
-    /* background-color: #182C42; */
     /* background-color: white; */
     border-bottom: 1px solid #dedede;
     padding: 27px 12%;
     transition: all .45s ease;
-    /* backdrop-filter: blur(20px); */
+    backdrop-filter: blur(10px);
+}
+
+/* #logo, #user, #guide{
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7499%) hue-rotate(246deg) brightness(104%) contrast(103%);
+} */
+
+/* #logo{
+    filter: brightness(0) saturate(100%) invert(66%) sepia(66%) saturate(393%) hue-rotate(153deg) brightness(101%) contrast(102%);  
+} */
+
+header.scroll {
+    padding: 14px 2%;
 }
 
 .header_cover{
@@ -48,15 +64,12 @@ header{
     background-size: cover;
     overflow: auto;
     color: transparent;
-    /* transition: all .45s ease; */
+    transition: all .45s ease;
+    height: 134px;
 }
 
-/* #logo, #user, #guide{
-    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7499%) hue-rotate(246deg) brightness(104%) contrast(103%);
-} */
-
-header.scroll {
-    padding: 14px 2%;
+.header_cover.scroll{
+    height: 108px;
 }
 
 main{
@@ -85,7 +98,7 @@ main.scroll{
 } */
 
 .logo img{
-    width: 150px;
+    width: 100px;
     height: 60px;
 }
 
@@ -127,7 +140,8 @@ main.scroll{
     left: 50%;
     transform: translate(-50%, -30%);
     color: white;
-    background-color: #54DAFF;
+    /* background-color: #54DAFF; */
+    background-color: black;
     border-radius: 30px;
     padding: 0 3px;
     transition: transform 0.45s ease;
@@ -142,7 +156,7 @@ main.scroll{
 
 .list:hover img{
     transform: translateY(-9px); 
-    filter: brightness(0) saturate(100%) invert(68%) sepia(75%) saturate(474%) hue-rotate(161deg) brightness(101%) contrast(102%);
+    /* filter: brightness(0) saturate(100%) invert(68%) sepia(75%) saturate(474%) hue-rotate(161deg) brightness(101%) contrast(102%); */
 }
 
 .list:hover span{
@@ -155,12 +169,13 @@ main.scroll{
     align-self: center;
     position: absolute;
     margin-left: 2px;
-    border: 2px solid #54DAFF;
+    /* border: 2px solid #54DAFF; */
     border-radius: 50px;
     width: 5em; 
     height: 4.2em;
     transition: transform 0.45s ease;
     z-index: 3;
+    box-shadow: 0 0 9px rgba(0, 0, 0, .3);
 }
 
 .menu{
@@ -185,9 +200,9 @@ main.scroll{
     display: none;
 }
 
-.active img{
+/* .active img{
     filter: brightness(0) saturate(100%) invert(68%) sepia(75%) saturate(474%) hue-rotate(161deg) brightness(101%) contrast(102%);
-}
+} */
 
 .contain1{
     display: flex;
@@ -205,14 +220,43 @@ main.scroll{
     justify-content: space-between;
 }
 
+.user_frame{
+    /* background-color: #F1F1F1; */
+    border-radius: 30px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 3px solid #F1F1F1;
+}
+
+.user_frame:hover{
+    background-color: #E9E9E9;
+    border: 3px solid #E9E9E9;
+    /* opacity: 0.9; */
+}
+
+.user_frame.active1{
+    background-color: #E9E9E9;
+    border: 3px solid #E9E9E9;
+}
+
+#user{
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+}
+
 .user_modal{
     display: none;
     position: fixed;
     z-index: 100;
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     /* background-color: rgba(0, 0, 0, 0.5); */
 }
 
@@ -242,22 +286,30 @@ main.scroll{
     margin: 6px;
 }
 
-#user:hover{
+/* #user:hover{
     transform: scale(1.1);
+} */
+
+#guide{
+    display: flex;
 }
 
-#guide:hover{
+/* #guide:hover{
     transform: scale(1.1);
-}
+} */
 
-#menu-icon:hover{
+/* #menu-icon:hover{
     transform: scale(1.1);
-}
+} */
 
 .user_modal_content .profile, .account, .setting, .help, .themes, .logout{
     display: flex;
     align-items: center;
-    padding-left: 9px;
+    /* padding-left: 9px; */
+    cursor: pointer;
+    width: 93%;
+    align-self: center;
+    border-radius: 6px;
 }
 
 .user_modal_content .logout{
@@ -271,7 +323,7 @@ main.scroll{
 .user_modal_content .help:hover, 
 .user_modal_content .themes:hover, 
 .user_modal_content .logout:hover {
-    background-color: #dedede;
+    background-color: #E9E9E9;
 }
 
 .basic_info{
@@ -280,6 +332,11 @@ main.scroll{
     box-shadow: 0 0 9px rgba(0, 0, 0, .2);
     border-radius: 6px;
     margin: 9px;
+    cursor: pointer;
+}
+
+.basic_info:hover{
+    background-color: #E9E9E9;
 }
 
 #avatar{
@@ -300,11 +357,117 @@ main.scroll{
     color: grey;
 }
 
-/* Quanlynhanvien */
+
+/* ======================================================================================================
+
+
+                                                HOME PAGE
+                                                
+                                                
+=========================================================================================================*/
+
+.home_page_container1{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    background: url('background/homepagebackgroundv3.png');
+    background-size: cover;
+}
+
+.home_page_container2{
+    display: flex;
+    flex-direction: column;
+    padding: 90px 4%;
+}
+
+.welcome_title{
+    font-size: 2.4em;
+    font-weight: 600;
+}
+
+.welcome_role{
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.welcome_start_guide{
+    margin-top: 25px;
+    display: flex;
+    gap: 15px;
+}
+
+.welcome_start_frame{
+    display: flex;
+    padding: 12px 25px;
+    border-radius: 30px;
+    /* border: 1px solid black; */
+    background-color: #E1E1E1;
+    cursor: pointer;
+}
+
+.welcome_start_frame img{
+    height: 25px;
+    width: 25px;
+    margin-left: 5px;
+    transition: transform 0.45s ease;
+}
+
+.welcome_start_frame:hover img{
+    transform: translateX(5px);
+}
+
+.welcome_guide_frame{
+    display: flex;
+    padding: 12px 25px;
+    border-radius: 30px;
+    /* border: 1px solid black; */
+    background-color: white;
+    cursor: pointer;
+}
+
+.welcome_avatar{
+    margin-left: auto;
+}
+
+.welcome_avatar img{
+    width: 500px;
+    height: 500px;
+}
+
+
+/* =======================================================================================================
+
+
+                                            QUAN LY NHAN VIEN
+
+
+==========================================================================================================*/
 .title{
-    font-size: 1.2em;
+    font-size: 2em;
     font-weight: 600;
     color: black;
+}
+
+.midTitle{
+    font-size: 1.4em;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.smallTitle{
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.description{
+    width: 45%;
+
+}
+
+.path{
+    margin-bottom: 10px;
 }
 
 .path a{
@@ -316,18 +479,20 @@ main.scroll{
     padding: 9px;
     margin: 12px;
     display: flex;
-    width: 160px;
+    /* width: 160px; */
+    width: fit-content;
     height: 50px;
     align-items: center;
     justify-content: center;
     background-color: transparent;
     border-radius: 30px;
-    border: 1px solid #ccc;
+    border: 1px solid #F1F1F1;
+    background-color: #F1F1F1;
     cursor: pointer;
 }
 
 .create_account_btn:hover{
-    background-color: #ccc;
+    background-color: #E1E1E1;
 }
 
 .create_account_btn img{
@@ -338,6 +503,15 @@ main.scroll{
 .create_account_btn span{
     font-size: 1em;
     font-weight: 600;
+    margin: 0px 5px;
+}
+
+.margin_bottom{
+    margin-bottom: 10px;
+}
+
+.margin_top{
+    margin-top: 10px;
 }
 
 .create_account_modal{
@@ -390,14 +564,12 @@ main.scroll{
 .create_account_content{
     display: flex;
     flex-direction: column;
-    /* max-height: 550px; */
     padding: 15px;
     overflow-y: auto;
     overflow-x: hidden;
-    transition: box-shadow 0.3s ease-in-out;
 }
 
-.create_account__footer{
+.create_account_footer{
     padding: 0px 15px 15px 15px;
 }
 
@@ -411,6 +583,10 @@ main.scroll{
     font-size: 1em;
 }
 
+.create_account_content span{
+    font-size: 0.9em;
+}
+
 .upload_avatar{
     width: 100px;
     height: 100px;
@@ -418,8 +594,8 @@ main.scroll{
     border: 3px solid #ccc;
 }
 
-.upload_btn{
-    background-color: #E9E9E9;
+.upload_avatar_btn{
+    background-color: #F1F1F1;
     margin-top: 7px;
     margin-left: 15px;
     height: 40px;
@@ -432,15 +608,15 @@ main.scroll{
     font-size: 0.9em;
 }
 
-.upload_btn:hover{
-    background-color: #E2E2E2;
+.upload_avatar_btn:hover{
+    background-color: #E1E1E1;
 }
 
-.upload_btn span{
+.upload_avatar_btn span{
     margin-left: 3px;
 }
 
-.upload_btn img{
+.upload_avatar_btn img{
     height: 20px;
     width: 20px;
 }
@@ -448,10 +624,13 @@ main.scroll{
 .upload_role{
     margin-left: 15px;
     margin-top: 10px;
-    height: 40px;
+    height: 30px;
     width: 120px;
     border-radius: 30px;
-    border: 1px solid black;
+}
+
+.upload_role:hover{
+    background-color: #E1E1E1;
 }
 
 select{
@@ -461,7 +640,7 @@ select{
     box-shadow: none;
     flex: 1;
     padding: 0 1em;
-    background-color: #E9E9E9;
+    background-color: #F1F1F1;
     cursor: pointer;
 }
 
@@ -507,7 +686,11 @@ input[type="radio"] {
     margin-bottom: 15px;
 }
 
-.upload_birthday input{
+.birthday_container{
+    margin-bottom: 10px;
+}
+
+.birthday_container input{
     width: 100px !important;
     margin-bottom: 0px;
     margin-top: 5px;
@@ -521,7 +704,8 @@ input[type="radio"] {
 
 .create{
     padding: 10px 30px;
-    background-color: green;
+    /* background-color: green; */
+    background-color: black;
     border: none;
     border-radius: 30px;
     color: white;
@@ -529,9 +713,24 @@ input[type="radio"] {
     cursor: pointer;
 }
 
-.create:hover{
+/* .create:hover{
     background-color: darkgreen;
+} */
+
+.delete{
+    padding: 10px 30px;
+    /* background-color: red; */
+    background-color: black;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
 }
+
+/* .delete:hover{
+    background-color: darkred;
+} */
 
 .cancel{
     padding: 10px 30px;
@@ -539,26 +738,38 @@ input[type="radio"] {
     border: none;
     font-size: 1em;
     cursor: pointer;
+    background-color: #F1F1F1;
 }
 
 .cancel:hover{
-    background-color: #ccc;
+    background-color: #E1E1E1;
 }
 
 .search_btn{
     padding: 9px;
     margin: 12px;
     border-radius: 30px;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     display: flex;
     width: fit-content;
     height: 50px;
+    background-color: #F1F1F1;
 }
 
 .search_btn input{
     border: none;
     outline: none;
     font-size: 1em;
+    background-color: #F1F1F1;
+    padding-left: 5px;
+}
+
+.search_btn:hover{
+    background-color: #E1E1E1;
+}
+
+.search_btn:hover input {
+    background-color: #E1E1E1;
 }
 
 .search_btn img{
@@ -566,13 +777,7 @@ input[type="radio"] {
     height: 25px;
     margin: 3px;
     cursor: pointer;
-    /* transition: transform 0.45s ease; */
 }
-
-.search_btn img:hover{
-    /* transform: scale(1.1); */
-}
-
 
 .staff_header_helper{
     display: flex;
@@ -601,7 +806,7 @@ input[type="radio"] {
     width: 15%;
 }
 
-.main_content{
+.staff_main_content{
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -617,7 +822,12 @@ input[type="radio"] {
     display: flex;
     flex-direction: row;
     align-items: center;
+    cursor: pointer;
 }
+
+/* .user_box:nth-child(odd) {
+    background-color: #dedede;
+} */
 
 .user_box:hover{
     transform: scale(1.02);
@@ -637,6 +847,7 @@ input[type="radio"] {
 
 #u_ho_ten{
     width: 25%;
+    padding-right: 15px;
 }
 
 #u_diachi_email{
@@ -646,12 +857,14 @@ input[type="radio"] {
 
 #u_chuc_vu{
     width: 15%;
+    font-size: 0.9em;
 }
 
 #inner_u_chuc_vu{
     width: fit-content;
     padding: 0px 5px;
-    background-color: #54DAFF;
+    /* background-color: #54DAFF; */
+    background-color: black;
     border-radius: 5px;
     color: white;
 }
@@ -676,20 +889,294 @@ input[type="radio"] {
     background-color: transparent;
 }
 
-.delete_btn{
+/* .delete_account_btn{
     filter: brightness(0) saturate(100%) invert(17%) sepia(100%) saturate(7497%) hue-rotate(359deg) brightness(102%) contrast(110%);
+} */
+
+.delete_account_confirmation_modal{
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.delete_account_confirmation_container{
+    background-color: white;
+    /* width: 550px; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+}
+
+.delete_account_confirmation_header{
+    display: flex;
+    justify-content: center;
+    font-size: 1.1em;
+    padding: 15px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+.delete_account_confirmation_header p{
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.delete_account_confirmation_content{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    padding: 20px 45px 30px 45px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.delete_account_confirmation_footer{
+    padding: 0px 15px 15px 15px;
+}
+
+.center_element{
+    display: flex;
+    justify-content: center;
+}
+
+.staff_information_content{
+    display: flex;
+    flex-direction: column;
+    padding: 0px 10% 0 5%;
+    /* white-space: nowrap; */
+    z-index: 0;
+}
+
+.staff_information_content input{
+    margin-bottom: 15px;
+    height: 45px;
+    width: 100%;
+    border-radius: 15px;
+    border: 2px solid #CDCDCD;
+    padding: 0px 15px; 
+    font-size: 1em;
+}
+
+.staff_information_content span{
+    font-size: 0.9em;
+}
+
+.change_avatar{
+    width: 120px;
+    height: 120px;
+    border-radius: 90px;
+    border: 3px solid #ccc;
+}
+
+.change_avatar_btn{
+    background-color: #F1F1F1;
+    margin-top: 7px;
+    margin-left: 15px;
+    height: 40px;
+    width: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    cursor: pointer;
+    /* font-size: 0.9em; */
+    align-self: center;
+}
+
+.change_avatar_btn:hover{
+    background-color: #E1E1E1;
+}
+
+.change_avatar_btn span{
+    margin-left: 3px;
+    padding-right: 3px;
+}
+
+.change_avatar_btn img{
+    height: 20px;
+    width: 20px;
+}
+
+.staff_information_contain1{
+    display: flex;
+    flex-direction: row;
+}
+
+.staff_information_contain2{
+    display: flex;
+    flex-direction: column;
+    width: 49%;
+}
+
+#infor_name{
+    height: 45px;
+    width: 100%;
+    border-radius: 15px;
+    border: 2px solid #CDCDCD;
+    padding: 0px 15px;   
+    font-size: 1em;
+}
+
+#infor_surname{
+    height: 45px;
+    width: 100%;
+    border-radius: 15px;
+    border: 2px solid #CDCDCD;
+    padding: 0px 15px; 
+    margin-left: 10px;
+    font-size: 1em;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    width: 20px;
+    height: 20px; 
+    margin-top: 5px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+}
+
+.change_role_container{
+    white-space: nowrap;
+    align-items: center;
+    display: flex;
+    padding-left: 30px;
+}
+
+.change_role_container button{
+    padding: 10px 20px;
+    margin: 12px;
+    display: flex;
+    width: fit-content;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 30px;
+    border: 1px solid #F1F1F1;
+    background-color: #F1F1F1;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.change_role_container button:hover{
+    background-color: #E1E1E1;
+}
+
+.reset_save{
+    margin-top: 45px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+.save{
+    padding: 10px 30px;
+    /* background-color: green; */
+    background-color: black;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+/* .create:hover{
+    background-color: darkgreen;
+} */
+
+.reset{
+    padding: 10px 30px;
+    border-radius: 30px;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #F1F1F1;
+}
+
+.reset:hover{
+    background-color: #E1E1E1;
+}
+
+/* ============================================================================================================================================
+
+
+                                                              QUẢN LÝ SẢN PHẨM
+                                                        
+                                                        
+=============================================================================================================================================== */
+.category{
+    margin: 20px 0px;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    gap: 45px;
+    overflow-x: auto;
+}
+
+.category::-webkit-scrollbar {
+    display: none;
+}
+
+.category_card{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.category_card img{
+    height: 90%;
+}
+
+.category_card span{
+    margin-top: 10px;
+    font-size: 0.75em;
+    font-weight: 600;
+}
+
+.product_box{
+    height: 360px;
+    width: 270px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 0 9px rgba(0, 0, 0, .2);
+}
+
+.product_name{
+
 }
 
 @media(max-width: 1280px){
+
+    /* Native Element */
     header{
         padding: 14px 2%;
         transition: .2s;
+    }
+
+    .header_cover{
+        height: 108px;
     }
 
     main{
         margin-top: 6.7em;
     }
 
+
+    /* Navigation */
     .navigation a{
         padding: 5px 0;
         margin: 0px 20px;
@@ -715,13 +1202,51 @@ input[type="radio"] {
         height: 4.2em;
     }
 
+
+    /* User Menu */
     .user_modal_content{
         transform: translate(151px, -12px);
+    }
+
+
+    /* Welcome Page */
+    .home_page_container2{
+        padding: 60px 4%;
+    }
+
+    .welcome_title{
+        font-size: 2em;
+    }
+    
+    .welcome_role{
+        font-size: 1.5em;
+    }
+    
+    .welcome_start_guide{
+        margin-top: 20px;
+        gap: 15px;
+    }
+
+    .welcome_avatar img{
+        width: 360px;
+        height: 360px;
     }
 }
 
 @media(max-width: 1090px){
 
+    /* Native Element */
+    .header_cover{
+        height: 89px;
+    }
+
+    main{
+        margin-top: 4.6em;
+        padding: 16px 6%;
+    }
+
+
+    /* Navigation & Menu */
     #menu-icon{
         display: block;
     }
@@ -775,7 +1300,6 @@ input[type="radio"] {
         transform: none;
     }
     
-
     .list:hover img{
         transform: none;
     }
@@ -788,14 +1312,59 @@ input[type="radio"] {
         display: none;
     }
 
-    main{
-        margin-top: 4.6em;
-        padding: 16px 6%;
-    }
 
+    /* User Menu */
     .user_modal_content{
         top: 72px;
         right: 260px;
+    }
+
+    /* Staff information */
+    .create_account_btn{
+        width: 50px;
+    }
+    
+    .create_account_btn span{
+        display: none;
+    }
+
+    #stt{
+        width: 12%;
+    }
+    
+    #ho_ten{
+        width: 30%;
+    }
+    
+    #diachi_email{
+        display: none;
+    }
+    
+    #chuc_vu{
+        width: 15%;
+    }
+
+    #u_stt{
+        width: 12%;
+        padding-left: 3.9px;
+    }
+    
+    #u_ho_ten{
+        width: 30%;
+        padding-right: 15px;
+    }
+    
+    #u_diachi_email{
+        display: none;
+    }
+    
+    #u_chuc_vu{
+        width: 15%;
+        font-size: 0.9em;
+    }
+
+    .edit_delete{
+        margin-left: auto;
     }
 }
 

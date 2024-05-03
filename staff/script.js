@@ -229,6 +229,12 @@ btnCreate.addEventListener('click', function(event){
         alert(response[1]);
     })
 
+    var path = "../staff/uploadAvatar.php";
+    var data = 'username= ' + email.substring(0, email.value.indexOf("@"));
+        JS.connectToPHP(path, data, function(xhr) {
+        return;
+    });
+
     btnCancel.click();
 })
 
@@ -300,7 +306,8 @@ btnAvatar.addEventListener('click', function(event){
             {
                 var imageData = reader.result;
                 var path = "../staff/uploadAvatar.php";
-                var data = 'image=' + encodeURIComponent(imageData);
+                var data = 'username= ' + email.substring(0, email.value.indexOf("@")) +
+                           'image=' + encodeURIComponent(imageData);
                 JS.connectToPHP(path, data, function(xhr) {
                     var urlNewAvatar = xhr.responseText;
                     newAvatar.src = urlNewAvatar;
@@ -309,3 +316,18 @@ btnAvatar.addEventListener('click', function(event){
         }
     });
 })
+
+document.addEventListener("DOMContentLoaded", function() {
+    var name = document.getElementById('name');
+    var role = document.getElementById('role');
+    var avatar = document.getElementById('avatar');
+
+    JS.connectToPHP("../main/loadAccount.php", "", function(xhr) {
+        var response = JSON.parse(xhr.responseText);
+        name.textContent = response[0];
+        role.textContent = response[1];
+        avatar.src = "../avatar/" + response[2];
+
+        var names = sessionStorage.getItem('name');
+    })
+});

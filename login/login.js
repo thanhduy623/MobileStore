@@ -40,7 +40,7 @@ var mess = document.getElementById('mess');
 
 document.addEventListener("DOMContentLoaded", function() {
     //Check session
-    checkSession();
+    //checkSession();
 
 
     //Check cookie
