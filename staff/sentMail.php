@@ -27,18 +27,24 @@
             $mail->addAddress($email, $name);
             $expires = time() + 60;
             $username = json_decode($username);
-            $expires = json_decode($expires);
-            $activationLink = "http://localhost/MobileStore/staff/actived_0.php?username=$username&expires=$expires";
+            // Mã hóa thông tin cần bảo mật
+            $encryptedUsername = base64_encode($username);
+            $encryptedExpires = base64_encode($expires);
+
+            // Tạo liên kết an toàn với các thông tin đã mã hóa
+            $activationLink = "http://localhost/MobileStore/staff/actived_0.php?username=$encryptedUsername&expires=$encryptedExpires";
+            $content = "
+                            Chào " . $username .",\n \n
+                            Chúc mừng bạn đã trở thành thành viên của Four Du Store!\n \n
+                            Vui lòng chọn vào <a href=\"$activationLink\">đây</a> để kích hoạt tài khoản.
+                        ";
 
         
             //Content
             $mail->isHTML(true);
-            $mail->Subject = 'Here is the subject';
-            $mail->Body    = "
-                            Chào $username,\n \n
-                            Chúc mừng bạn đã trở thành thành viên của Four Du Store!\n \n
-                            Vui lòng chọn vào <a href=\"$activationLink\">đây</a> để kích hoạt tài khoản.
-                            ";
+            $mail->Subject = "FOUR DU STORE";
+            $mail->Body = $content;
+
 
         
             $mail->send();

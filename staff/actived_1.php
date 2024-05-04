@@ -1,8 +1,8 @@
 <?php
     function loadPage() {
         // Lấy tham số từ URL
-        $username = json_encode($_GET['username']);
-        $expires = json_encode($_GET['expires']);
+        $username = base64_decode($_GET['username']);
+        $expires = base64_decode($_GET['expires']);
 
         // Kiểm tra thời gian hết hạn
         $currentTime = time();

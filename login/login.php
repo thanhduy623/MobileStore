@@ -5,7 +5,7 @@
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $query = "SELECT username, pwd, actived, fullname, roled  FROM STAFF WHERE username = ?";
+    $query = "SELECT username, pwd, actived, fullname, roled, img  FROM STAFF WHERE username = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -27,6 +27,7 @@
     $actived_db = $row['actived'];
     $roled_db = $row['roled'];
     $pwd_db = $row['pwd'];
+    $img_db = $row['img'];
 
 
     //Kiem tra mật khẩu
@@ -46,8 +47,8 @@
     session_start();
     $_SESSION['username']   = $username_db;
     $_SESSION['fullname']   = $fullname_db;
-    $_SESSION['roled']       = $roled_db;
-    $_SESSION['img']        = $username_db . ".png";
+    $_SESSION['roled']      = $roled_db;
+    $_SESSION['img']        = $img_db;
     $_SESSION['actived']    = $actived_db;
     
     session_write_close();

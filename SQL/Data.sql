@@ -14,14 +14,46 @@ create table STAFF
     roled		varchar(10)	,
     pwd			varchar(100),
     actived		int,
-    img			varchar(50)
+    img			varchar(50),
+    created  timestamp DEFAULT CURRENT_TIMESTAMP
 );
 
-insert into STAFF values
+insert into STAFF (username, fullname, email, gender, dateBirth, phone, roled, pwd, actived, img) 
+values
 (
 	"admin",
 	"Quản trị viên",
     "admin@gmail.com",
+    "Nam",
+    "2004/01/01",
+    "0000000000",
+    "Quản lí",
+    "$2y$10$931OhhXYyK9kXsVDJg.agOR01FaPCW1V35afsWXHCSbwCKtdADgrG",
+    1,
+    "../avatar/admin.png"
+);
+
+insert into STAFF (username, fullname, email, gender, dateBirth, phone, roled, pwd, actived, img) 
+values
+(
+	"admin3",
+	"Duy nè",
+    "admin@gmail.com",
+    "Nam",
+    "2004/01/01",
+    "0000000000",
+    "Quản lí",
+    "$2y$10$931OhhXYyK9kXsVDJg.agOR01FaPCW1V35afsWXHCSbwCKtdADgrG",
+    1,
+    "../avatar/admin.png"
+);
+
+insert into STAFF (username, fullname, email, gender, dateBirth, phone, roled, pwd, actived, img) 
+values
+(
+	"admin2",
+	"Quản trị viên",
+    "admin2@gmail.com",
     "Nam",
     "2004/01/01",
     "0000000000",

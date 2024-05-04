@@ -9,7 +9,7 @@
     $dateBirth = $_POST['birth'];
     $phone = $_POST['phone'];
     $roled = $_POST['roled'];
-    $img = $username . ".png";
+    $img = '../avatar/' . $username . ".png";
     $pwd = password_hash($username, PASSWORD_DEFAULT);
     $actived = -1;
 

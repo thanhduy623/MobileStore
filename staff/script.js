@@ -230,8 +230,8 @@ btnCreate.addEventListener('click', function(event){
     })
 
     var path = "../staff/uploadAvatar.php";
-    var data = 'username= ' + email.substring(0, email.value.indexOf("@"));
-        JS.connectToPHP(path, data, function(xhr) {
+    var data = 'username=' + email.value.substring(0, email.value.indexOf("@"));
+    JS.connectToPHP(path, data, function(xhr) {
         return;
     });
 
@@ -326,8 +326,129 @@ document.addEventListener("DOMContentLoaded", function() {
         var response = JSON.parse(xhr.responseText);
         name.textContent = response[0];
         role.textContent = response[1];
-        avatar.src = "../avatar/" + response[2];
-
-        var names = sessionStorage.getItem('name');
+        avatar.src = response[2];
     })
+
+    loadStaff();
+    logout();   
+});
+
+
+function logout() {
+    var logout = document.getElementById("logout");
+    logout.addEventListener('click', function(e) {
+        JS.connectToPHP("../main/logout.php","", function(xhr) {
+            window.location.href = xhr.responseText;
+        })
+    })
+}
+
+
+function loadStaff() {
+    JS.connectToPHP("../staff/loadStaff.php","", function (xhr){
+        var listStaff = document.getElementById("listStaff");
+        var response = JSON.parse(xhr.responseText);
+        for (var i = 0; i < response.length; i++) {
+            // Tạo một div mới để chứa thông tin của mỗi dòng
+            var userBox = document.createElement("div");
+            userBox.classList.add("user_box");
+            
+            // Tạo và thiết lập các phần tử HTML với thông tin từ mỗi dòng
+            var uStt = document.createElement("p");
+            uStt.id = "u_stt";
+            uStt.textContent = i + 1;
+            userBox.appendChild(uStt);
+            
+            var uHoTen = document.createElement("p");
+            uHoTen.id = "u_ho_ten";
+            uHoTen.textContent = response[i][0];
+            userBox.appendChild(uHoTen);
+            
+            var uDiaChiEmail = document.createElement("p");
+            uDiaChiEmail.id = "u_diachi_email";
+            uDiaChiEmail.textContent = response[i][1];
+            userBox.appendChild(uDiaChiEmail);
+            
+            var uChucVu = document.createElement("div");
+            uChucVu.id = "u_chuc_vu";
+            var innerUChucVu = document.createElement("p");
+            innerUChucVu.id = "inner_u_chuc_vu";
+            innerUChucVu.textContent = response[i][2];
+            uChucVu.appendChild(innerUChucVu);
+            userBox.appendChild(uChucVu);
+            
+            // Tạo nút chỉnh sửa
+            var editBtn = document.createElement("button");
+            editBtn.type = "button";
+            editBtn.classList.add("edit_btn");
+            var editImg = document.createElement("img");
+            editImg.src = "../assets/create-outline.svg";
+            editBtn.appendChild(editImg);
+
+            // Tạo nút xóa
+            var deleteBtn = document.createElement("button");
+            deleteBtn.type = "button";
+            deleteBtn.classList.add("delete_btn");
+            var deleteImg = document.createElement("img");
+            deleteImg.src = "../assets/trash.svg";
+            deleteBtn.appendChild(deleteImg);
+
+            // Tạo div chứa nút chỉnh sửa và xóa
+            var editDelete = document.createElement("div");
+            editDelete.classList.add("edit_delete");
+            editDelete.appendChild(editBtn);
+            editDelete.appendChild(deleteBtn);
+            userBox.appendChild(editDelete);
+
+            // Gán sự kiện click cho nút chỉnh sửa
+            editBtn.addEventListener('click', createEditHandler(response[i][0]));
+
+            // Gán sự kiện click cho nút xóa
+            deleteBtn.addEventListener('click', createDeleteHandler(response[i][0]));
+
+            // Thêm userBox vào listStaff
+            listStaff.appendChild(userBox);
+        }
+    });
+}
+
+// Hàm gói lại để bảo vệ giá trị của i
+function createEditHandler(name) {
+    return function() {
+        alert(name); // Hiển thị thông tin của nhân viên khi chỉnh sửa
+    };
+}
+
+// Hàm gói lại để bảo vệ giá trị của i
+function createDeleteHandler(name) {
+    return function() {
+        alert(name); // Hiển thị thông tin của nhân viên khi xóa
+    };
+}
+
+// Thêm sự kiện input vào ô findText
+document.getElementById('findText').addEventListener('input', function() {
+    var searchText = this.value.trim().toLowerCase(); // Chuyển đổi kí tự nhập vào thành chữ thường để so sánh dễ dàng hơn
+    
+    // Lặp qua tất cả các user_box
+    var userBoxes = document.querySelectorAll('.user_box');
+    userBoxes.forEach(function(userBox) {
+        // Lấy nội dung của u_ho_ten và chuyển đổi thành chữ thường
+        var uHoTen = userBox.querySelector('#u_ho_ten').textContent.toLowerCase();
+        
+        // Kiểm tra xem searchText có rỗng không
+        if (searchText === "") {
+            // Nếu searchText rỗng, hiển thị tất cả các user_box
+            userBox.style.display = 'flex';
+        } else {
+            // Ngược lại, kiểm tra xem uHoTen có chứa searchText không
+            if (uHoTen.includes(searchText)) {
+                // Nếu có, hiển thị user_box
+                userBox.style.display = 'flex';
+            } else {
+                // Ngược lại, ẩn đi user_box
+                userBox.style.display = 'none';
+            }
+        }
+    });
 });
