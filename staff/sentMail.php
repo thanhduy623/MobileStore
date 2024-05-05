@@ -9,6 +9,18 @@
     use PHPMailer\PHPMailer\Exception;
     use PHPMailer\PHPMailer\PHPMailer;
 
+    if(isset($_POST['sentAgain'])) {
+        // Lấy dữ liệu từ POST request
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $name = $_POST['name'];
+    
+        // Gọi hàm sentMail
+        echo json_encode([true, "Gửi lại link xác nhận thành công"]);
+        sentMail($username, $email, $name);
+        exit;
+    }
+
 
     function sentMail($username, $email, $name) {
         $mail = new PHPMailer(true);
@@ -26,18 +38,15 @@
             $mail->setFrom('fourDuStore@gmail.com', 'FOUR DU STORE');
             $mail->addAddress($email, $name);
             $expires = time() + 60;
-            $username = json_decode($username);
             // Mã hóa thông tin cần bảo mật
             $encryptedUsername = base64_encode($username);
             $encryptedExpires = base64_encode($expires);
 
             // Tạo liên kết an toàn với các thông tin đã mã hóa
             $activationLink = "http://localhost/MobileStore/staff/actived_0.php?username=$encryptedUsername&expires=$encryptedExpires";
-            $content = "
-                            Chào " . $username .",\n \n
-                            Chúc mừng bạn đã trở thành thành viên của Four Du Store!\n \n
-                            Vui lòng chọn vào <a href=\"$activationLink\">đây</a> để kích hoạt tài khoản.
-                        ";
+            $content =  "Chào " . $name . ",<br><br>" .
+                        "Đây là tin nhắn tự động đến từ Four Du Store!<br><br>" .
+                        "Vui lòng chọn vào <a href=\"$activationLink\">đây</a> để kích hoạt tài khoản.";
 
         
             //Content

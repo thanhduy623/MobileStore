@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../main/style.css">
     <title>Document</title>
 </head>
 <body>
@@ -20,7 +21,7 @@
             </div>
             <span>Ảnh</span>
             <div class="contain1 margin_bottom">
-                <img src="user/dongduy.jpg" alt="" class="change_avatar">
+                <img id="infor_avatar" src="#" alt="" class="change_avatar">
                 <div class="contain2 center_element">
                     <div class="change_avatar_btn" id="change_avatar">
                         <img src="assets/share-outline.svg" alt="">
@@ -31,15 +32,15 @@
             <div class="staff_information_contain1">
                 <div class="staff_information_contain2">
                     <span id="name_label">Tên</span>
-                    <input type="text" name="infor_name" id="infor_name" value="Duy">
+                    <input type="text" name="infor_name" id="infor_name" value="">
                 </div>
                 <div class="staff_information_contain2">
                     <span id="surname_label">Họ</span>
-                    <input type="text" name="infor_surname" id="infor_surname" value="Huỳnh Kiến Đông">
+                    <input type="text" name="infor_surname" id="infor_surname" value="">
                 </div>
             </div>
             <span id="phone_label">Số điện thoại</span>
-            <input type="text" name="infor_phone" id="infor_phone" value="0362102992">
+            <input type="text" name="infor_phone" id="infor_phone" value="">
             <span id="gender_label">Giới tính</span>
             <div class="contain1 gender_container">
                 <input type="radio" name="gender" id="male" checked>
@@ -51,26 +52,15 @@
             </div>
             <span>Ngày sinh</span> 
             <div class="birthday_container">
-                <input type="number" placeholder="Ngày" min="1" max="31" id="infor_date" value="01">
-                <input type="number" placeholder="Tháng" min="1" max="12" id="infor_month" value="01"> 
-                <input type="number" placeholder="Năm" min="1900" max="9999" id="infor_year" value="2004">
+                <input type="number" placeholder="Ngày" min="1" max="31" id="infor_date">
+                <input type="number" placeholder="Tháng" min="1" max="12" id="infor_month"> 
+                <input type="number" placeholder="Năm" min="1900" max="9999" id="infor_year">
             </div>  
             <div class="midTitle">
                 <span>Quản lý tài khoản</span>
             </div> 
             <span id="email_label">Email • Không thể thay đổi</span>
             <input type="text" name="infor_email" id="infor_email" value="huynhkiendongduy1506@gmail.com" readonly>
-            <div class="smallTitle">
-                <span>Chuyển đổi tài khoản</span>
-            </div>
-            <div class="contain1">
-                <div class="description">
-                    <span>Với mỗi loại tài khoản tương ứng với vai trò của từng nhân viên sẽ được cung cấp các công cụ đặc biệt để vận hành và phát triễn danh nghiệp một cách hiệu quả.</span>
-                </div>
-                <div class="change_role_container" id="change_role_btn">
-                    <button>chuyển đổi tài khoản</button>
-                </div>
-            </div>
             <div class="smallTitle margin_top">
                 <span>Vô hiệu hóa tài khoản</span>
             </div>
@@ -99,5 +89,7 @@
             </div>
         </div>
     </main>
+    <script type="module" src="script.js"></script>
+
 </body>
 </html>

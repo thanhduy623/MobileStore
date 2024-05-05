@@ -4,8 +4,9 @@
     $directory = '../avatar/'; // Thư mục lưu ảnh
     $fileName = $username . '_temp.png';
     $filePath = $directory . $fileName;
-
+    echo "Tồn tại";
     if (file_exists($filePath)) {
+        
         $newFileName = $username . '.png';
         $newFilePath = $directory . $newFileName;
     

@@ -349,80 +349,95 @@ function loadStaff() {
         var listStaff = document.getElementById("listStaff");
         var response = JSON.parse(xhr.responseText);
         for (var i = 0; i < response.length; i++) {
-            // Tạo một div mới để chứa thông tin của mỗi dòng
-            var userBox = document.createElement("div");
-            userBox.classList.add("user_box");
-            
-            // Tạo và thiết lập các phần tử HTML với thông tin từ mỗi dòng
-            var uStt = document.createElement("p");
-            uStt.id = "u_stt";
-            uStt.textContent = i + 1;
-            userBox.appendChild(uStt);
-            
-            var uHoTen = document.createElement("p");
-            uHoTen.id = "u_ho_ten";
-            uHoTen.textContent = response[i][0];
-            userBox.appendChild(uHoTen);
-            
-            var uDiaChiEmail = document.createElement("p");
-            uDiaChiEmail.id = "u_diachi_email";
-            uDiaChiEmail.textContent = response[i][1];
-            userBox.appendChild(uDiaChiEmail);
-            
-            var uChucVu = document.createElement("div");
-            uChucVu.id = "u_chuc_vu";
-            var innerUChucVu = document.createElement("p");
-            innerUChucVu.id = "inner_u_chuc_vu";
-            innerUChucVu.textContent = response[i][2];
-            uChucVu.appendChild(innerUChucVu);
-            userBox.appendChild(uChucVu);
-            
-            // Tạo nút chỉnh sửa
-            var editBtn = document.createElement("button");
-            editBtn.type = "button";
-            editBtn.classList.add("edit_btn");
-            var editImg = document.createElement("img");
-            editImg.src = "../assets/create-outline.svg";
-            editBtn.appendChild(editImg);
-
-            // Tạo nút xóa
-            var deleteBtn = document.createElement("button");
-            deleteBtn.type = "button";
-            deleteBtn.classList.add("delete_btn");
-            var deleteImg = document.createElement("img");
-            deleteImg.src = "../assets/trash.svg";
-            deleteBtn.appendChild(deleteImg);
-
-            // Tạo div chứa nút chỉnh sửa và xóa
-            var editDelete = document.createElement("div");
-            editDelete.classList.add("edit_delete");
-            editDelete.appendChild(editBtn);
-            editDelete.appendChild(deleteBtn);
-            userBox.appendChild(editDelete);
-
-            // Gán sự kiện click cho nút chỉnh sửa
-            editBtn.addEventListener('click', createEditHandler(response[i][0]));
-
-            // Gán sự kiện click cho nút xóa
-            deleteBtn.addEventListener('click', createDeleteHandler(response[i][0]));
-
-            // Thêm userBox vào listStaff
-            listStaff.appendChild(userBox);
+            createLineStaff(i+1, response[i][0], response[i][1], response[i][2]);
         }
     });
 }
 
 // Hàm gói lại để bảo vệ giá trị của i
-function createEditHandler(name) {
+function createLineStaff(num, name, email, roled) {
+    var userBox = document.createElement("div");
+        userBox.classList.add("user_box");
+        
+        // Tạo và thiết lập các phần tử HTML với thông tin từ mỗi dòng
+        var uStt = document.createElement("p");
+        uStt.id = "u_stt";
+        uStt.textContent = num;
+        userBox.appendChild(uStt);
+        
+        var uHoTen = document.createElement("p");
+        uHoTen.id = "u_ho_ten";
+        uHoTen.textContent = name;
+        userBox.appendChild(uHoTen);
+        
+        var uDiaChiEmail = document.createElement("p");
+        uDiaChiEmail.id = "u_diachi_email";
+        uDiaChiEmail.textContent = email;
+        userBox.appendChild(uDiaChiEmail);
+        
+        var uChucVu = document.createElement("div");
+        uChucVu.id = "u_chuc_vu";
+        var innerUChucVu = document.createElement("p");
+        innerUChucVu.id = "inner_u_chuc_vu";
+        innerUChucVu.textContent = roled;
+        uChucVu.appendChild(innerUChucVu);
+        userBox.appendChild(uChucVu);
+        
+        // Tạo nút chỉnh sửa
+        var editBtn = document.createElement("button");
+        editBtn.type = "button";
+        editBtn.classList.add("edit_btn");
+        var editImg = document.createElement("img");
+        editImg.src = "../assets/create-outline.svg";
+        editBtn.appendChild(editImg);
+
+        // Tạo nút xóa
+        var deleteBtn = document.createElement("button");
+        deleteBtn.type = "button";
+        deleteBtn.classList.add("delete_btn");
+        var deleteImg = document.createElement("img");
+        deleteImg.src = "../assets/sentMail.png";
+        deleteBtn.appendChild(deleteImg);
+
+        // Tạo div chứa nút chỉnh sửa và xóa
+        var editDelete = document.createElement("div");
+        editDelete.classList.add("edit_delete");
+        editDelete.appendChild(editBtn);
+        editDelete.appendChild(deleteBtn);
+        userBox.appendChild(editDelete);
+
+        // Tách mail thành username
+        var username = email.split('@').shift();
+
+        // Gán sự kiện click cho nút chỉnh sửa
+        editBtn.addEventListener('click', createEditHandler(username));
+
+        // Gán sự kiện click cho nút xóa
+        deleteBtn.addEventListener('click', createDeleteHandler(username, email, name));
+
+        // Thêm userBox vào listStaff
+        listStaff.appendChild(userBox);
+}
+
+
+// Hàm tạo line thông tin
+function createEditHandler(username) {
     return function() {
-        alert(name); // Hiển thị thông tin của nhân viên khi chỉnh sửa
+        window.location.href = "../profile?username=" + encodeURIComponent(username);
     };
 }
 
+
 // Hàm gói lại để bảo vệ giá trị của i
-function createDeleteHandler(name) {
+function createDeleteHandler(username, email, name) {
     return function() {
-        alert(name); // Hiển thị thông tin của nhân viên khi xóa
+        var data =  "username= " + username +
+                    "&email= " + email +
+                    "&name=" + name +
+                    "&sentAgain=" + true;
+        JS.connectToPHP("../staff/sentMail.php", data, function(xhr){
+            alert(xhr.responseText[1]);
+        })
     };
 }
 
