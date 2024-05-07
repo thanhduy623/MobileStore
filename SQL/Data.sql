@@ -27,7 +27,7 @@ values
     "Nam",
     "2004/01/01",
     "0000000000",
-    "Quản lí",
+    "Quản lý",
     "$2y$10$931OhhXYyK9kXsVDJg.agOR01FaPCW1V35afsWXHCSbwCKtdADgrG",
     1,
     "../avatar/admin.png"
@@ -57,7 +57,7 @@ values
     "Nam",
     "2004/01/01",
     "0000000000",
-    "Quản lí",
+    "Quản lý",
     "$2y$10$931OhhXYyK9kXsVDJg.agOR01FaPCW1V35afsWXHCSbwCKtdADgrG",
     1,
     "../avatar/admin.png"

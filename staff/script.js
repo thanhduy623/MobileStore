@@ -12,7 +12,7 @@ menu.addEventListener('click', () => {
     if (isOpen) {
         btnmenu.src = initialSrc; 
     } else {
-        btnmenu.src = "assets/close.svg"; 
+        btnmenu.src = "../assets/close.svg"; 
     }
     isOpen = !isOpen; 
     navigation.classList.toggle('open');
@@ -308,7 +308,6 @@ btnAvatar.addEventListener('click', function(event){
             reader.readAsDataURL(file);
             reader.onload = function() 
             {
-                console.log(email.value);
                 var imageData = reader.result;
                 var path = "../staff/uploadAvatar.php";
                 var data = 'email=' + encodeURIComponent(email.value) +
