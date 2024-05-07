@@ -1,5 +1,7 @@
 <?php
-    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $username = explode('@', $email)[0];
+
     $imageData = $_POST['image'];
     $imageData = str_replace('data:image/png;base64,', '', $imageData);
     $imageData = str_replace(' ', '+', $imageData);

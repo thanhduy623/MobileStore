@@ -16,7 +16,6 @@
         $name = $_POST['name'];
     
         // Gọi hàm sentMail
-        echo json_encode([true, "Gửi lại link xác nhận thành công"]);
         sentMail($username, $email, $name);
         exit;
     }

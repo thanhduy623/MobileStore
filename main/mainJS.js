@@ -23,6 +23,7 @@ export function connectToPHP(path, data, callback) {
 
 
 
+
 //Kiểm tra rỗng
 export function checkEmpty(element) {
     if(element.value.trim() === "") {return true;}

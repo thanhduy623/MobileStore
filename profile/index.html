@@ -8,7 +8,7 @@
 </head>
 <body>
     <main>
-        <a href="#" class="title">Hồ sơ</a>
+        <a href="#" id="title" class="title">Hồ sơ</a>
             <div class="path">
                 <a href="#">Nhân viên •</a> 
                 <a href="#">Danh sách •</a> 
@@ -21,10 +21,10 @@
             </div>
             <span>Ảnh</span>
             <div class="contain1 margin_bottom">
-                <img id="infor_avatar" src="#" alt="" class="change_avatar">
+                <img id="infor_avatar" src="" alt="" class="change_avatar">
                 <div class="contain2 center_element">
                     <div class="change_avatar_btn" id="change_avatar">
-                        <img src="assets/share-outline.svg" alt="">
+                        <img src="../assets/share-outline.svg" alt="">
                         <span>Thay đổi</span>
                     </div>
                 </div>
@@ -42,12 +42,12 @@
             <span id="phone_label">Số điện thoại</span>
             <input type="text" name="infor_phone" id="infor_phone" value="">
             <span id="gender_label">Giới tính</span>
-            <div class="contain1 gender_container">
-                <input type="radio" name="gender" id="male" checked>
+            <div id="gender_container" class="contain1 gender_container">
+                <input type="radio" name="gender" id="male" value="Nam">
                 <label for="">Nam</label>
-                <input type="radio" name="gender" id="female">
+                <input type="radio" name="gender" id="female" value="Nữ">
                 <label for="">Nữ</label>
-                <input type="radio" name="gender" id="other">
+                <input type="radio" name="gender" id="other" value="Khác">
                 <label for="">Khác</label>
             </div>
             <span>Ngày sinh</span> 
@@ -56,15 +56,15 @@
                 <input type="number" placeholder="Tháng" min="1" max="12" id="infor_month"> 
                 <input type="number" placeholder="Năm" min="1900" max="9999" id="infor_year">
             </div>  
-            <div class="midTitle">
+            <div class="midTitle manager">
                 <span>Quản lý tài khoản</span>
             </div> 
             <span id="email_label">Email • Không thể thay đổi</span>
-            <input type="text" name="infor_email" id="infor_email" value="huynhkiendongduy1506@gmail.com" readonly>
-            <div class="smallTitle margin_top">
+            <input type="text" name="infor_email" id="infor_email" readonly>
+            <div class="smallTitle margin_top manager">
                 <span>Vô hiệu hóa tài khoản</span>
             </div>
-            <div class="contain1">
+            <div class="contain1 manager">
                 <div class="description">
                     <span>Tạm thời khóa quyền truy cập của nhân viên vào tài khoản.</span>
                 </div>
@@ -72,10 +72,10 @@
                     <button>Vô hiệu hóa tài khoản</button>
                 </div>
             </div>
-            <div class="smallTitle margin_top">
+            <div class="smallTitle margin_top manager">
                 <span>Xóa tài khoản</span>
             </div>
-            <div class="contain1">
+            <div class="contain1 manager">
                 <div class="description">
                     <span>Xóa vĩnh viễn dữ liệu về nhân viên và mọi thứ liên kết với tài khoản của nhân viên.</span>
                 </div>
@@ -84,8 +84,9 @@
                 </div>
             </div>
             <div class="reset_save contain1">
-                <button class="reset" id="reset">Thiết lập lại</button>
-                <button class="save" id="save">Lưu</button>
+                <button class="reset manager" id="reset">Thiết lập lại</button>
+                <button class="reset" id="change_pwb">Đổi mật khẩu</button>
+                <button class="save manager" id="save">Lưu</button>
             </div>
         </div>
     </main>

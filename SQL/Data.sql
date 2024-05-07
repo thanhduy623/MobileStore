@@ -42,7 +42,7 @@ values
     "Nam",
     "2004/01/01",
     "0000000000",
-    "Quản lí",
+    "Nhân viên",
     "$2y$10$931OhhXYyK9kXsVDJg.agOR01FaPCW1V35afsWXHCSbwCKtdADgrG",
     1,
     "../avatar/admin.png"
@@ -52,7 +52,7 @@ insert into STAFF (username, fullname, email, gender, dateBirth, phone, roled, p
 values
 (
 	"admin2",
-	"Quản trị viên",
+	"Quản trị viên 2",
     "admin2@gmail.com",
     "Nam",
     "2004/01/01",
