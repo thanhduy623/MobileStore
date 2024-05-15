@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý sản phẩm</title>
+    <link rel="stylesheet" href="../main//style.css">
+    <link rel="shortcut icon" href="../assets/logo-icon.svg"> 
+</head>
+<body>
+    <header>
+        <a href="../Index.html" class="logo">
+            <img src="../assets/logo.svg" alt="" id="logo">
+        </a>
+
+        <ul class="navigation">
+            <li class="list">
+                <a href="../Index.html">
+                    <img src="../assets/home.svg" alt="" id="home">
+                    <span>Trang chủ</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="../StaffManagement/StaffManagement.html">
+                    <img src="../assets/people.svg" alt="" id="staff">
+                    <span>Nhân viên</span>
+                </a>
+            </li>
+            <li class="list active">
+                <a href="../ProductManagement/ProductManagement.html">
+                    <img src="../assets/bag-handle.svg" alt="" id="product">
+                    <span>Sản phẩm</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="../CustomerMnagement/CustomerManagement.html">
+                    <img src="../assets/chatbubbles.svg" alt="" id="client">
+                    <span>Khách hàng</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="../ReportsandStatistics/ReportsandStatistics.html">
+                    <img src="../assets/cellular.svg" alt="" id="report">
+                    <span>Báo cáo</span>
+                </a>
+            </li>
+            <div class="indicator"></div>
+        </ul>
+
+        <div class="menu">
+            <a href="#" id="guide" class="guide"><img src="../assets/compass.svg" alt=""></a>
+            <div class="user_frame">
+                <img id="user" class="user" src="../User/dongduy.jpg" alt="">
+            </div>
+            <div id="menu-icon"><img src="../assets/menu.svg" alt=""></div>
+        </div>
+
+        <div id="user_modal" class="user_modal">
+            <div class="user_modal_content">
+                <div id="basic_info" class="basic_info">
+                    <div class="contain1">
+                        <img src="../User/dongduy.jpg" alt="" id="avatar">
+                        <div class="contain2">
+                            <p id="name" class="name">Dong Duy</p>
+                            <p id="role" class="role">Quản trị viên</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="profile" class="profile">
+                    <img src="../assets/person-circle-outline.svg" alt="">
+                    <span>Xem hồ sơ</span>
+                </div>
+                <div id="account" class="account">
+                    <img src="../assets/at-outline.svg" alt="">
+                    <span>Quản lý tài khoản</span>
+                </div>
+                <div id="setting" class="setting">
+                    <img src="../assets/settings-outline.svg" alt="">
+                    <span>Cài đặt</span>
+                </div>
+                <div id="help" class="help">
+                    <img src="../assets/help-circle-outline.svg" alt="">
+                    <span>Trợ giúp và hỗ trợ</span>
+                </div>
+                <div id="themes" class="themes">
+                    <img src="../assets/moon-outline.svg" alt="">
+                    <span>Giao diện</span>
+                </div>
+                <div id="logout" class="logout">
+                    <img src="../assets/log-out-outline.svg" alt="">
+                    <span>Đăng xuất</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <a href="#" class="title">Sản phẩm</a>
+            <div class="path">
+                <a href="#">Sản phẩm •</a> 
+                <a href="#">Danh sách</a> 
+            </div>
+        <div class="contain3">
+            <div class="search_btn">
+                <img src="../assets/search.svg" alt="">
+                <input type="text" placeholder="Tìm kiếm">
+            </div>
+            <div class="contain1">
+                <div class="create_account_btn" id="create_product_btn">
+                    <img src="../assets/add.svg" alt="">
+                    <span>Tạo sản phẩm</span>
+                </div>
+                <div class="create_account_btn" id="transaction_btn">
+                    <img src="../assets/cube-outline.svg" alt="">
+                    <span>Giao dịch</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="create_product_modal" id="create_product_modal">
+            <div class="create_product_container">
+                <div class="create_product_header">
+                    <p>Tạo sản phẩm mới</p>
+                </div>
+                <div class="create_product_content">
+                    <span>Ảnh</span>
+                    <div class="contain1 margin_bottom">
+                        <div class="upload_product_img">
+                            <img id="product_img" src="../product/iphone-card-40-iphone15prohero-202309.jpg" alt="">
+                        </div>
+                        <div class="contain2 center_element">
+                            <div class="upload_product_btn" id="upload_product_btn">
+                                <img src="../assets/share-outline.svg" alt="">
+                                <span>Tải ảnh lên</span>
+                            </div>
+                            <select id="upload_product_category" name="upload_product_category" class="upload_product_category" required> 
+                                <option value="iPhone">iPhone</option>
+                                <option value="iPad">iPad</option>
+                                <option value="Macbook">Macbook</option>
+                                <option value="Apple Watch">Apple Watch</option>
+                                <option value="Apple Vision">Apple Vision</option>
+                                <option value="AirPods">AirPods</option>
+                                <option value="AirTag">AirTag</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <span>Nhập sản phẩm</span>
+                        <input type="text" name="product_id" id="product_id" value="IP0001" readonly>
+
+                        <span>Tên sản phẩm</span>
+                        <input type="text" name="product_name" id="product_name">
+                        
+                        <span id="product_cost">Giá gốc</span>
+                        <input type="number" name="product_cost" id="product_cost">
+                    
+                        <span  id="product_price" >Giá bán</span>
+                        <input type="number" name="product_price" id="product_price" class="margin_bottom_zero">
+                    </div>             
+                </div>
+                <div class="create_product_footer">
+                    <div class="contain1 create_cancel">
+                        <button class="cancel" id="cancel">Hủy</button>
+                        <button class="create" id="submit">Tạo</button>
+                    </div>  
+                </div>
+            </div>
+        </div>
+
+        <div class="change_product_infor_modal" id="change_product_infor_modal">
+            <div class="change_product_infor_container">
+                <div class="change_product_infor_header">
+                    <p>Chỉnh sửa thông tin sản phẩm</p>
+                </div>
+                <div class="change_product_infor_content">
+                    <span>Ảnh</span>
+                    <div class="contain1 margin_bottom">
+                        <div class="change_product_img">
+                            <img src="../product/iphone-card-40-iphone15prohero-202309.jpg" alt="">
+                        </div>
+                        <div class="contain2 center_element">
+                            <div class="change_product_btn">
+                                <img src="../assets/share-outline.svg" alt="">
+                                <span>Thay đổi ảnh</span>
+                            </div>
+                            <select id="change_product_category" name="change_product_category" class="change_product_category"> 
+                                <option value="iPhone">iPhone</option>
+                                <option value="iPad">iPad</option>
+                                <option value="Mac">Mac</option>
+                                <option value="Apple Watch">Apple Watch</option>
+                                <option value="Apple Vision">Apple Vision</option>
+                                <option value="AirPods">AirPods</option>
+                                <option value="AirTag">AirTag</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <span id="change_product_id">Mã sản phẩm</span>
+                        <input type="text" name="change_product_id" id="change_product_id" value="IP0001" readonly>
+
+                        <span id="change_product_name">Tên sản phẩm</span>
+                        <input type="text" name="product_name" id="product_name" value="iPhone 15 Pro">
+                        
+                        <span id="change_product_cost">Giá gốc</span>
+                        <input type="number" name="change_product_cost" id="change_product_cost" value="600">
+                    
+                        <span  id="change_product_price" >Giá bán</span>
+                        <input type="number" name="change_product_price" id="change_product_price" class="margin_bottom_zero" value="1000">
+                    </div>             
+                </div>
+                <div class="change_product_infor_footer">
+                    <div class="contain1 create_cancel">
+                        <button class="cancel" id="cancel_change_product">Hủy</button>
+                        <button class="create">Lưu</button>
+                    </div>  
+                </div>
+            </div>
+        </div>
+
+        <div class="delete_product_confirmation_modal" id="delete_product_confirmation_modal">
+            <div class="delete_product_confirmation_container">
+                <div class="delete_product_confirmation_header">
+                    <p>Thông báo</p>
+                </div>
+                <div class="delete_product_confirmation_content">
+                    <p>Xác nhận xóa vĩnh viễn sản phẩm này!</p>
+                </div>
+                <div class="delete_product_confirmation_footer">
+                    <div class="contain1 create_cancel">
+                        <button class="cancel" id="cancel_delete_product">Hủy</button>
+                        <button class="delete">Xóa</button>
+                    </div>  
+                </div>
+            </div>
+        </div>
+
+        <div class="category">
+            <div class="category_card contain2" id="mac">
+                <img src="../product/category/store-card-13-mac-nav-202310.png" alt="">
+                <span>Mac</span>
+            </div>
+            <div class="category_card contain2" id="iphone">
+                <img src="../product/category/store-card-13-iphone-nav-202309_GEO_US.png" alt="">
+                <span>iPhone</span>
+            </div>
+            <div class="category_card contain2" id="ipad">
+                <img src="../product/category/store-card-13-ipad-nav-202210.png" alt="">
+                <span>iPad</span>
+            </div>
+            <div class="category_card contain2" id="watch">
+                <img src="../product/category/store-card-13-watch-nav-202309.png" alt="">
+                <span>Apple Watch</span>
+            </div>
+            <div class="category_card contain2" id="vision">
+                <img src="../product/category/store-card-13-vision-pro-nav-202401.png" alt="">
+                <span>Apple Vision Pro</span>
+            </div>
+            <div class="category_card contain2" id="airpods">
+                <img src="../product/category/store-card-13-airpods-nav-202209.png" alt="">
+                <span>AirPods</span>
+            </div>
+            <div class="category_card contain2" id="airtag">
+                <img src="../product/category/store-card-13-airtags-nav-202108.png" alt="">
+                <span>AirTag</span>
+            </div>
+        </div>
+
+        <div class="midTitle" id="macBook">MacBook</div>
+        <div class="product_list contain1" id="containMacbook">
+            <div class="product_box contain2">
+                <div class="product_name">iPhone 15 Pro</div>
+                <img src="../product/iphone-card-40-iphone15prohero-202309.jpg" alt="">
+                <div class="number_code">IP0001</div>
+                <div class="product_detail">
+                    <div class="product_code">
+                        <img class="barcode" src="../product/screenshot-3-03c05975-1f8e-463e-aec6-9eb87890bd48.webp" alt="">
+                    </div>
+                    <div class="product_edit_delete">
+                        <button class="product_edit">Sửa</button>
+                        <button class="product_delete">Xóa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="midTitle" id="ipad">Iphone</div>
+        <div class="product_list contain1" id="containIphone">
+            <div class="product_box contain2">
+                <div class="product_name">iPhone 15 Pro</div>
+                <img src="../product/iphone-card-40-iphone15prohero-202309.jpg" alt="">
+                <div class="number_code">IP0001</div>
+                <div class="product_detail">
+                    <div class="product_code">
+                        <img class="barcode" src="../product/screenshot-3-03c05975-1f8e-463e-aec6-9eb87890bd48.webp" alt="">
+                    </div>
+                    <div class="product_edit_delete">
+                        <button class="product_edit">Sửa</button>
+                        <button class="product_delete">Xóa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="midTitle" id="ipad">Ipad</div>
+        <div class="product_list contain1" id="containIpad">
+            <div class="product_box contain2">
+                <div class="product_name">iPhone 15 Pro</div>
+                <img src="../product/iphone-card-40-iphone15prohero-202309.jpg" alt="">
+                <div class="number_code">IP0001</div>
+                <div class="product_detail">
+                    <div class="product_code">
+                        <img class="barcode" src="../product/screenshot-3-03c05975-1f8e-463e-aec6-9eb87890bd48.webp" alt="">
+                    </div>
+                    <div class="product_edit_delete">
+                        <button class="product_edit">Sửa</button>
+                        <button class="product_delete">Xóa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="midTitle" id="watch">Apple Watch</div>
+        <div class="product_list contain1" id="containWatch">
+            <div class="product_box contain2">
+                <div class="product_name">iPhone 15 Pro</div>
+                <img src="../product/iphone-card-40-iphone15prohero-202309.jpg" alt="">
+                <div class="number_code">IP0001</div>
+                <div class="product_detail">
+                    <div class="product_code">
+                        <img class="barcode" src="../product/screenshot-3-03c05975-1f8e-463e-aec6-9eb87890bd48.webp" alt="">
+                    </div>
+                    <div class="product_edit_delete">
+                        <button class="product_edit">Sửa</button>
+                        <button class="product_delete">Xóa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="midTitle" id="vision">Apple Vision Pro</div>
+        <div class="product_list contain1" id="containVision">
+            <div class="product_box contain2">
+                <div class="product_name">iPhone 15 Pro</div>
+                <img src="../product/iphone-card-40-iphone15prohero-202309.jpg" alt="">
+                <div class="number_code">IP0001</div>
+                <div class="product_detail">
+                    <div class="product_code">
+                        <img class="barcode" src="../product/screenshot-3-03c05975-1f8e-463e-aec6-9eb87890bd48.webp" alt="">
+                    </div>
+                    <div class="product_edit_delete">
+                        <button class="product_edit">Sửa</button>
+                        <button class="product_delete">Xóa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="midTitle" id="airPods">AirPods</div>
+        <div class="product_list contain1" id="containAirpods">
+            <div class="product_box contain2">
+                <div class="product_name">iPhone 15 Pro</div>
+                <img src="../product/iphone-card-40-iphone15prohero-202309.jpg" alt="">
+                <div class="number_code">IP0001</div>
+                <div class="product_detail">
+                    <div class="product_code">
+                        <img class="barcode" src="../product/screenshot-3-03c05975-1f8e-463e-aec6-9eb87890bd48.webp" alt="">
+                    </div>
+                    <div class="product_edit_delete">
+                        <button class="product_edit">Sửa</button>
+                        <button class="product_delete">Xóa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="midTitle" id="tag">AirTag</div>
+        <div class="product_list contain1" id="containAirtag">
+            <div class="product_box contain2">
+                <div class="product_name">iPhone 15 Pro</div>
+                <img src="../product/iphone-card-40-iphone15prohero-202309.jpg" alt="">
+                <div class="number_code">IP0001</div>
+                <div class="product_detail">
+                    <div class="product_code">
+                        <img class="barcode" src="../product/screenshot-3-03c05975-1f8e-463e-aec6-9eb87890bd48.webp" alt="">
+                    </div>
+                    <div class="product_edit_delete">
+                        <button class="product_edit">Sửa</button>
+                        <button class="product_delete">Xóa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" class="indexScript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" class="indexScript"></script>
+    <script src="../Script.js" class="indexScript"></script>
+    <script src="productManagement.js" type="module"></script>
+</body>
+</html>

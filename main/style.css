@@ -86,7 +86,7 @@ main.scroll{
 }
 
 .navigation:hover{
-    /* transform: scale(1.2); */
+    transform: scale(1.2);
 }
 
 .navigation a{
@@ -144,7 +144,7 @@ main.scroll{
     border-radius: 50px;
     width: 5em; 
     height: 4.2em;
-    /* transition: transform 0.45s ease; */
+    transition: transform 0.45s ease;
     z-index: 3;
     box-shadow: 0 0 9px rgba(0, 0, 0, .3);
 }
@@ -156,8 +156,13 @@ main.scroll{
 
 .menu a, #menu-icon{
     margin-right: 25px;
-    margin-left: 10px;
+    margin-left: 25px;
     transition: all .45s ease;
+    display: flex;
+}
+
+#menu-icon{
+    padding-top: 5px;
 }
 
 .menu img{
@@ -503,7 +508,7 @@ main.scroll{
     transform: translate(-50%, -50%);
     position: absolute;
     border-radius: 15px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);    
 }
 
 .create_account_contain1{
@@ -537,6 +542,7 @@ main.scroll{
     padding: 15px;
     overflow-y: auto;
     overflow-x: hidden;
+    max-height: 570px;
 }
 
 .create_account_footer{
@@ -788,7 +794,7 @@ input[type="radio"] {
     padding: 15px;
     margin: 1px;
     border-radius: 30px;
-    transition: transform 0.45s ease;
+    transition: transform 0.45s ease; 
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -1224,6 +1230,122 @@ input[type="radio"] {
     background-color: #E1E1E1;
 }
 
+/* CHANGE PASSWORD */
+
+.passwork_container img{
+    height: 15px;
+    width: 15px;
+}
+
+.password_container_modal img{
+    height: 15px;
+    width: 15px;
+}
+
+.password_container_modal input{
+    width: 100% !important;
+}
+
+.password_container_modal img {
+    margin-right: 3% !important;
+}
+
+.password_icon{
+    float: right;
+    margin-right: 17%;
+    margin-top: -45px;
+    position: relative;
+    /* z-index: 2; */
+    cursor: pointer;
+}
+
+.password_input{
+    display: block;
+    width: 85% !important;
+}
+
+.change_infor_password{
+    position: relative;
+    float: right;
+    margin-right: 0%;
+    margin-top: -60px;
+    margin-left: 0px;
+    padding: 10px 15px;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 30px;
+    background-color: #F1F1F1;
+    cursor: pointer;
+}
+
+.change_infor_password:hover{
+    background-color: #E1E1E1;
+}
+
+/* CHANGE PASSWORD MODAL */
+
+.change_infor_password_modal{
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.change_infor_password_container{
+    background-color: white;
+    width: 550px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+}
+
+.change_infor_password_header{
+    display: flex;
+    justify-content: center;
+    font-size: 1.1em;
+    padding: 15px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+.change_infor_password_header p{
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.change_infor_password_content{
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.change_infor_password_footer{
+    padding: 0px 15px 15px 15px;
+}
+
+.change_infor_password_content input{
+    margin-bottom: 15px;
+    height: 45px;
+    width: 100%;
+    border-radius: 15px;
+    border: 2px solid #CDCDCD;
+    padding: 0px 15px; 
+    font-size: 1em;
+}
+
+.create_product_content span{
+    font-size: 0.9em;
+}
+
 /* ============================================================================================================================================
 
 
@@ -1350,6 +1472,85 @@ input[type="radio"] {
 
 .product_edit:hover{
     background-color: #E1E1E1;
+}
+
+/* CREATE TRANSACTION MODAL */
+.create_transaction_modal{
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.create_transaction_container{
+    background-color: white;
+    width: 550px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+}
+
+.create_transaction_header{
+    display: flex;
+    justify-content: center;
+    font-size: 1.1em;
+    padding: 15px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+.create_transaction_header p{
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.create_transaction_content{
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 560px;
+}
+
+.create_transaction_footer{
+    padding: 0px 15px 15px 15px;
+}
+
+.create_transaction_content input{
+    margin-bottom: 15px;
+    height: 45px;
+    width: 100%;
+    border-radius: 15px;
+    border: 2px solid #CDCDCD;
+    padding: 0px 15px; 
+    font-size: 1em;
+}
+
+.create_transaction_content span{
+    font-size: 0.9em;
+}
+
+/* Transaction Product List */
+.transaction_product_list{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+.transaction_product_list p{
+    height: fit-content;
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 30px;
+    border: 2px solid #CDCDCD;
 }
 
 /* create product modal */
@@ -1552,6 +1753,56 @@ input[type="radio"] {
     padding: 0px 15px 15px 15px;
 }
 
+/* Delete transaction confirmation */
+.delete_transaction_confirmation_modal{
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.delete_transaction_confirmation_container{
+    background-color: white;
+    /* width: 550px; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+}
+
+.delete_transaction_confirmation_header{
+    display: flex;
+    justify-content: center;
+    font-size: 1.1em;
+    padding: 15px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+.delete_transaction_confirmation_header p{
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.delete_transaction_confirmation_content{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    padding: 20px 45px 30px 45px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.delete_transaction_confirmation_footer{
+    padding: 0px 15px 15px 15px;
+}
+
 /* change product infor */
 .change_product_infor_modal{
     display: none;
@@ -1692,6 +1943,109 @@ input[type="radio"] {
                                                     
                                                     
 ====================================================================================================================================*/
+.transaction_header_helper{
+    display: flex;
+    padding: 0px 26px 6px 26px;
+    border-bottom: 1px solid #ccc;
+}
+
+.transaction_header_helper p{
+    white-space: nowrap;
+    font-weight: 600; 
+}
+
+#tr_ma{
+    width: 15%;
+}
+
+#tr_kh_hang{
+    width: 30%;
+}
+
+#tr_ngay{
+    width: 25%;
+}
+
+#tr_nh_vien{
+    width: 25%;
+}
+
+.transaction_main_content{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    white-space: nowrap;
+    z-index: 0;
+}
+
+.transaction_box{
+    padding: 30px 15px;
+    margin: 1px;
+    /* border-radius: 30px; */
+    border-bottom: 1px solid #E1E1E1;
+    transition: transform 0.45s ease;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+
+.transaction_box:hover{
+    transform: scale(1.02);
+    box-shadow: 0 0 9px rgba(0, 0, 0, .2);
+
+}
+
+.transaction_box p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#b_tr_ma{
+    width: 15%;
+    padding-left: 0px;
+}
+
+#b_tr_kh_hang{
+    width: 30%;
+    padding-right: 15px;
+}
+
+#b_tr_ngay{
+    outline: none;
+    border: none;
+    width: 25%;
+    padding-right: 15px;
+}
+
+#b_tr_ngay::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+#b_tr_nh_vien{
+    width: 25%;
+}
+
+.transaction_delete{
+    display: flex;
+    width: 5%;
+    justify-content: flex-end;
+    padding-right: 5px;
+}
+
+.transaction_delete img{
+    width: 25px;
+    height: 25px;
+}
+
+.transaction_delete button{
+    border: none;
+    outline: none;
+    cursor: pointer;   
+    background-color: transparent;
+}
+
+/* trans */
 .customer_header_helper{
     display: flex;
     padding: 0px 26px 6px 26px;
@@ -1770,6 +2124,173 @@ input[type="radio"] {
 
 #c_u_sdt{
     width: 25%;
+}
+
+/* ======================================================================================================================================
+
+
+                                                      BAO CAO VA PHAN TICH
+                                                    
+                                                    
+=========================================================================================================================================*/
+.view_order{
+    border: 2px solid #CDCDCD;
+    width: fit-content;
+    height: fit-content;
+    padding: 3px 4px 3px 20px;
+    border-radius: 30px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.view_order span{
+    margin-right: 6px;
+}
+
+.view_by_day{
+    width: fit-content;
+    height: fit-content;
+    padding: 12px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.view_by_month{
+    width: fit-content;
+    height: fit-content;
+    padding: 12px 25px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.view_by_day.active{
+    background-color: #CDCDCD;
+}
+
+.view_by_month.active{
+    background-color: #CDCDCD;
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 45px;
+}
+.chart-title {
+    margin-top: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    color: black;
+}
+
+.select_day_chart_title{
+    display: flex;
+    margin-left: 15px;
+}
+
+#select_day_chart{
+    margin-bottom: 15px;
+    margin-left: 15px;
+    height: 45px;
+    width: 200px;
+    border-radius: 6px;
+    border: 2px solid #CDCDCD;
+    padding: 0px 15px; 
+    font-size: 1em;
+}
+
+#select_month_chart{
+    margin-bottom: 15px;
+    margin-left: 15px;
+    height: 45px;
+    width: 200px;
+    border-radius: 6px;
+    border: 2px solid #CDCDCD;
+    padding: 0px 15px; 
+    font-size: 1em;
+}
+
+/* Thong ke chi tiet */
+.statistics_header_helper{
+    display: flex;
+    padding: 0px 26px 6px 26px;
+    border-bottom: 1px solid #ccc;
+}
+
+.statistics_header_helper p{
+    white-space: nowrap;
+    font-weight: 600; 
+}
+
+#st_maSP{
+    width: 20%;
+}
+
+#st_so_luong{
+    width: 20%;
+}
+
+#st_tien_ban{
+    width: 30%;
+}
+
+#st_doanh_thu{
+    width: 30%;
+}
+
+.statistics_main_content{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    white-space: nowrap;
+    z-index: 0;
+}
+
+.statistics_box{
+    padding: 30px 15px;
+    margin: 1px;
+    /* border-radius: 30px; */
+    border-bottom: 1px solid #E1E1E1;
+    transition: transform 0.45s ease;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+
+.statistics_box:hover{
+    transform: scale(1.02);
+    box-shadow: 0 0 9px rgba(0, 0, 0, .2);
+
+}
+
+.statistics_box p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#b_st_maSP{
+    width: 20%;
+    padding-left: 0px;
+}
+
+#b_st_so_luong{
+    width: 20%;
+    padding-right: 15px;
+}
+
+#b_st_tien_ban{
+    outline: none;
+    border: none;
+    width: 30%;
+    padding-right: 15px;
+}
+
+#b_st_doanh_thu{
+    width: 30%;
 }
 
 @media(max-width: 1280px){
@@ -1874,11 +2395,12 @@ input[type="radio"] {
         flex-direction: column;
         top: 100%;
         right: -100%;
-        width: fit-content;
-        height: fit-content;
-        background-color: transparent;
-        border-radius: 9px;
+        width: 100%;
+        height: 100vh;
+        /* background-color: transparent; */
+        border-radius: 0px;
         transition: all .45s ease;
+        box-shadow: none;
     }
 
     .navigation:hover{
@@ -1897,7 +2419,7 @@ input[type="radio"] {
         position: static;
         opacity: 1;
         font-size: 1em;
-        color: #54DAFF;
+        color: black;
         background-color: transparent;
         font-weight: 600;
         margin-top: 3px;
@@ -1910,7 +2432,7 @@ input[type="radio"] {
     }
 
     .list:hover{
-        transform: translateY(-6px);
+        transform: translateY(-3px);
     }
  
     .list:hover span {
@@ -1922,7 +2444,7 @@ input[type="radio"] {
     }
 
     .navigation.open{
-        right: 2%;
+        right: 0%;
     }
 
     .indicator{
@@ -1987,4 +2509,68 @@ input[type="radio"] {
     .product_box{
         width: 48%;
     }
+
+    .create_account_container{
+        width: 480px;
+    }
+
+    .create_product_container{
+        width: 480px;
+    }
+
+    .change_infor_password_container{
+        width: 480px;
+    }
+
+    .create_transaction_container{
+        width: 480px;
+    }
 }
+
+@media(max-width: 900px){
+    .welcome_avatar{
+        display: none;
+    }
+
+    .password_icon{
+        margin-right: 33%;
+    }
+
+    .password_input{
+        width: 70% !important;
+    }
+
+    #tr_kh_hang{
+        display: none;
+    }
+
+    #b_tr_kh_hang{
+        display: none;
+    }
+
+    #tr_nh_vien{
+        display: none;
+    }
+
+    #b_tr_nh_vien{
+        display: none;
+    }
+
+    #tr_ma{
+        width: 40%;
+    }
+
+    #b_tr_ma{
+        width: 40%;
+    }
+
+    #tr_ngay{
+        width: 40%;
+    }
+
+    #b_tr_ngay{
+        width: 55%;
+    }
+}
+
+

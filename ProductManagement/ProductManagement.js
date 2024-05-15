@@ -1,0 +1,289 @@
+import * as JS from '../main/mainJS.js';
+
+// Category
+document.querySelectorAll('.category_card').forEach(item => {
+    item.addEventListener('click', event => {
+        var categoryId = item.id; 
+        var targetMidTitle = document.querySelector('.midTitle#' + categoryId);
+        if (targetMidTitle) {
+            var targetTop = targetMidTitle.getBoundingClientRect().top;
+            window.scrollTo({
+                top: window.scrollY + targetTop - 150,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+
+// Update Create New Product Modal Height
+function updateProductContentMaxHeight() {
+    var windowHeight = window.innerHeight;
+    var newProductContentMaxHeight = Math.min(windowHeight - 144, 570); 
+    document.querySelector('.create_product_content').style.maxHeight = newProductContentMaxHeight + 'px';
+}
+window.addEventListener('load', updateProductContentMaxHeight);
+window.addEventListener('resize', updateProductContentMaxHeight);
+var createProductContent = document.querySelector('.create_product_content');
+var createProductHeader = document.querySelector('.create_product_header');
+var createProductFooter = document.querySelector('.create_product_footer');
+function updateProductContentHeight() {
+    var windowHeight = window.innerHeight;
+    var headerHeight = createProductHeader.offsetHeight;
+    var footerHeight = createProductFooter.offsetHeight;
+    var newProductContentHeight = windowHeight - headerHeight - footerHeight - 25;
+    createProductContent.style.height = newProductContentHeight + 'px';
+}
+window.addEventListener('DOMContentLoaded', updateProductContentHeight);
+window.addEventListener('resize', updateProductContentHeight);
+
+
+// Create New Product Modal
+var create_product_btn = document.getElementById('create_product_btn');
+var create_product_modal = document.getElementById('create_product_modal');
+var cancel = document.getElementById('cancel');
+create_product_btn.addEventListener('click', function(){
+    create_product_modal.style.display = 'block';
+    document.body.style.overflow = "hidden";
+})
+cancel.addEventListener('click', function(){
+    create_product_modal.style.display = 'none';
+    document.body.style.overflow = "auto";
+})
+window.addEventListener('click', function(event){
+    if(event.target === create_product_modal){
+        create_product_modal.style.display = 'none';
+        document.body.style.overflow = "auto";
+    }
+})  
+
+
+// Change Product Information Modal
+var product_edit = document.querySelectorAll('.product_edit');
+var change_product_infor_modal = document.getElementById('change_product_infor_modal');
+var cancel_change_product = document.getElementById('cancel_change_product');
+product_edit.forEach(btn => {
+    btn.addEventListener('click', function(){
+        change_product_infor_modal.style.display = 'block';
+        document.body.style.overflow = "hidden";
+    });
+});
+cancel_change_product.addEventListener('click', function(){
+    change_product_infor_modal.style.display = 'none';
+    document.body.style.overflow = "auto";
+})
+window.addEventListener('click', function(event){
+    if(event.target === change_product_infor_modal){
+        change_product_infor_modal.style.display = 'none';
+        document.body.style.overflow = "auto";
+    }
+})  
+
+
+// Delete Product Confirmation
+var product_delete = document.querySelectorAll('.product_delete');
+var delete_product_confirmation_modal = document.getElementById('delete_product_confirmation_modal');
+var cancel_delete_product = document.getElementById('cancel_delete_product');
+product_delete.forEach(btn => {
+    btn.addEventListener('click', function(){
+        delete_product_confirmation_modal.style.display = 'block';
+        document.body.style.overflow = "hidden";
+    });
+});
+
+cancel_delete_product.addEventListener('click', function(){
+    delete_product_confirmation_modal.style.display = 'none';
+    document.body.style.overflow = "auto";
+})
+
+window.addEventListener('click', function(event){
+    if(event.target === delete_product_confirmation_modal){
+        delete_product_confirmation_modal.style.display = 'none';
+        document.body.style.overflow = "auto";
+    }
+})  
+
+// Page Load
+$(document).ready(function() {
+    $("#transaction_btn").on("click", function(event) {
+        event.preventDefault(); 
+        var pageUrl = "ProductManagement/Transaction.html";
+        $.ajax({
+            url: pageUrl,
+            type: "GET",
+            dataType: "html",
+            success: function(response) {
+                var newMainContent = $(response).filter("main");
+                $("main").replaceWith(newMainContent);
+                document.title = $(response).filter("title").text();
+                $("script:not(#indexScript)").remove();
+                var scriptUrl = pageUrl.replace('.html', '.js');
+                if(scriptUrl != 'Index.js'){
+                    loadScript(scriptUrl);
+                }   
+                
+                // window.history.replaceState({ path: pageUrl }, '', pageUrl);
+            },
+            error: function(xhr, status, error) {
+                console.error("Error loading page:", error);
+            }
+        });
+        scrollToTop();
+    });
+
+    function loadScript(scriptUrl) {
+        console.log("Loading script:", scriptUrl);
+        $.getScript(scriptUrl)
+            .done(function(script, textStatus) {
+                console.log("Script loaded successfully:", scriptUrl);
+            })
+            .fail(function(jqxhr, settings, exception) {
+                console.error("Failed to load script:", scriptUrl);
+                console.error("Error:", exception);
+            });
+    }
+});
+
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+
+/////////////////////////////////////////////////////////////////////////////
+
+
+document.getElementById("submit").addEventListener('click', function() {
+    var product_id = document.getElementById("product_id");
+    var product_name = document.getElementById("product_name");
+    var product_price = document.getElementById("product_price");
+    var product_cost = document.getElementById("product_cost");
+    var product_type = JS.getSelected("upload_product_category");
+    var product_img = document.getElementById("product_img");
+
+    //Kiểm tra dữ liệu đầu vào
+    //if(!checkinput(product_name, product_price, product_cost)) {return;}
+    
+    product_id = product_id.value;
+    product_name = product_name.value;
+    product_price = product_price.value;
+    product_cost = product_cost.value;
+    product_type = product_type.value;
+    product_img = product_img.src.toString();
+
+    alert(product_img)
+
+
+    //Khởi tạo sản phẩm
+    //if(!createProduct(product_id, product_name, product_cost, product_price, product_type, product_img)) {return;}
+
+    //if(!checkType(product_id, product_name, product_cost, product_price, product_type, product_img) == null) {return}
+    var box = document.getElementById("containMacbook");
+    //createItem(product_id.value, "product_name.valussssssssssssssssssssse", product_cost.value, product_price.value, product_type.value, product_img.src, document.getElementById("containMacbook"));
+})
+
+
+document.getElementById("upload_product_btn").addEventListener('click', function() {
+    JS.loadPic("../product/", document.getElementById("product_id").value, document.getElementById("product_img"));
+})
+
+///////////////////////////////////////////////////////////////////////
+
+
+function checkinput(product_name, product_price, product_cost) {
+    if(JS.checkEmpty(product_name)) {
+        alert("Không để trống tên sản phẩm");
+        product_name.focus();
+        return false;
+    }
+
+    if(product_cost < 0) {
+        alert("Giá gốc sản phẩm không hợp lệ");
+        product_cost.focus();
+        return false;
+    }
+
+    if(product_price < 0) {
+        alert("Giá gốc sản phẩm không hợp lệ");
+        product_cost.focus();
+        return false;
+    }
+
+    return true;
+}
+
+function createProduct(product_id, product_name, product_cost, product_price, product_type, product_img) {
+    var path =  "../ProductManagement/product.php"
+    var data =  "id=" + product_id.value + 
+                "&name=" + product_name.value +
+                "&cost=" + product_cost.value +
+                "&price=" + product_price.value +
+                "&type=" + product_type.value +
+                "&img=" + product_img.src +
+                "&process=add";
+
+    JS.connectToPHP(path, data, function(xhr) {
+        var response = JSON.parse(xhr.responseText);
+        alert(response[1]);
+        return(response[0]);
+    })
+
+    return false;
+}
+
+
+function checkType(id, name, cost, price, type, img) {
+    switch(type) {
+        case "iPhone":
+            createItem(id, name, cost, price, type, img, document.getElementById("containIphone"));
+        case "iPad":
+            createItem(id, name, cost, price, type, img, document.getElementById("containIpad"));
+            break;
+        case "Macbook":
+            createItem(id, name, cost, price, type, img, document.getElementById("containMacbook"));
+            break;
+        case "Apple Watch":
+            createItem(id, name, cost, price, type, img, document.getElementById("containWatch"));
+            break;
+        case "Apple Vision":
+            createItem(id, name, cost, price, type, img, document.getElementById("containVision"));
+            break;
+        case "AirPods":
+            createItem(id, name, cost, price, type, img, document.getElementById("containAirpods"));
+            break;
+        case "AirTag":
+            createItem(id, name, cost, price, type, img, document.getElementById("containAirtag"));
+            break;
+        default:
+            alert("Thông tìm thấy mục tương ứng");
+            return null;
+        }
+    }
+
+
+function createItem(id, name, cost, price, type, img, box) {
+    // Tạo một div mới
+    var newItem = document.createElement('div');
+    newItem.classList.add('product_box', 'contain2'); // Thêm các lớp vào phần tử mới tạo
+
+    // Tạo nội dung của phần tử
+    newItem.innerHTML = `
+        <div class="product_name">${name}</div>
+        <img src="${img}" alt="">
+        <div class="number_code">${id}</div>
+        <div class="product_detail">
+            <div class="product_code">
+                <img class="barcode" src="../product/screenshot-3-03c05975-1f8e-463e-aec6-9eb87890bd48.webp" alt="">
+            </div>
+            <div class="product_edit_delete">
+                <button class="product_edit">Sửa</button>
+                <button class="product_delete">Xóa</button>
+            </div>
+        </div>
+    `;
+
+    // Chèn phần tử mới vào phần tử cha đã được xác định
+    box.appendChild(newItem);
+}

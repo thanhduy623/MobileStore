@@ -102,3 +102,33 @@ export function checkEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email.value);
 }
+
+
+//Tải ảnh lên 
+export function loadPic(folder, name, frame) {
+    var input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/png';
+    
+    // Khi người dùng chọn file ảnh
+    input.addEventListener('change', function() {
+        var file = this.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function() 
+            {
+                var imageData = reader.result;
+                var data =  "scr=" + folder + name +
+                            "&image=" + imageData;
+                connectToPHP("../main/loadPic.php", data, function(xhr) {
+                    var src = xhr.responseText;
+                    frame.src = src;
+                });
+            };
+        }
+    });
+
+    input.click();
+}
