@@ -87,7 +87,7 @@ function toSent() {
 
 //XỬ LÍ TRẢ VỀ______________________________________________________________________
 function handle(xhr) {
-    var response = JSON.parse(xhr.responseText);
+    var response = (xhr.responseText);
     console.log(response);
 
     if(response[0] == false) {

@@ -165,6 +165,9 @@ document.getElementById("upload_product_btn").addEventListener('click', function
     JS.loadPic("../product/", document.getElementById("product_id").value, document.getElementById("product_img"));
 })
 
+// Lưu thông tin cập nhật
+document.getElementById("save_change_product").addEventListener('click', saveChange);
+
 ///////////////////////////////////////////////////////////////////////
 function loadProduct() {
     JS.connectToPHP("../ProductManagement/product.php","process=load", function(xhr) {
@@ -200,12 +203,12 @@ function addProduct() {
     if(createProduct(product_id, product_name, product_cost, product_price, product_type, product_img)) {return;}
     // //Kiểm tra loại
     if(!checkType(product_id, product_name, product_cost, product_price, product_type, product_img) == null) {return}
+
+    document.getElementById("cancel").click();
 }
 
 //Cập nhật ID tự động
 function createID() {
-    console.log(JS.getSelected("upload_product_category").value)
-
     var type = JS.getSelected("upload_product_category").value;
     var sign = null;
     if(type === "iPhone")       {sign = "IP"}
@@ -245,7 +248,7 @@ function checkinput(product_name, product_price, product_cost) {
 }
 
 
-// Tạo item sản phẩm
+// Tạo sản phẩm và lưu vào SQL
 function createProduct(product_id, product_name, product_cost, product_price, product_type, product_img) {
     var path =  "../ProductManagement/product.php"
     var data =  "id=" + product_id + 
@@ -285,7 +288,7 @@ switch(type) {
         createItem(id, name, cost, price, type, img, document.getElementById("containVision"));
         break;
     case "AirPods":
-        createItem(id, name, cost, price, type, img, document.getElementById("containAirpods"));
+        createItem(id, name, cost, price, type, img, document.getElementById("containAirtag"));
         break;
     case "AirTag":
         createItem(id, name, cost, price, type, img, document.getElementById("containAirtag"));
@@ -298,23 +301,28 @@ switch(type) {
 }
 
 
-function createItem(id, name, cost, price, type, img, box) {
+function createItem(id, name, cost, price, type, img, box) {   
     // Tạo một div mới
     var newItem = document.createElement('div');
     newItem.classList.add('product_box', 'contain2');
+    newItem.id = "box_" + id;
+
+    //Mã hóa
+    cost = btoa(cost)
+    price = btoa(price)
 
     // Tạo nội dung của phần tử
     newItem.innerHTML = `
-        <div class="product_name">${name}</div>
+        <div class="product_name" id="product_name_${id}">${name}</div>
         <img src="${img}" alt="">
         <div class="number_code">${id}</div>
         <div class="product_detail">
-            <div class="product_code">
+            <div class="product_code manager">
                 <img id="barcode-${id}" class="barcode" src="" alt="">
             </div>
-            <div class="product_edit_delete">
-                <button class="product_edit" data-id="${id}" data-name="${name}" data-cost="${cost}" data-price="${price}" data-type="${type}" data-img="${img}">Sửa</button>
-                <button class="product_delete" data-id="${id}" data-name="${name}" data-cost="${cost}" data-price="${price}" data-type="${type}" data-img="${img}">Xóa</button>
+            <div class="product_edit_delete manager">
+            <button id="btn_edit_${id}" class="product_edit" data-id="${id}" data-name="${name}" data-cost="${cost}" data-price="${price}" data-type="${type}" data-img="${img}">Sửa</button>
+            <button id="btn_delete_${id}" class="product_delete" data-id="${id}">Xóa</button>
             </div>
         </div>
     `;
@@ -323,6 +331,9 @@ function createItem(id, name, cost, price, type, img, box) {
 
     // Thêm sự kiện nút sửa/xóa
     newItem.querySelector('.product_edit').addEventListener('click', eventClickEdit);
+    newItem.querySelector('.product_delete').addEventListener('click', function(event) {
+        eventClickDelete(event, newItem);
+    });
 
     // Tạo mã vạch và đặt vào phần tử chứa mã vạch
     createBarcode("123456", "barcode-" + id);
@@ -348,10 +359,49 @@ function eventClickEdit(event) {
     // Lấy các thuộc tính dữ liệu từ nút được nhấn
     document.getElementById("change_product_id").value = event.target.dataset.id;
     document.getElementById("change_product_name").value = event.target.dataset.name;
-    document.getElementById("change_product_cost").value = event.target.dataset.cost;
-    document.getElementById("change_product_price").value = event.target.dataset.price;
+    document.getElementById("change_product_cost").value = atob(event.target.dataset.cost);
+    document.getElementById("change_product_price").value = atob(event.target.dataset.price);
     document.getElementById("change_product_category").value = event.target.dataset.type;
     document.getElementById("change_product_img").src = event.target.dataset.img;
+    
+}
 
-    console.log(event.target.dataset.name)
+function eventClickDelete(event, newItem) {
+    if (!window.confirm("Bạn có muốn tiếp tục không?")) {return;}
+
+    var data = "id=" + event.target.dataset.id + "&process=delete";
+
+    JS.connectToPHP("../ProductManagement/product.php", data, function(xhr) {
+        var response = JSON.parse(xhr.responseText)
+        alert(response[1]);
+        if(response[0]) {
+            newItem.remove();
+        }
+    });
+}
+
+function saveChange(event) {
+    var id = document.getElementById("change_product_id").value;
+    var name = document.getElementById("change_product_name").value;
+    var cost = document.getElementById("change_product_cost").value;
+    var price = document.getElementById("change_product_price").value;
+    var img = document.getElementById("change_product_img_src").src;
+
+    var data =  "id=" + id + 
+                "&name=" + name + 
+                "&cost=" + cost + 
+                "&price=" + price + 
+                "&img=" + img + 
+                "&process=update";
+
+    JS.connectToPHP("../ProductManagement/product.php", data, function(xhr) {
+        var response = JSON.parse(xhr.responseText)
+        alert(response[1]);
+        if(response[0]) {
+            document.getElementById("product_name_" + id).textContent = name;
+            document.getElementById("btn_edit_" + id).setAttribute('data-name', name);
+            document.getElementById("btn_edit_" + id).setAttribute('data-cost', btoa(cost));
+            document.getElementById("btn_edit_" + id).setAttribute('data-price', btoa(price));
+        }
+    });
 }

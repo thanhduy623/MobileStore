@@ -14,6 +14,14 @@
         createID();
     }
 
+    if($process === "delete") {
+        delete();
+    }
+
+    if($process === "update") {
+        update();
+    }
+
 
     //Hàm xủ lí theo từng loại nhất định
     function add() {
@@ -23,9 +31,6 @@
         $price = $_POST['price'];
         $type = $_POST['type'];
         $img = $_POST['img'];
-
-        echo(json_encode([$type]));
-        exit();
 
         try {
             $conn = connectDB();
@@ -86,6 +91,45 @@
         }
         catch (Exception $e) {
             echo json_encode(["Không thể tạo mã ID, vui lòng thử lại sau"]);
+            exit();
+        }
+    }
+
+    function delete() {
+        $id = $_POST['id'];
+
+        try {
+            $conn = connectDB();
+            $query = "DELETE FROM PRODUCT WHERE idProduct = '" . $id . "'";
+            $stmt = $conn->prepare($query);
+            $stmt->execute();
+            echo json_encode([true, "Xóa thành công"]);
+            exit();
+
+        } catch (Exception $e) {
+            echo json_encode([false, "Không thể xóa sản phẩm, do sản phẩm đã được bán"]);
+            exit();
+        }
+    }
+
+    function update() {
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $cost = $_POST['cost'];
+        $price = $_POST['price'];
+        $img = $_POST['img'];
+
+        try {
+            $conn = connectDB();
+            $query = "UPDATE PRODUCT SET nameProduct = ?, cost = ?, price = ?, img = ? WHERE idProduct = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("siiss", $name, $cost, $price, $img, $id);
+            $stmt->execute();
+            echo json_encode([true, "Sửa thành công"]);
+            exit();
+
+        } catch (Exception $e) {
+            echo json_encode([false, "Không thể sửa sản phẩm"]);
             exit();
         }
     }

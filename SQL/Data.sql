@@ -18,6 +18,10 @@ create table STAFF
     created  timestamp DEFAULT CURRENT_TIMESTAMP
 );
 
+insert into STAFF (username, fullname, email, gender, dateBirth, phone, roled, pwd, actived, img) 
+values
+("admin", "Quản trị viên", "admin@gmail.com", "Nam", "2004/01/01", "0000000000", "Quản lý", "$2y$10$931OhhXYyK9kXsVDJg.agOR01FaPCW1V35afsWXHCSbwCKtdADgrG", 1, "../avatar/admin.png"),
+("staff", "Nhân viên", "staff@gmail.com", "Nữ", "2004/01/02", "0000000000", "Bán hàng", "$2y$10$931OhhXYyK9kXsVDJg.agOR01FaPCW1V35afsWXHCSbwCKtdADgrG", 1, "../avatar/admin.png");
 
 create table PRODUCT
 (
@@ -25,12 +29,27 @@ create table PRODUCT
     nameProduct	nvarchar(50),
     cost		int,
     price		int,
-    category	varchar(6),
+    category	varchar(20),
     img			varchar(255),
     entered		int				default 0,
+    hanged		int				default 0,
     selled		int				default 0,
     remain		int				default 0
 );
+
+insert into PRODUCT (idProduct, nameProduct, cost, price, category, img)
+values
+("IP0001", "Iphone 15 - 125GB", 15000000, 19000000, "iPhone", "../product/IP0001.png"),
+("IP0002", "Iphone 15 - 125GB", 16000000, 22000000, "iPhone", "../product/IP0002.png"),
+("IP0003", "Iphone 15 - 125GB", 18000000, 25000000, "iPhone", "../product/IP0003.png"),
+("IP0004", "Iphone 15 - 125GB", 17000000, 29000000, "iPhone", "../product/IP0004.png"),
+("MA0001", "Macbook Air M1 - 256GB", 15000000, 18000000, "Macbook", "../product/MA0001.png"),
+("ID0001", "Ipad pro 11inch", 18000000, 21000000, "iPad", "../product/ID0001.png"),
+("AP0001", "Airpods pro 1", 3000000, 5000000, "AirPods", "../product/AP0001.png"),
+("AW0001", "Apple Watch SE 44mm", 5000000, 7000000, "Apple Watch", "../product/IP0004.png"),
+("AV0001", "Apple Vision Pro", 100000000, 130000000, "Apple Vision", "../product/IP0004.png");
+select * from Product
+
 
 DELIMITER $$
 CREATE FUNCTION generate_product_code(prefix_param VARCHAR(2)) RETURNS VARCHAR(6)
@@ -108,36 +127,6 @@ values
 	"admin",
 	"Quản trị viên",
     "admin@gmail.com",
-    "Nam",
-    "2004/01/01",
-    "0000000000",
-    "Quản lý",
-    "$2y$10$931OhhXYyK9kXsVDJg.agOR01FaPCW1V35afsWXHCSbwCKtdADgrG",
-    1,
-    "../avatar/admin.png"
-);
-
-insert into STAFF (username, fullname, email, gender, dateBirth, phone, roled, pwd, actived, img) 
-values
-(
-	"admin3",
-	"Duy nè",
-    "admin@gmail.com",
-    "Nam",
-    "2004/01/01",
-    "0000000000",
-    "Nhân viên",
-    "$2y$10$931OhhXYyK9kXsVDJg.agOR01FaPCW1V35afsWXHCSbwCKtdADgrG",
-    1,
-    "../avatar/admin.png"
-);
-
-insert into STAFF (username, fullname, email, gender, dateBirth, phone, roled, pwd, actived, img) 
-values
-(
-	"admin2",
-	"Quản trị viên 2",
-    "admin2@gmail.com",
     "Nam",
     "2004/01/01",
     "0000000000",
