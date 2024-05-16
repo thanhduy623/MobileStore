@@ -175,7 +175,7 @@
                 <div class="change_product_infor_content">
                     <span>Ảnh</span>
                     <div class="contain1 margin_bottom">
-                        <div class="change_product_img">
+                        <div class="change_product_img" id="change_product_img">
                             <img src="../product/iphone-card-40-iphone15prohero-202309.jpg" alt="">
                         </div>
                         <div class="contain2 center_element">
@@ -186,7 +186,7 @@
                             <select id="change_product_category" name="change_product_category" class="change_product_category"> 
                                 <option value="iPhone">iPhone</option>
                                 <option value="iPad">iPad</option>
-                                <option value="Mac">Mac</option>
+                                <option value="Macbook">Macbook</option>
                                 <option value="Apple Watch">Apple Watch</option>
                                 <option value="Apple Vision">Apple Vision</option>
                                 <option value="AirPods">AirPods</option>
@@ -195,16 +195,16 @@
                         </div>
                     </div>
                     <div>
-                        <span id="change_product_id">Mã sản phẩm</span>
+                        <span>Mã sản phẩm</span>
                         <input type="text" name="change_product_id" id="change_product_id" value="IP0001" readonly>
 
-                        <span id="change_product_name">Tên sản phẩm</span>
-                        <input type="text" name="product_name" id="product_name" value="iPhone 15 Pro">
+                        <span>Tên sản phẩm</span>
+                        <input type="text" name="change_product_name" id="change_product_name" value="iPhone 15 Pro">
                         
-                        <span id="change_product_cost">Giá gốc</span>
+                        <span>Giá gốc</span>
                         <input type="number" name="change_product_cost" id="change_product_cost" value="600">
                     
-                        <span  id="change_product_price" >Giá bán</span>
+                        <span>Giá bán</span>
                         <input type="number" name="change_product_price" id="change_product_price" class="margin_bottom_zero" value="1000">
                     </div>             
                 </div>
@@ -266,131 +266,24 @@
         </div>
 
         <div class="midTitle" id="macBook">MacBook</div>
-        <div class="product_list contain1" id="containMacbook">
-            <div class="product_box contain2">
-                <div class="product_name">iPhone 15 Pro</div>
-                <img src="../product/iphone-card-40-iphone15prohero-202309.jpg" alt="">
-                <div class="number_code">IP0001</div>
-                <div class="product_detail">
-                    <div class="product_code">
-                        <img class="barcode" src="../product/screenshot-3-03c05975-1f8e-463e-aec6-9eb87890bd48.webp" alt="">
-                    </div>
-                    <div class="product_edit_delete">
-                        <button class="product_edit">Sửa</button>
-                        <button class="product_delete">Xóa</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="product_list contain1" id="containMacbook"></div>
 
         <div class="midTitle" id="ipad">Iphone</div>
-        <div class="product_list contain1" id="containIphone">
-            <div class="product_box contain2">
-                <div class="product_name">iPhone 15 Pro</div>
-                <img src="../product/iphone-card-40-iphone15prohero-202309.jpg" alt="">
-                <div class="number_code">IP0001</div>
-                <div class="product_detail">
-                    <div class="product_code">
-                        <img class="barcode" src="../product/screenshot-3-03c05975-1f8e-463e-aec6-9eb87890bd48.webp" alt="">
-                    </div>
-                    <div class="product_edit_delete">
-                        <button class="product_edit">Sửa</button>
-                        <button class="product_delete">Xóa</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="product_list contain1" id="containIphone"></div>
 
         <div class="midTitle" id="ipad">Ipad</div>
-        <div class="product_list contain1" id="containIpad">
-            <div class="product_box contain2">
-                <div class="product_name">iPhone 15 Pro</div>
-                <img src="../product/iphone-card-40-iphone15prohero-202309.jpg" alt="">
-                <div class="number_code">IP0001</div>
-                <div class="product_detail">
-                    <div class="product_code">
-                        <img class="barcode" src="../product/screenshot-3-03c05975-1f8e-463e-aec6-9eb87890bd48.webp" alt="">
-                    </div>
-                    <div class="product_edit_delete">
-                        <button class="product_edit">Sửa</button>
-                        <button class="product_delete">Xóa</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="product_list contain1" id="containIpad"></div>
         
         <div class="midTitle" id="watch">Apple Watch</div>
-        <div class="product_list contain1" id="containWatch">
-            <div class="product_box contain2">
-                <div class="product_name">iPhone 15 Pro</div>
-                <img src="../product/iphone-card-40-iphone15prohero-202309.jpg" alt="">
-                <div class="number_code">IP0001</div>
-                <div class="product_detail">
-                    <div class="product_code">
-                        <img class="barcode" src="../product/screenshot-3-03c05975-1f8e-463e-aec6-9eb87890bd48.webp" alt="">
-                    </div>
-                    <div class="product_edit_delete">
-                        <button class="product_edit">Sửa</button>
-                        <button class="product_delete">Xóa</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="product_list contain1" id="containWatch"></div>
 
         <div class="midTitle" id="vision">Apple Vision Pro</div>
-        <div class="product_list contain1" id="containVision">
-            <div class="product_box contain2">
-                <div class="product_name">iPhone 15 Pro</div>
-                <img src="../product/iphone-card-40-iphone15prohero-202309.jpg" alt="">
-                <div class="number_code">IP0001</div>
-                <div class="product_detail">
-                    <div class="product_code">
-                        <img class="barcode" src="../product/screenshot-3-03c05975-1f8e-463e-aec6-9eb87890bd48.webp" alt="">
-                    </div>
-                    <div class="product_edit_delete">
-                        <button class="product_edit">Sửa</button>
-                        <button class="product_delete">Xóa</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="midTitle" id="airPods">AirPods</div>
-        <div class="product_list contain1" id="containAirpods">
-            <div class="product_box contain2">
-                <div class="product_name">iPhone 15 Pro</div>
-                <img src="../product/iphone-card-40-iphone15prohero-202309.jpg" alt="">
-                <div class="number_code">IP0001</div>
-                <div class="product_detail">
-                    <div class="product_code">
-                        <img class="barcode" src="../product/screenshot-3-03c05975-1f8e-463e-aec6-9eb87890bd48.webp" alt="">
-                    </div>
-                    <div class="product_edit_delete">
-                        <button class="product_edit">Sửa</button>
-                        <button class="product_delete">Xóa</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="product_list contain1" id="containVision"></div>
 
         <div class="midTitle" id="tag">AirTag</div>
-        <div class="product_list contain1" id="containAirtag">
-            <div class="product_box contain2">
-                <div class="product_name">iPhone 15 Pro</div>
-                <img src="../product/iphone-card-40-iphone15prohero-202309.jpg" alt="">
-                <div class="number_code">IP0001</div>
-                <div class="product_detail">
-                    <div class="product_code">
-                        <img class="barcode" src="../product/screenshot-3-03c05975-1f8e-463e-aec6-9eb87890bd48.webp" alt="">
-                    </div>
-                    <div class="product_edit_delete">
-                        <button class="product_edit">Sửa</button>
-                        <button class="product_delete">Xóa</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="product_list contain1" id="containAirtag"></div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" class="indexScript"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js" class="indexScript"></script>
     <script src="../Script.js" class="indexScript"></script>

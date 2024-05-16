@@ -32,6 +32,27 @@ create table PRODUCT
     remain		int				default 0
 );
 
+DELIMITER $$
+CREATE FUNCTION generate_product_code(prefix_param VARCHAR(2)) RETURNS VARCHAR(6)
+BEGIN
+    DECLARE max_number INT;
+    DECLARE new_code VARCHAR(10);
+    
+    -- Get the maximum number from the idProduct column with the corresponding prefix
+    SET max_number = (SELECT MAX(CAST(SUBSTRING(idProduct, 3) AS UNSIGNED)) FROM PRODUCT WHERE SUBSTRING(idProduct, 1, 2) = prefix_param);
+    
+    -- If no maximum number exists, set max_number = 0
+    IF max_number IS NULL THEN
+        SET max_number = 0;
+    END IF;
+    
+    -- Create a new code
+    SET new_code = CONCAT(prefix_param, LPAD(max_number + 1, 4, '0'));
+    
+    RETURN new_code;
+END$$
+DELIMITER ;
+
 
 create table CUSTOMER
 (
@@ -127,3 +148,4 @@ values
 );
 
 select * from PRODUCT;
+drop table PRODUCT

@@ -45,6 +45,11 @@ var cancel = document.getElementById('cancel');
 create_product_btn.addEventListener('click', function(){
     create_product_modal.style.display = 'block';
     document.body.style.overflow = "hidden";
+    document.getElementById("product_name").value = "";
+    document.getElementById("product_cost").value = "";
+    document.getElementById("product_price").value = "";
+    document.getElementById("upload_product_category").value = "iPhone";
+    createID();
 })
 cancel.addEventListener('click', function(){
     create_product_modal.style.display = 'none';
@@ -59,15 +64,9 @@ window.addEventListener('click', function(event){
 
 
 // Change Product Information Modal
-var product_edit = document.querySelectorAll('.product_edit');
 var change_product_infor_modal = document.getElementById('change_product_infor_modal');
 var cancel_change_product = document.getElementById('cancel_change_product');
-product_edit.forEach(btn => {
-    btn.addEventListener('click', function(){
-        change_product_infor_modal.style.display = 'block';
-        document.body.style.overflow = "hidden";
-    });
-});
+
 cancel_change_product.addEventListener('click', function(){
     change_product_infor_modal.style.display = 'none';
     document.body.style.overflow = "auto";
@@ -153,9 +152,33 @@ function scrollToTop() {
 
 
 /////////////////////////////////////////////////////////////////////////////
+document.addEventListener('DOMContentLoaded', loadProduct)
 
+//Thêm mới sản phẩm
+document.getElementById("submit").addEventListener('click', addProduct)
 
-document.getElementById("submit").addEventListener('click', function() {
+// Cập nhật ID sản phẩm tự động
+document.getElementById('upload_product_category').addEventListener('change', createID)
+
+// Nút tải ảnh
+document.getElementById("upload_product_btn").addEventListener('click', function() {
+    JS.loadPic("../product/", document.getElementById("product_id").value, document.getElementById("product_img"));
+})
+
+///////////////////////////////////////////////////////////////////////
+function loadProduct() {
+    JS.connectToPHP("../ProductManagement/product.php","process=load", function(xhr) {
+        var response = JSON.parse(xhr.responseText);
+
+        for (var i = 0; i < response.length; i++) {
+            var product = response[i];
+            checkType(product.idProduct, product.nameProduct, product.cost, product.price, product.category, product.img);
+        }
+    })
+}
+
+//Thêm mới sản phẩm
+function addProduct() {
     var product_id = document.getElementById("product_id");
     var product_name = document.getElementById("product_name");
     var product_price = document.getElementById("product_price");
@@ -164,7 +187,7 @@ document.getElementById("submit").addEventListener('click', function() {
     var product_img = document.getElementById("product_img");
 
     //Kiểm tra dữ liệu đầu vào
-    //if(!checkinput(product_name, product_price, product_cost)) {return;}
+    if(!checkinput(product_name, product_price, product_cost)) {return;}
     
     product_id = product_id.value;
     product_name = product_name.value;
@@ -173,24 +196,31 @@ document.getElementById("submit").addEventListener('click', function() {
     product_type = product_type.value;
     product_img = product_img.src.toString();
 
-    alert(product_img)
-
-
     //Khởi tạo sản phẩm
-    //if(!createProduct(product_id, product_name, product_cost, product_price, product_type, product_img)) {return;}
+    if(createProduct(product_id, product_name, product_cost, product_price, product_type, product_img)) {return;}
+    // //Kiểm tra loại
+    if(!checkType(product_id, product_name, product_cost, product_price, product_type, product_img) == null) {return}
+}
 
-    //if(!checkType(product_id, product_name, product_cost, product_price, product_type, product_img) == null) {return}
-    var box = document.getElementById("containMacbook");
-    //createItem(product_id.value, "product_name.valussssssssssssssssssssse", product_cost.value, product_price.value, product_type.value, product_img.src, document.getElementById("containMacbook"));
-})
+//Cập nhật ID tự động
+function createID() {
+    console.log(JS.getSelected("upload_product_category").value)
 
-
-document.getElementById("upload_product_btn").addEventListener('click', function() {
-    JS.loadPic("../product/", document.getElementById("product_id").value, document.getElementById("product_img"));
-})
-
-///////////////////////////////////////////////////////////////////////
-
+    var type = JS.getSelected("upload_product_category").value;
+    var sign = null;
+    if(type === "iPhone")       {sign = "IP"}
+    if(type === "iPad")         {sign = "ID"}
+    if(type === "Macbook")      {sign = "MA"}
+    if(type === "Apple Watch")  {sign = "AW"}
+    if(type === "Apple Vision") {sign = "AV"}
+    if(type === "AirPods")      {sign = "AP"}
+    if(type === "AirTag")       {sign = "AT"}
+    var data =  "type=" + sign + "&process=createID"
+    
+    JS.connectToPHP("../ProductManagement/product.php",data, function(xhr) {
+        document.getElementById("product_id").value = JSON.parse(xhr.responseText);
+    })
+}
 
 function checkinput(product_name, product_price, product_cost) {
     if(JS.checkEmpty(product_name)) {
@@ -214,16 +244,19 @@ function checkinput(product_name, product_price, product_cost) {
     return true;
 }
 
+
+// Tạo item sản phẩm
 function createProduct(product_id, product_name, product_cost, product_price, product_type, product_img) {
     var path =  "../ProductManagement/product.php"
-    var data =  "id=" + product_id.value + 
-                "&name=" + product_name.value +
-                "&cost=" + product_cost.value +
-                "&price=" + product_price.value +
-                "&type=" + product_type.value +
-                "&img=" + product_img.src +
+    var data =  "id=" + product_id + 
+                "&name=" + product_name +
+                "&cost=" + product_cost +
+                "&price=" + product_price +
+                "&type=" + product_type +
+                "&img=" + product_img +
                 "&process=add";
 
+    // Lưu vào SQL
     JS.connectToPHP(path, data, function(xhr) {
         var response = JSON.parse(xhr.responseText);
         alert(response[1]);
@@ -235,38 +268,40 @@ function createProduct(product_id, product_name, product_cost, product_price, pr
 
 
 function checkType(id, name, cost, price, type, img) {
-    switch(type) {
-        case "iPhone":
-            createItem(id, name, cost, price, type, img, document.getElementById("containIphone"));
-        case "iPad":
-            createItem(id, name, cost, price, type, img, document.getElementById("containIpad"));
-            break;
-        case "Macbook":
-            createItem(id, name, cost, price, type, img, document.getElementById("containMacbook"));
-            break;
-        case "Apple Watch":
-            createItem(id, name, cost, price, type, img, document.getElementById("containWatch"));
-            break;
-        case "Apple Vision":
-            createItem(id, name, cost, price, type, img, document.getElementById("containVision"));
-            break;
-        case "AirPods":
-            createItem(id, name, cost, price, type, img, document.getElementById("containAirpods"));
-            break;
-        case "AirTag":
-            createItem(id, name, cost, price, type, img, document.getElementById("containAirtag"));
-            break;
-        default:
-            alert("Thông tìm thấy mục tương ứng");
-            return null;
-        }
+switch(type) {
+    case "iPhone":
+        createItem(id, name, cost, price, type, img, document.getElementById("containIphone"));
+        break;
+    case "iPad":
+        createItem(id, name, cost, price, type, img, document.getElementById("containIpad"));
+        break;
+    case "Macbook":
+        createItem(id, name, cost, price, type, img, document.getElementById("containMacbook"));
+        break;
+    case "Apple Watch":
+        createItem(id, name, cost, price, type, img, document.getElementById("containWatch"));
+        break;
+    case "Apple Vision":
+        createItem(id, name, cost, price, type, img, document.getElementById("containVision"));
+        break;
+    case "AirPods":
+        createItem(id, name, cost, price, type, img, document.getElementById("containAirpods"));
+        break;
+    case "AirTag":
+        createItem(id, name, cost, price, type, img, document.getElementById("containAirtag"));
+        break;
+    default:
+        console.log(id)
+        alert("Thông tìm thấy mục tương ứng");
+        return null;
     }
+}
 
 
 function createItem(id, name, cost, price, type, img, box) {
     // Tạo một div mới
     var newItem = document.createElement('div');
-    newItem.classList.add('product_box', 'contain2'); // Thêm các lớp vào phần tử mới tạo
+    newItem.classList.add('product_box', 'contain2');
 
     // Tạo nội dung của phần tử
     newItem.innerHTML = `
@@ -275,15 +310,48 @@ function createItem(id, name, cost, price, type, img, box) {
         <div class="number_code">${id}</div>
         <div class="product_detail">
             <div class="product_code">
-                <img class="barcode" src="../product/screenshot-3-03c05975-1f8e-463e-aec6-9eb87890bd48.webp" alt="">
+                <img id="barcode-${id}" class="barcode" src="" alt="">
             </div>
             <div class="product_edit_delete">
-                <button class="product_edit">Sửa</button>
-                <button class="product_delete">Xóa</button>
+                <button class="product_edit" data-id="${id}" data-name="${name}" data-cost="${cost}" data-price="${price}" data-type="${type}" data-img="${img}">Sửa</button>
+                <button class="product_delete" data-id="${id}" data-name="${name}" data-cost="${cost}" data-price="${price}" data-type="${type}" data-img="${img}">Xóa</button>
             </div>
         </div>
     `;
-
     // Chèn phần tử mới vào phần tử cha đã được xác định
     box.appendChild(newItem);
+
+    // Thêm sự kiện nút sửa/xóa
+    newItem.querySelector('.product_edit').addEventListener('click', eventClickEdit);
+
+    // Tạo mã vạch và đặt vào phần tử chứa mã vạch
+    createBarcode("123456", "barcode-" + id);
+}
+
+function createBarcode(id, barcode) {
+
+    var container = document.getElementById(barcode);
+
+    // Đặt kích thước của phần tử chứa mã vạch
+    JsBarcode(container, id, {
+        format: "CODE128",
+        displayValue: false,
+        fontSize: 24,
+        textMargin: 10
+    });
+}
+
+function eventClickEdit(event) {
+    document.getElementById("change_product_infor_modal").style.display = 'block';
+    document.body.style.overflow = "hidden";
+    
+    // Lấy các thuộc tính dữ liệu từ nút được nhấn
+    document.getElementById("change_product_id").value = event.target.dataset.id;
+    document.getElementById("change_product_name").value = event.target.dataset.name;
+    document.getElementById("change_product_cost").value = event.target.dataset.cost;
+    document.getElementById("change_product_price").value = event.target.dataset.price;
+    document.getElementById("change_product_category").value = event.target.dataset.type;
+    document.getElementById("change_product_img").src = event.target.dataset.img;
+
+    console.log(event.target.dataset.name)
 }
