@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giao dịch</title>
+    <link rel="stylesheet" href="../Style.css">
+    <link rel="shortcut icon" href="assets/logo-icon.svg"> 
+</head>
+<body>
+    <header>
+        <a href="../Index.html" class="logo">
+            <img src="../assets/logo.svg" alt="" id="logo">
+        </a>
+
+        <ul class="navigation">
+            <li class="list">
+                <a href="../Index.html">
+                    <img src="../assets/home.svg" alt="" id="home">
+                    <span>Trang chủ</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="../StaffManagement/StaffManagement.html">
+                    <img src="../assets/people.svg" alt="" id="staff">
+                    <span>Nhân viên</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="../ProductManagement/ProductManagement.html">
+                    <img src="../assets/bag-handle.svg" alt="" id="product">
+                    <span>Sản phẩm</span>
+                </a>
+            </li>
+            <li class="list active">
+                <a href="TransactionManagement/Transaction.html">
+                    <img src="../assets/cart.svg" alt="" id="transaction">
+                    <span>Giao dịch</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="../CustomerManagement/CustomerManagement.html">
+                    <img src="../assets/chatbubbles.svg" alt="" id="client">
+                    <span>Khách hàng</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="../ReportsandStatistics/ReportsandStatistics.html">
+                    <img src="../assets/cellular.svg" alt="" id="report">
+                    <span>Báo cáo</span>
+                </a>
+            </li>
+            <div class="indicator"></div>
+        </ul>
+
+        <div class="menu">
+            <a href="#" id="guide" class="guide"><img src="../assets/compass.svg" alt=""></a>
+            <div class="user_frame">
+                <img id="user" class="user" src="../User/dongduy.jpg" alt="">
+            </div>
+            <div id="menu-icon"><img src="../assets/menu.svg" alt=""></div>
+        </div>
+
+        <div id="user_modal" class="user_modal">
+            <div class="user_modal_content">
+                <div id="basic_info" class="basic_info">
+                    <div class="contain1">
+                        <img src="../User/dongduy.jpg" alt="" id="avatar">
+                        <div class="contain2">
+                            <p id="name" class="name">Dong Duy</p>
+                            <p id="role" class="role">Quản trị viên</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="profile" class="profile">
+                    <img src="../assets/person-circle-outline.svg" alt="">
+                    <span>Xem hồ sơ</span>
+                </div>
+                <div id="account" class="account">
+                    <img src="../assets/at-outline.svg" alt="">
+                    <span>Quản lý tài khoản</span>
+                </div>
+                <div id="setting" class="setting">
+                    <img src="../assets/settings-outline.svg" alt="">
+                    <span>Cài đặt</span>
+                </div>
+                <div id="help" class="help">
+                    <img src="../assets/help-circle-outline.svg" alt="">
+                    <span>Trợ giúp và hỗ trợ</span>
+                </div>
+                <div id="themes" class="themes">
+                    <img src="../assets/moon-outline.svg" alt="">
+                    <span>Giao diện</span>
+                </div>
+                <div id="logout" class="logout">
+                    <img src="../assets/log-out-outline.svg" alt="">
+                    <span>Đăng xuất</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="delete_transaction_confirmation_modal" id="delete_transaction_confirmation_modal">
+            <div class="delete_transaction_confirmation_container">
+                <div class="delete_transaction_confirmation_header">
+                    <p>Thông báo</p>
+                </div>
+                <div class="delete_transaction_confirmation_content">
+                    <p>Xác nhận xóa giao dịch này!</p>
+                </div>
+                <div class="delete_transaction_confirmation_footer">
+                    <div class="contain1 create_cancel">
+                        <button class="cancel" id="cancel_delete_transaction">Hủy</button>
+                        <button class="delete">Xóa</button>
+                    </div>  
+                </div>
+            </div>
+        </div>
+
+        <div class="create_transaction_modal" id="create_transaction_modal">
+            <div class="create_transaction_container">
+                <div class="create_transaction_header">
+                    <p>Tạo giao dịch mới</p>
+                </div>
+                <div class="create_transaction_content">
+                    <div>
+                        <div class="contain1">
+                            <div>   
+                                <span><strong>Mã giao dịch</strong></span>
+                                <input type="text" name="transaction_id" id="transaction_id" value="123456" readonly>
+                            </div>
+                            <div>
+                                <span><strong>Ngày tạo</strong></span>
+                                <input type="date" name="transaction_date" id="transaction_date">
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="margin_bottom"><span><strong>Thông tin khách hàng</strong></span></div>
+                        <div class="">
+                            <span>Số điện thoại</span>
+                            <input type="text" name="transaction_customer" id="transaction_customer_phone_number">
+                            <span>Họ tên</span>
+                            <input type="text" name="transaction_customer" id="transaction_customer_name">
+                            <span>Địa chỉ</span>
+                            <input type="text" name="transaction_customer" id="transaction_customer_address">
+                        </div>
+
+                        <div class="margin_bottom">
+                            <span><strong>Thông tin Sản phẩm</strong></span>
+                        </div>
+                        <div class="contain1">
+                            <div class="contain2 div45">
+                                <span>Mã sản phẩm</span>
+                                <input type="text" name="transaction_product_id" id="transaction_product_id">
+                            </div>
+                            <div class="contain2 div25">
+                                <span>Số lượng</span>
+                                <div class="contain1 space_between">
+                                    <input type="text" name="transaction_product_quanity" id="transaction_product_quanity">
+                                    <button class="plus-button">+</button>
+                                </div>
+                            </div>
+                        </div>                        
+                        <span>Danh mục sản phẩm</span>
+                        <div class="transaction_product_list" id="transaction_product_list">
+                            <div class="transaction_product_list_box">
+                                <p id="b_product_id">IP0001</p>
+                                <p id="b_product_name">iPhone 15 Pro Max</p>
+                                <p id="b_product_quanity">15</p>
+                                <p id="b_product_price">30000000</p>
+                                <p id="b_product_total">450000000</p>
+                                <button class="minus-button">-</button>
+                            </div>
+                            <div class="transaction_product_list_box">
+                                <p id="b_product_id">IP0001</p>
+                                <p id="b_product_name">iPhone 15 Pro Max</p>
+                                <p id="b_product_quanity">15</p>
+                                <p id="b_product_price">30000000</p>
+                                <p id="b_product_total">450000000</p>
+                                <button class="minus-button">-</button>
+                            </div>
+                        </div>
+
+                        <span><strong>Tổng tiền</strong></span>
+                        <input type="number" name="transaction_total" id="transaction_total">
+
+                        <span><strong>Tiền khách đưa</strong></span>
+                        <input type="number" name="transaction_received_money" id="transaction_received_money">
+
+                        <span><strong>Tiền thối lại</strong></span>
+                        <input type="number" name="transaction_return_money" id="transaction_return_money" class="margin_bottom_zero">
+
+
+                    </div>
+                </div>
+                <div class="create_transaction_footer">
+                    <div class="contain1 create_cancel">
+                        <button class="cancel" id="cancel_create">Hủy</button>
+                        <button class="create">Tạo</button>
+                    </div>  
+                </div>
+            </div>
+        </div>
+
+        <!-- hehe -->
+        <div class="transaction_details_modal" id="transaction_details_modal">
+            <div class="transaction_details_container">
+                <div class="transaction_details_header">
+                    <p>Thông tin giao dịch</p>
+                </div>
+                <div class="transaction_details_content">
+                    <div>
+                        <div class="contain1">
+                            <div>   
+                                <span><strong>Mã giao dịch</strong></span>
+                                <input type="text" name="transaction_details_id" id="transaction_details_id" value="123456" readonly>
+                            </div>
+                            <div>
+                                <span><strong>Ngày tạo</strong></span>
+                                <input type="date" name="transaction_details_date" id="transaction_details_date" readonly>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="margin_bottom"><span><strong>Thông tin khách hàng</strong></span></div>
+                        <div class="">
+                            <span>Số điện thoại</span>
+                            <input type="text" name="transaction_details_customer_phone_number" id="transaction_details_customer_phone_number" readonly>
+                            <span>Họ tên</span>
+                            <input type="text" name="transaction_details_customer_name" id="transaction_details_customer_name" readonly>
+                            <span>Địa chỉ</span>
+                            <input type="text" name="transaction_details_customer_address" id="transaction_details_customer_address" readonly>
+                        </div>
+
+                        <span><strong>Tổng tiền</strong></span>
+                        <input type="number" name="transaction_details_total" id="transaction_details_total" readonly>
+                                              
+                        <span><strong>Danh mục sản phẩm</strong></span>
+                        <div class="transaction_product_list" id="transaction_product_list">
+                            <div class="transaction_product_list_box">
+                                <p id="b_product_id">IP0001</p>
+                                <p id="b_product_name">iPhone 15 Pro Max</p>
+                                <p id="b_product_quanity">15</p>
+                                <p id="b_product_price">30000000</p>
+                                <p id="b_product_total">450000000</p>
+                            </div>
+                            <div class="transaction_product_list_box">
+                                <p id="b_product_id">IP0001</p>
+                                <p id="b_product_name">iPhone 15 Pro Max</p>
+                                <p id="b_product_quanity">15</p>
+                                <p id="b_product_price">30000000</p>
+                                <p id="b_product_total">450000000</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="transaction_details_footer">
+                    <div class="contain1 create_cancel">
+                        <button class="cancel" id="cancel_details">Hủy</button>
+                    </div>  
+                </div>
+            </div>
+        </div>
+
+
+        <a href="#" class="title">Giao dịch</a>
+            <div class="path">
+                <a href="#">Sản phẩm •</a> 
+                <a href="#">Danh sách giao dịch</a> 
+            </div>
+        <div class="contain3">
+            <div class="search_btn">
+                <img src="../assets/search.svg" alt="">
+                <input type="text" placeholder="Tìm kiếm">
+            </div>
+            <div class="create_account_btn" id="create_transaction_btn">
+                <img src="../assets/add.svg" alt="">
+                <span>Tạo giao dịch</span>
+            </div>
+        </div>
+        <div class="transaction_header_helper">
+            <p id="tr_ma">Mã giao dịch</p>
+            <p id="tr_ngay">Ngày tạo</p>
+            <p id="tr_kh_hang">Tên khách hàng</p>
+            <p id="tr_tongtien">Tổng tiền</p>
+        </div>
+        <div class="transaction_main_content">
+            <div class="transaction_box">
+                <p id="b_tr_ma">123456</p>
+                <input type="date" id="b_tr_ngay">
+                <p id="b_tr_kh_hang">Huỳnh Kiến Đông Duy</p>
+                <p id="b_tr_tongtien">10000000</p>
+            </div>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" class="indexScript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" class="indexScript"></script>
+    <script src="../Script.js" class="indexScript"></script>
+    <script src="Transaction.js"></script>
+</body>
+</html>

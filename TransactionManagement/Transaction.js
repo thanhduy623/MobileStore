@@ -46,12 +46,12 @@ window.addEventListener('resize', updateTransactionContentHeight);
 // Create Transaction Modal
 var create_transaction_btn = document.getElementById('create_transaction_btn');
 var create_transaction_modal = document.getElementById('create_transaction_modal');
-var cancel = document.getElementById('cancel');
+var cancel_create = document.getElementById('cancel_create');
 create_transaction_btn.addEventListener('click', function(){
     create_transaction_modal.style.display = 'block';
     document.body.style.overflow = "hidden";
 })
-cancel.addEventListener('click', function(){
+cancel_create.addEventListener('click', function(){
     create_transaction_modal.style.display = 'none';
     document.body.style.overflow = "auto";
 })
@@ -60,10 +60,30 @@ window.addEventListener('click', function(event){
         create_transaction_modal.style.display = 'none';
         document.body.style.overflow = "auto";
     }
-})
+})  
 
 
+// Transaction Details Modal
+var transaction_box = document.getElementsByClassName('transaction_box');
+var transaction_details_modal = document.getElementById('transaction_details_modal');
+var cancel_details = document.getElementById('cancel_details');
 
-///////////////////////////////////////////////////////////////////////////////////////////
+// Convert HTMLCollection to an array
+Array.from(transaction_box).forEach(btn => {
+    btn.addEventListener('click', function(){
+        transaction_details_modal.style.display = 'block';
+        document.body.style.overflow = "hidden";
+    });
+});
 
+cancel_details.addEventListener('click', function(){
+    transaction_details_modal.style.display = 'none';
+    document.body.style.overflow = "auto";
+});
 
+window.addEventListener('click', function(event){
+    if(event.target === transaction_details_modal){
+        transaction_details_modal.style.display = 'none';
+        document.body.style.overflow = "auto";
+    }
+});

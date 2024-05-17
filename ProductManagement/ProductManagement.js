@@ -39,17 +39,23 @@ window.addEventListener('resize', updateProductContentHeight);
 
 
 // Create New Product Modal
-var create_product_btn = document.getElementById('create_product_btn');
-var create_product_modal = document.getElementById('create_product_modal');
 var cancel = document.getElementById('cancel');
-create_product_btn.addEventListener('click', function(){
-    create_product_modal.style.display = 'block';
+document.getElementById('create_product_btn').addEventListener('click', function(){
+    document.getElementById('create_product_modal').style.display = 'block';
     document.body.style.overflow = "hidden";
     document.getElementById("product_name").value = "";
     document.getElementById("product_cost").value = "";
     document.getElementById("product_price").value = "";
     document.getElementById("upload_product_category").value = "iPhone";
     createID();
+})
+
+document.getElementById('input_product_btn').addEventListener('click', function(){
+    document.getElementById('input_product_modal').style.display = 'block';
+    document.body.style.overflow = "hidden";
+    document.getElementById("save_input_product").addEventListener('click', updateInput);
+    document.getElementById("cancel_input_product").addEventListener('click', cancelInput);
+    getIdProduct();
 })
 cancel.addEventListener('click', function(){
     create_product_modal.style.display = 'none';
@@ -90,10 +96,6 @@ product_delete.forEach(btn => {
     });
 });
 
-cancel_delete_product.addEventListener('click', function(){
-    delete_product_confirmation_modal.style.display = 'none';
-    document.body.style.overflow = "auto";
-})
 
 window.addEventListener('click', function(event){
     if(event.target === delete_product_confirmation_modal){
@@ -404,4 +406,81 @@ function saveChange(event) {
             document.getElementById("btn_edit_" + id).setAttribute('data-price', btoa(price));
         }
     });
+}
+
+function getIdProduct() {
+    JS.connectToPHP("../ProductManagement/product.php","process=loadId", function(xhr) {
+        var response = JSON.parse(xhr.responseText);
+        if(response[0] == false) {alert[1]}
+
+        var dataList = document.getElementById('product_ids');
+        response[1].forEach(function(id) {
+            var option = document.createElement('option');
+            option.value = id;
+            dataList.appendChild(option);
+        });
+    })
+
+    document.getElementById("input_product_id").addEventListener('input', getNameProduct);
+}
+
+function getNameProduct() {
+    var id = document.getElementById("input_product_id");
+    var name = document.getElementById("input_product_name");
+
+    if(id.value.length != 6) {
+        name.value = "";
+        return;
+    }
+
+    var data =  "id=" + id.value +
+                "&process=loadName"
+    JS.connectToPHP("../ProductManagement/product.php",data, function(xhr) {
+        var response = JSON.parse(xhr.responseText);
+
+        if(response[0] == false) {
+            alert(response[1]);
+            id.value = "";
+            name.value = "";
+            return;
+        }
+
+        document.getElementById("input_product_name").value = response[1].nameProduct
+    })
+}
+
+function updateInput() {
+    var id = document.getElementById("input_product_id");
+    var num = document.getElementById("input_num");
+    
+    if(JS.checkEmpty(id) || JS.checkEmpty(num)) {
+        alert("Không được để trống dữ liệu");
+        return;
+    }
+
+    if(num.value < 1) {
+        alert("Số lượng phải lớn hơn 0")
+        return
+    }
+
+    var data =  "id=" + id.value +
+                "&num=" + num.value +
+                "&process=input"
+    JS.connectToPHP("../ProductManagement/product.php", data, function(xhr) {
+        var response = JSON.parse(xhr.responseText);
+        alert(response[1])
+        if(response[0] == true) {
+            document.getElementById("input_product_id").value = "";
+            document.getElementById("input_product_name").value = "";
+            document.getElementById("input_num").value = "";
+        }
+    })
+}
+
+function cancelInput() {
+    input_product_modal.style.display = 'none';
+    document.body.style.overflow = "auto";
+    document.getElementById("input_product_id").value = "";
+    document.getElementById("input_product_name").value = "";
+    document.getElementById("input_num").value = "";
 }

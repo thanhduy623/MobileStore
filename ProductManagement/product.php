@@ -22,6 +22,17 @@
         update();
     }
 
+    if($process === "loadId") {
+        loadId();
+    }
+
+    if($process === "loadName") {
+        loadName();
+    }
+    
+    if($process === "input") {
+        input();
+    }
 
     //Hàm xủ lí theo từng loại nhất định
     function add() {
@@ -130,6 +141,67 @@
 
         } catch (Exception $e) {
             echo json_encode([false, "Không thể sửa sản phẩm"]);
+            exit();
+        }
+    }
+
+    function loadId() {
+        try {
+            $conn = connectDB();
+            $query = "SELECT idProduct FROM PRODUCT";
+            $stmt = $conn->prepare($query);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $idProducts = [];
+            while ($row = $result->fetch_assoc()) {
+                $idProducts[] = $row['idProduct'];
+            }
+            echo json_encode([true, $idProducts]);
+            exit();
+
+        } catch (Exception $e) {
+            echo json_encode([false, "Lấy danh sách mã sản phẩm thất bại"]);
+            exit();
+        }
+    }
+
+    function loadName() {
+        try {
+            $conn = connectDB();
+            $query = "SELECT nameProduct FROM PRODUCT where idProduct = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("s", $_POST['id']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            if($result->num_rows == 0) {
+                echo json_encode([false, "Mã sản phẩm không đúng"]);
+                exit();
+            }
+
+            echo json_encode([true, $result->fetch_assoc()]);
+            exit();
+        } catch (Exception $e) {
+            echo json_encode([false, "Tải dữ liệu thất bại, vui lòng thử lại sau"]);
+            exit();
+        }
+    }
+
+    function input() {
+        try {
+            $conn = connectDB();
+            $query = "UPDATE PRODUCT
+                      SET entered = entered + ?
+                      WHERE idProduct = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("is",$_POST['num'] , $_POST['id']);
+            $stmt->execute();
+
+            echo json_encode([true, "Nhập sản phẩm thành công"]);
+            exit();
+        } catch (Exception $e) {
+            echo json_encode([false, "Nhập sản phẩm thất bại"]);
             exit();
         }
     }

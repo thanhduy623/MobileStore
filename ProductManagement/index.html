@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý sản phẩm</title>
-    <link rel="stylesheet" href="../main//style.css">
+    <link rel="stylesheet" href="../main/style.css">
     <link rel="shortcut icon" href="../assets/logo-icon.svg"> 
 </head>
 <body>
@@ -110,7 +110,7 @@
                     <img src="../assets/add.svg" alt="">
                     <span>Tạo mới</span>
                 </div>
-                <div class="create_account_btn" id="transaction_btn">
+                <div class="create_account_btn" id="input_product_btn">
                     <img src="../assets/cube-outline.svg" alt="">
                     <span>Nhập kho</span>
                 </div>
@@ -217,18 +217,28 @@
             </div>
         </div>
 
-        <div class="delete_product_confirmation_modal" id="delete_product_confirmation_modal">
-            <div class="delete_product_confirmation_container">
-                <div class="delete_product_confirmation_header">
-                    <p>Thông báo</p>
+        <div class="change_product_infor_modal" id="input_product_modal">
+            <div class="change_product_infor_container">
+                <div class="change_product_infor_header">
+                    <p>Nhập sản phẩm vào kho</p>
                 </div>
-                <div class="delete_product_confirmation_content">
-                    <p>Xác nhận xóa vĩnh viễn sản phẩm này!</p>
+                <div class="change_product_infor_content">                    
+                    <div>
+                        <span>Mã sản phẩm</span>
+                        <input type="text" name="change_product_id" id="input_product_id" list="product_ids">
+                        <datalist id="product_ids"></datalist>
+
+                        <span>Tên sản phẩm</span>
+                        <input type="text" name="change_product_name" id="input_product_name" readonly>
+                        
+                        <span>Số lượng</span>
+                        <input type="number" name="change_product_cost" id="input_num">
+                    </div>             
                 </div>
-                <div class="delete_product_confirmation_footer">
+                <div class="change_product_infor_footer">
                     <div class="contain1 create_cancel">
-                        <button class="cancel" id="cancel_delete_product">Hủy</button>
-                        <button class="delete">Xóa</button>
+                        <button class="cancel" id="cancel_input_product">Hủy</button>
+                        <button class="create" id="save_input_product">Nhập</button>
                     </div>  
                 </div>
             </div>

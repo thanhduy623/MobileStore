@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý khách hàng</title>
+    <title>Báo cáo và thống kê</title>
     <link rel="stylesheet" href="../Style.css">
     <link rel="shortcut icon" href="../assets/logo-icon.svg"> 
 </head>
@@ -32,13 +32,19 @@
                     <span>Sản phẩm</span>
                 </a>
             </li>
-            <li class="list active">
-                <a href="../CustomerMnagement/CustomerManagement.html">
+            <li class="list">
+                <a href="../TransactionManagement/Transaction.html">
+                    <img src="../assets/cart.svg" alt="" id="transaction">
+                    <span>Giao dịch</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="../CustomerManagement/CustomerManagement.html">
                     <img src="../assets/chatbubbles.svg" alt="" id="client">
                     <span>Khách hàng</span>
                 </a>
             </li>
-            <li class="list">
+            <li class="list active">
                 <a href="../ReportsandStatistics/ReportsandStatistics.html">
                     <img src="../assets/cellular.svg" alt="" id="report">
                     <span>Báo cáo</span>
@@ -95,56 +101,68 @@
     </header>
 
     <main>
-        <div class="customer_header">
-            <a href="CustomerManagement.html" class="title">Khách hàng</a>
-            <div class="path">
-                <a href="#">Khách hàng •</a> 
-                <a href="#">Danh sách</a> 
-                <a href="#"></a> 
-            </div>
-            <div class="contain3">
-                <div class="search_btn">
-                    <img src="../assets/search.svg" alt="">
-                    <input type="text" placeholder="Tìm kiếm">
-                </div>
-                
-                <div class="delete_account_confirmation_modal" id="delete_account_confirmation_modal">
-                    <div class="delete_account_confirmation_container">
-                        <div class="delete_account_confirmation_header">
-                            <p>Thông báo</p>
-                        </div>
-                        <div class="delete_account_confirmation_content">
-                            <p>Xác nhận xóa vĩnh viễn tài khoản này!</p>
-                        </div>
-                        <div class="delete_account_confirmation_footer">
-                            <div class="contain1 create_cancel">
-                                <button class="cancel" id="cancel_delete_account">Hủy</button>
-                                <button class="delete">Xóa</button>
-                            </div>  
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <a href="#" class="title">Báo cáo & phân tích</a>
+        <div class="path">
+            
         </div>
-        <div class="customer_header_helper">
-            <p id="c_stt">STT</p>
-            <p id="c_ho_ten">Họ và tên</p>
-            <p id="c_gioi_tinh">Giới tính</p>
-            <p id="c_sdt">Số điện thoại</p>
+        <div class="view_order contain1">
+            <Span>Chế độ xem</Span>
+            <div class="view_by_day active" id="view_by_day">Ngày</div>
+            <div class="view_by_month" id="view_by_month">Tháng</div>
+            <div class="view_by_specific" id="view_by_specific">Tùy chọn</div>
         </div>
-        <div class="customer_main_content">
-            <div class="user_box" id="user_box">
-                <p id="c_u_stt">01</p>
-                <p id="c_u_ho_ten">Huỳnh Kiến Đông Duy</p>
-                <p id="c_u_gioi_tinh">Nam</p>
-                <p id="c_u_sdt">0362100990</p>
-                <div class="edit_delete">   
-                    <!-- <a href="Profile.html" class="edit_btn" id="edit_btn">
-                        <img src="../assets/create-outline.svg" alt="">
-                    </a> -->
-                    <button type="button" class="delete_account_btn" id="delete_account_btn">
+
+        <div class="smallTitle select_day_chart_title">Chọn thời gian</div>
+        <input type="date" id="select_day_chart">
+
+        <div class="midTitle">Thống kê chi tiết</div>
+        <div class="chart-container">
+            <canvas id="total_amount_received_chart" width="400" height="200"></canvas>
+            <div class="chart-title">Biểu đồ Tổng giá tiền bán ra theo ngày</div>
+            <canvas id="number_of_order_and_product_chart" width="400" height="200"></canvas>
+            <div class="chart-title">Biểu đồ Số lượng đơn hàng và sản phẩm bán ra theo ngày</div>
+        </div>
+
+        <div class="midTitle margin_bottom">Danh sách đơn hàng</div>
+        <div class="statistics_header_helper">
+            <p id="st_maDH">Mã đơn hàng</p>
+            <p id="st_so_luong">Số lượng SP</p>
+            <p id="st_tien_ban">Tổng tiền bán</p>
+            <p id="st_doanh_thu">Doanh thu</p>
+            <p id="st_thoigian">Thời gian</p>
+        </div>
+        <div class="statistics_main_content">
+            <div class="statistics_box" id="statistics_box">
+                <p id="b_st_maDH">00001</p>
+                <p id="b_st_so_luong">25</p>
+                <p id="b_st_tien_ban">500000000</p>
+                <p id="b_st_doanh_thu">300000000</p>
+                <p id="b_st_thoigian">01/01/2004</p>
+                <div class="statistics_delete">   
+                    <button type="button" class="delete_transaction_btn" id="delete_transaction_btn">
                         <img src="../assets/trash.svg" alt="">
                     </button>
+                </div>
+            </div>
+        </div>
+        <div class="order_details_modal" id="order_details_modal">
+            <div class="order_details_modal_container">
+                <div class="order_details_modal_header">
+                    <p>Chi tiết đơn hàng</p>
+                </div>
+                <div class="order_details_modal_content">
+                    <p id="id_bill"><strong>Mã đơn:</strong>000001</p>
+                    <div class="product_item margin_bottom">
+                        <p class="product_id"><strong>ID sản phẩm:</strong>IP0001</p>
+                        <p class="quanity"><strong>Số lượng:</strong>2</p>
+                        <p class="price"><strong>Đơn giá:</strong>1000000</p>
+                        <p class="sum"><strong>Tổng tiền:</strong>2000000</p>
+                    </div>
+                </div>
+                <div class="order_details_modal_footer">
+                    <div class="contain1 create_cancel">
+                        <button class="cancel" id="cancel">Hủy</button>
+                    </div>  
                 </div>
             </div>
         </div>
@@ -152,6 +170,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" class="indexScript"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js" class="indexScript"></script>
     <script src="../Script.js" class="indexScript"></script>
-    <script src="CustomerManagement.js"></script>
+    <script src="ReportsandStatistics.js"></script>
 </body>
 </html>

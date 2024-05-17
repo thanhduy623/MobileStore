@@ -32,7 +32,6 @@ create table PRODUCT
     category	varchar(20),
     img			varchar(255),
     entered		int				default 0,
-    hanged		int				default 0,
     selled		int				default 0,
     remain		int				default 0
 );
@@ -76,12 +75,15 @@ DELIMITER ;
 create table CUSTOMER
 (
     fullName	nvarchar(50),
-    gender		boolean		,
-	dateBirth	date		,
-    address		nvarchar(20),
+    address		nvarchar(100),
     phone		varchar(10)			PRIMARY KEY
 );
 
+insert into CUSTOMER (fullName, address, phone) values
+("Nguyễn Thanh Duy", "Kiên Giang", "0834828525"),
+("Huỳnh Kiến Đông Duy", "Đồng Tháp", "0909333678"),
+("Khưu Trùng Dương", "An Giang", "0364912107"),
+("Nguyễn Quốc Duy", "An Giang", "0363733898");
 
 create table VOUCHER
 (
