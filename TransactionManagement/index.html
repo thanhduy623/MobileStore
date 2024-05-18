@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giao dịch</title>
-    <link rel="stylesheet" href="../Style.css">
+    <link rel="stylesheet" href="../main/style.css">
     <link rel="shortcut icon" href="assets/logo-icon.svg"> 
 </head>
 <body>
@@ -101,22 +101,7 @@
     </header>
 
     <main>
-        <div class="delete_transaction_confirmation_modal" id="delete_transaction_confirmation_modal">
-            <div class="delete_transaction_confirmation_container">
-                <div class="delete_transaction_confirmation_header">
-                    <p>Thông báo</p>
-                </div>
-                <div class="delete_transaction_confirmation_content">
-                    <p>Xác nhận xóa giao dịch này!</p>
-                </div>
-                <div class="delete_transaction_confirmation_footer">
-                    <div class="contain1 create_cancel">
-                        <button class="cancel" id="cancel_delete_transaction">Hủy</button>
-                        <button class="delete">Xóa</button>
-                    </div>  
-                </div>
-            </div>
-        </div>
+        
 
         <div class="create_transaction_modal" id="create_transaction_modal">
             <div class="create_transaction_container">
@@ -128,11 +113,11 @@
                         <div class="contain1">
                             <div>   
                                 <span><strong>Mã giao dịch</strong></span>
-                                <input type="text" name="transaction_id" id="transaction_id" value="123456" readonly>
+                                <input type="text" name="transaction_id" id="transaction_id" readonly>
                             </div>
                             <div>
                                 <span><strong>Ngày tạo</strong></span>
-                                <input type="date" name="transaction_date" id="transaction_date">
+                                <input type="date" name="transaction_date" id="transaction_date" readonly>
                             </div>
                             
                         </div>
@@ -142,9 +127,9 @@
                             <span>Số điện thoại</span>
                             <input type="text" name="transaction_customer" id="transaction_customer_phone_number">
                             <span>Họ tên</span>
-                            <input type="text" name="transaction_customer" id="transaction_customer_name">
+                            <input type="text" name="transaction_customer" id="transaction_customer_name" readonly>
                             <span>Địa chỉ</span>
-                            <input type="text" name="transaction_customer" id="transaction_customer_address">
+                            <input type="text" name="transaction_customer" id="transaction_customer_address" readonly>
                         </div>
 
                         <div class="margin_bottom">
@@ -158,47 +143,31 @@
                             <div class="contain2 div25">
                                 <span>Số lượng</span>
                                 <div class="contain1 space_between">
-                                    <input type="text" name="transaction_product_quanity" id="transaction_product_quanity">
-                                    <button class="plus-button">+</button>
+                                    <input type="number" name="transaction_product_quanity" id="transaction_product_quanity">
+                                    <button id="addItem" class="plus-button">+</button>
                                 </div>
                             </div>
                         </div>                        
                         <span>Danh mục sản phẩm</span>
                         <div class="transaction_product_list" id="transaction_product_list">
-                            <div class="transaction_product_list_box">
-                                <p id="b_product_id">IP0001</p>
-                                <p id="b_product_name">iPhone 15 Pro Max</p>
-                                <p id="b_product_quanity">15</p>
-                                <p id="b_product_price">30000000</p>
-                                <p id="b_product_total">450000000</p>
-                                <button class="minus-button">-</button>
-                            </div>
-                            <div class="transaction_product_list_box">
-                                <p id="b_product_id">IP0001</p>
-                                <p id="b_product_name">iPhone 15 Pro Max</p>
-                                <p id="b_product_quanity">15</p>
-                                <p id="b_product_price">30000000</p>
-                                <p id="b_product_total">450000000</p>
-                                <button class="minus-button">-</button>
-                            </div>
                         </div>
 
                         <span><strong>Tổng tiền</strong></span>
-                        <input type="number" name="transaction_total" id="transaction_total">
+                        <input type="number" name="transaction_total" id="transaction_total" value="0" readonly>
 
                         <span><strong>Tiền khách đưa</strong></span>
-                        <input type="number" name="transaction_received_money" id="transaction_received_money">
+                        <input type="number" name="transaction_received_money" id="transaction_received_money"  value="0">
 
                         <span><strong>Tiền thối lại</strong></span>
-                        <input type="number" name="transaction_return_money" id="transaction_return_money" class="margin_bottom_zero">
+                        <input type="number" name="transaction_return_money" id="transaction_return_money" class="margin_bottom_zero" value="0" readonly>
 
 
                     </div>
                 </div>
                 <div class="create_transaction_footer">
                     <div class="contain1 create_cancel">
-                        <button class="cancel" id="cancel_create">Hủy</button>
-                        <button class="create">Tạo</button>
+                        <button class="cancel" id="cancel">Hủy</button>
+                        <button class="create" id="create">Tạo</button>
                     </div>  
                 </div>
             </div>
@@ -208,7 +177,7 @@
         <div class="transaction_details_modal" id="transaction_details_modal">
             <div class="transaction_details_container">
                 <div class="transaction_details_header">
-                    <p>Thông tin giao dịch</p>
+                    <p>Chi tiết hóa đơn</p>
                 </div>
                 <div class="transaction_details_content">
                     <div>
@@ -218,47 +187,21 @@
                                 <input type="text" name="transaction_details_id" id="transaction_details_id" value="123456" readonly>
                             </div>
                             <div>
-                                <span><strong>Ngày tạo</strong></span>
-                                <input type="date" name="transaction_details_date" id="transaction_details_date" readonly>
+                                <span><strong>Khách hàng</strong></span>
+                                <input type="text" name="transaction_details_date" id="transaction_details_date" readonly>
                             </div>
-                            
                         </div>
                         
-                        <div class="margin_bottom"><span><strong>Thông tin khách hàng</strong></span></div>
-                        <div class="">
-                            <span>Số điện thoại</span>
-                            <input type="text" name="transaction_details_customer_phone_number" id="transaction_details_customer_phone_number" readonly>
-                            <span>Họ tên</span>
-                            <input type="text" name="transaction_details_customer_name" id="transaction_details_customer_name" readonly>
-                            <span>Địa chỉ</span>
-                            <input type="text" name="transaction_details_customer_address" id="transaction_details_customer_address" readonly>
-                        </div>
-
                         <span><strong>Tổng tiền</strong></span>
                         <input type="number" name="transaction_details_total" id="transaction_details_total" readonly>
                                               
                         <span><strong>Danh mục sản phẩm</strong></span>
-                        <div class="transaction_product_list" id="transaction_product_list">
-                            <div class="transaction_product_list_box">
-                                <p id="b_product_id">IP0001</p>
-                                <p id="b_product_name">iPhone 15 Pro Max</p>
-                                <p id="b_product_quanity">15</p>
-                                <p id="b_product_price">30000000</p>
-                                <p id="b_product_total">450000000</p>
-                            </div>
-                            <div class="transaction_product_list_box">
-                                <p id="b_product_id">IP0001</p>
-                                <p id="b_product_name">iPhone 15 Pro Max</p>
-                                <p id="b_product_quanity">15</p>
-                                <p id="b_product_price">30000000</p>
-                                <p id="b_product_total">450000000</p>
-                            </div>
-                        </div>
+                        <div class="transaction_product_list" id="transaction_product_list_see"></div>
                     </div>
                 </div>
                 <div class="transaction_details_footer">
                     <div class="contain1 create_cancel">
-                        <button class="cancel" id="cancel_details">Hủy</button>
+                        <button class="cancel" id="cancel_details">Đóng</button>
                     </div>  
                 </div>
             </div>
@@ -273,7 +216,7 @@
         <div class="contain3">
             <div class="search_btn">
                 <img src="../assets/search.svg" alt="">
-                <input type="text" placeholder="Tìm kiếm">
+                <input type="text" id="find" placeholder="Tìm kiếm">
             </div>
             <div class="create_account_btn" id="create_transaction_btn">
                 <img src="../assets/add.svg" alt="">
@@ -286,18 +229,11 @@
             <p id="tr_kh_hang">Tên khách hàng</p>
             <p id="tr_tongtien">Tổng tiền</p>
         </div>
-        <div class="transaction_main_content">
-            <div class="transaction_box">
-                <p id="b_tr_ma">123456</p>
-                <input type="date" id="b_tr_ngay">
-                <p id="b_tr_kh_hang">Huỳnh Kiến Đông Duy</p>
-                <p id="b_tr_tongtien">10000000</p>
-            </div>
-        </div>
+        <div id="transaction_main_content" class="transaction_main_content"></div>
     </main>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" class="indexScript"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js" class="indexScript"></script>
     <script src="../Script.js" class="indexScript"></script>
-    <script src="Transaction.js"></script>
+    <script src="Transaction.js" type="module"></script>
 </body>
 </html>

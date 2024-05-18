@@ -192,10 +192,10 @@
         try {
             $conn = connectDB();
             $query = "UPDATE PRODUCT
-                      SET entered = entered + ?
+                      SET entered = entered + ?, remain = remain + ?
                       WHERE idProduct = ?";
             $stmt = $conn->prepare($query);
-            $stmt->bind_param("is",$_POST['num'] , $_POST['id']);
+            $stmt->bind_param("iis", $_POST['num'], $_POST['num'], $_POST['id']);
             $stmt->execute();
 
             echo json_encode([true, "Nhập sản phẩm thành công"]);

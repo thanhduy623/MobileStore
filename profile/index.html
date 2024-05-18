@@ -100,7 +100,35 @@
             </div>
             <div class="reset_save contain1">
                 <button class="reset manager" id="reset">Thiết lập lại</button>
-                <button class="save" id="save">Lưu</button>
+                <button class="save manager" id="save">Lưu</button>
+                <button class="save" id="pwd">Đổi mật khẩu</button>
+            </div>
+        </div>
+        <div class="change_infor_password_modal" id="change_infor_password_modal">
+            <div class="change_infor_password_container">
+                <div class="change_infor_password_header">
+                    <p>Thay đổi mật khẩu</p>
+                </div>
+                <div class="change_infor_password_content">
+                    <div>
+                      <span>Mật khẩu mới</span>
+                      <div class="password_container_modal">
+                        <input type="password" id="new_infor_password" value="" class="password_input">
+                        <img src="../assets/pwd.png" alt="Show password" class="password_icon" onclick="togglePasswordModal(this, 'new_infor_password')">
+                      </div>
+                  
+                      <span>Nhập lại</span>
+                      <div class="password_container_modal">
+                        <input type="password" id="confirm_infor_password" value="" class="password_input">
+                        <img src="../assets/pwd.png" alt="Show password" class="password_icon" onclick="togglePasswordModal(this, 'confirm_infor_password')">
+                      </div>
+                    </div>
+                  </div>                      
+                <div class="change_infor_password_footer">
+                    <div class="contain1 create_cancel">
+                        <button id="change" class="create">Thay đổi</button>
+                    </div>  
+                </div>
             </div>
         </div>
     </main>

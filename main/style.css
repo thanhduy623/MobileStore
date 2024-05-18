@@ -489,6 +489,15 @@ main.scroll{
     margin-top: 10px;
 }
 
+.margin_left{
+    margin-left: 15px;
+}
+
+.space_between{
+    display: flex;
+    justify-content: space-between;
+}
+
 .create_account_modal{
     display: none;
     position: fixed;
@@ -1475,7 +1484,72 @@ input[type="radio"] {
 }
 
 /* CREATE TRANSACTION MODAL */
-.create_transaction_modal{
+#transaction_id, #transaction_details_id{
+    width: 98%;
+}
+
+#transaction_date, #transaction_details_date{
+    width: 100%;
+}
+
+.div45{
+    width: 70%;
+}   
+
+.div25{
+    width: 30%;
+}
+
+#transaction_product_id{
+    width: 98%;
+}
+
+#transaction_product_quanity{
+    width: 70%;
+}
+
+.plus-button {
+    font-size: 24px;
+    color: white;
+    background-color: #CDCDCD;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 10px; 
+    margin-top: 3px;
+}
+
+.plus-button:hover {
+    background-color: #ccc;
+}
+
+.minus-button {
+    font-size: 16px;
+    color: white;
+    background-color: #CDCDCD;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 10px; 
+    margin-top: 3px;
+}
+
+.minus-button:hover {
+    background-color: #ccc;
+}
+
+
+.create_transaction_modal, .transaction_details_modal{
     display: none;
     position: fixed;
     z-index: 100;
@@ -1486,7 +1560,7 @@ input[type="radio"] {
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-.create_transaction_container{
+.create_transaction_container, .transaction_details_container{
     background-color: white;
     width: 550px;
     top: 50%;
@@ -1497,7 +1571,7 @@ input[type="radio"] {
     box-shadow: 0 0 30px rgba(0, 0, 0, .5);
 }
 
-.create_transaction_header{
+.create_transaction_header, .transaction_details_header{
     display: flex;
     justify-content: center;
     font-size: 1.1em;
@@ -1506,12 +1580,12 @@ input[type="radio"] {
     border-top-left-radius: 15px;
 }
 
-.create_transaction_header p{
+.create_transaction_header p, .transaction_details_header p{
     font-size: 1.2em;
     font-weight: 600;
 }
 
-.create_transaction_content{
+.create_transaction_content, .transaction_details_content{
     display: flex;
     flex-direction: column;
     padding: 15px;
@@ -1520,11 +1594,11 @@ input[type="radio"] {
     max-height: 560px;
 }
 
-.create_transaction_footer{
+.create_transaction_footer, .transaction_details_footer{
     padding: 0px 15px 15px 15px;
 }
 
-.create_transaction_content input{
+.create_transaction_content input, .transaction_details_content input{
     margin-bottom: 15px;
     height: 45px;
     width: 100%;
@@ -1534,23 +1608,28 @@ input[type="radio"] {
     font-size: 1em;
 }
 
-.create_transaction_content span{
+.create_transaction_content span, .transaction_details_content span{
     font-size: 0.9em;
 }
 
 /* Transaction Product List */
 .transaction_product_list{
     display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    /* gap: 10px; */
+    /* flex-wrap: wrap; */
     margin-bottom: 15px;
 }
-.transaction_product_list p{
-    height: fit-content;
-    width: fit-content;
-    padding: 5px 10px;
-    border-radius: 30px;
-    border: 2px solid #CDCDCD;
+
+.transaction_product_list_box{
+    display: flex;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+    gap: 25px;
+}
+
+.transaction_product_list_box p{
+    font-size: 0.9em;
 }
 
 /* create product modal */
@@ -1955,18 +2034,18 @@ input[type="radio"] {
 }
 
 #tr_ma{
-    width: 15%;
+    width: 20%;
 }
 
 #tr_kh_hang{
-    width: 30%;
+    width: 35%;
 }
 
 #tr_ngay{
     width: 25%;
 }
 
-#tr_nh_vien{
+#tr_tongtien{
     width: 25%;
 }
 
@@ -2002,12 +2081,12 @@ input[type="radio"] {
 }
 
 #b_tr_ma{
-    width: 15%;
+    width: 20%;
     padding-left: 0px;
 }
 
 #b_tr_kh_hang{
-    width: 30%;
+    width: 35%;
     padding-right: 15px;
 }
 
@@ -2022,7 +2101,7 @@ input[type="radio"] {
     display: none;
 }
 
-#b_tr_nh_vien{
+#b_tr_tongtien{
     width: 25%;
 }
 
@@ -2062,7 +2141,7 @@ input[type="radio"] {
 }
 
 #c_ho_ten{
-    width: 35%;
+    width: 25%;
 }
 
 #c_gioi_tinh{
@@ -2113,7 +2192,12 @@ input[type="radio"] {
 }
 
 #c_u_ho_ten{
-    width: 35%;
+    width: 25%;
+    padding-right: 15px;
+}
+
+#c_u_gioi_tinh{
+    width: 20%;
     padding-right: 15px;
 }
 
@@ -2160,11 +2244,23 @@ input[type="radio"] {
     cursor: pointer;
 }
 
+.view_by_specific{
+    width: fit-content;
+    height: fit-content;
+    padding: 12px 25px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
 .view_by_day.active{
     background-color: #CDCDCD;
 }
 
 .view_by_month.active{
+    background-color: #CDCDCD;
+}
+
+.view_by_specific.active{
     background-color: #CDCDCD;
 }
 
@@ -2176,6 +2272,7 @@ input[type="radio"] {
 }
 .chart-title {
     margin-top: 10px;
+    margin-bottom: 25px;
     font-size: 1em;
     font-weight: bold;
     color: black;
@@ -2208,6 +2305,17 @@ input[type="radio"] {
     font-size: 1em;
 }
 
+#select_start_day_chart, #select_end_day_chart{
+    margin-bottom: 15px;
+    margin-left: 15px;
+    height: 45px;
+    width: 200px;
+    border-radius: 6px;
+    border: 2px solid #CDCDCD;
+    padding: 0px 15px; 
+    font-size: 1em;
+}
+
 /* Thong ke chi tiet */
 .statistics_header_helper{
     display: flex;
@@ -2220,8 +2328,8 @@ input[type="radio"] {
     font-weight: 600; 
 }
 
-#st_maSP{
-    width: 20%;
+#st_maDH{
+    width: 15%;
 }
 
 #st_so_luong{
@@ -2229,11 +2337,15 @@ input[type="radio"] {
 }
 
 #st_tien_ban{
-    width: 30%;
+    width: 25%;
 }
 
 #st_doanh_thu{
-    width: 30%;
+    width: 25%;
+}
+
+#st_thoigian{
+    width: 15;
 }
 
 .statistics_main_content{
@@ -2267,8 +2379,8 @@ input[type="radio"] {
     text-overflow: ellipsis;
 }
 
-#b_st_maSP{
-    width: 20%;
+#b_st_maDH{
+    width: 15%;
     padding-left: 0px;
 }
 
@@ -2280,12 +2392,76 @@ input[type="radio"] {
 #b_st_tien_ban{
     outline: none;
     border: none;
-    width: 30%;
+    width: 25%;
     padding-right: 15px;
 }
 
 #b_st_doanh_thu{
-    width: 30%;
+    width: 25%;
+}
+
+#b_st_thoigian{
+    width: 15%;
+}
+
+/* Chi tiet don hang */
+.order_details_modal{
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.order_details_modal_container{
+    background-color: white;
+    /* width: 550px; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+}
+
+.order_details_modal_header{
+    display: flex;
+    justify-content: center;
+    font-size: 1.1em;
+    padding: 15px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+.order_details_modal_header p{
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.order_details_modal_content{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    padding: 0px 65px 30px 65px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.order_details_modal_content p{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.order_details_modal_footer{
+    padding: 0px 15px 15px 15px;
+}
+
+#id_bill{
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
 }
 
 @media(max-width: 1280px){

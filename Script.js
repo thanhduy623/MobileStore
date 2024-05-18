@@ -190,4 +190,31 @@ $(document).ready(function() {
     });
 });
 
-// Điều hướng Website 
+
+// Toggle Password
+function togglePassword() {
+    var passwordContainer = document.getElementById("passwork_container");
+    var passwordField = passwordContainer.querySelector('input');
+    var btneye = passwordContainer.querySelector('img');
+    var initialSrc = "assets/eye-outline.svg";
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        btneye.src = initialSrc; 
+    } else {
+        passwordField.type = "password";
+        btneye.src = "assets/eye-off-outline.svg";
+    }
+}
+
+function togglePasswordModal(eyeIcon, inputId) {
+    const passwordField = document.getElementById(inputId);
+    const initialSrc = "assets/eye-off-outline.svg";
+  
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+      eyeIcon.src = "assets/eye-outline.svg"; 
+    } else {
+      passwordField.type = "password";
+      eyeIcon.src = initialSrc;
+    }
+}  

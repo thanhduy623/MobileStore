@@ -4,11 +4,12 @@ var queryParams = new URLSearchParams(window.location.search);
 var username = atob(queryParams.get('username'));
 var view = atob(queryParams.get('view'));
 
-
 //SK: Tải trang
 document.addEventListener('DOMContentLoaded', function() {
     loadInformation(username);
     behaviorManagement(username);
+    if(view == "admin") {document.getElementById("pwd").style.display = "None"}
+    document.getElementById("pwd").addEventListener('click', changePWD)
 })
 
 
@@ -44,6 +45,7 @@ document.getElementById("delete_account_btn").addEventListener('click', function
 function behaviorManagement() {
     if(view !== "admin") {
         document.getElementById("infor_name").setAttribute('readonly', 'readonly');
+        document.getElementById("infor_surname").setAttribute('readonly', 'readonly');
         document.getElementById("infor_phone").setAttribute('readonly', 'readonly');
         document.getElementById("infor_email").setAttribute('readonly', 'readonly');
         document.getElementById("infor_date").setAttribute('readonly', 'readonly');
@@ -98,8 +100,6 @@ function loadInformation(username) {
         if(response.actived == -1) {
             document.querySelector("#deactivate_account_btn button").textContent = "Kích hoạt lại tài khoản";
         }
-
-        document.getElementById("change_pwb").style.display = "none";
     })
 }
 
@@ -243,5 +243,24 @@ function changeRoled(username) {
 
 
 function deleteAccount(username) {
-    alert("Chức năng đang trong quá trình phát triển");
+    alert("Không thể xóa nhân viên");
 }
+
+function changePWD() {
+    document.getElementById("change_infor_password_modal").style.display = "block";
+}
+
+document.getElementById("change").addEventListener('click', function() {
+    if(document.getElementById("new_infor_password").value == document.getElementById("confirm_infor_password").value) {
+        var data =  "username=" + encodeURIComponent(username) + 
+                    "&pwd=" + encodeURIComponent(document.getElementById("new_infor_password").value) +
+                    "&process=changePWD"
+        var path = "../profile/inforStaff.php";
+        JS.connectToPHP(path, data, function(xhr) {
+            alert(xhr.responseText)
+        })
+    } else {
+        alert("Mật khẩu không trùng khớp vui lòng thử lại");
+        document.getElementById("new_infor_password").focus();
+    }
+})

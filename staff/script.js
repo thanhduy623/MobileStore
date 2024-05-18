@@ -442,7 +442,6 @@ function createEditHandler(username) {
 }
 
 
-// Hàm gói lại để bảo vệ giá trị của i
 function createDeleteHandler(username, email, name) {
     return function() {
         var data =  "username= " + username +
@@ -481,3 +480,10 @@ document.getElementById('findText').addEventListener('input', function() {
         }
     });
 });
+
+document.getElementById("profile").addEventListener('click', function() {
+    JS.connectToPHP("../main/loadAccount.php","", function(xhr) {
+        var response = JSON.parse(xhr.responseText);
+        window.location.href = "../profile?username=" + btoa(response[3]) + "&view=" + btoa(response[1]);
+    })
+})

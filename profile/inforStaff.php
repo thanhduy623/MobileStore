@@ -25,6 +25,12 @@
         exit();
     }
 
+    if($process === "changePWD") {
+        //4. Thay đổi phân quyền
+        changePWD();
+        exit();
+    }
+
 
 
 
@@ -127,6 +133,20 @@
         $stmt->execute();
 
         echo("Đã thay đổi phân quyền thành công");
+        exit();
+    }
+
+    function changePWD() {
+        $username = $_POST['username'];
+        $pwd = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
+        include "../main/connectSQL.php";
+        
+        $conn = connectDB();
+        $query = "UPDATE STAFF SET pwd = ? WHERE username = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ss", $pwd, $username);
+        $stmt->execute();
+        echo("Đã đổi mật khẩu thành công");
         exit();
     }
 ?>

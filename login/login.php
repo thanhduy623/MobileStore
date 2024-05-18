@@ -5,11 +5,17 @@
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $query = "SELECT username, pwd, actived, fullname, roled, img  FROM STAFF WHERE username = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    try {
+        $query = "SELECT username, pwd, actived, fullname, roled, img  FROM STAFF WHERE username = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    }
+    catch (Exception $e) {
+        echo json_encode([false, "Lỗi"]);
+        exit();
+    }
 
 
 
