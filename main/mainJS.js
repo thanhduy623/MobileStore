@@ -1,3 +1,9 @@
+import * as MENU from './menu.js';
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    MENU.menuClick();
+});
+
 //Kết nối tới PHP
 export function connectToPHP(path, data, callback) {
     var xhr = new XMLHttpRequest();

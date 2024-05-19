@@ -1,4 +1,7 @@
 import * as JS from '../main/mainJS.js';
+import * as MENU from '../main/menu.js';
+
+MENU.menuClick()
 
 // Mobile Devices Menu
 var menu = document.querySelector('#menu-icon');
