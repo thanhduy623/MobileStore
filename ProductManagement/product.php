@@ -152,6 +152,7 @@
             $stmt = $conn->prepare($query);
             $stmt->execute();
             $result = $stmt->get_result();
+            
 
             $idProducts = [];
             while ($row = $result->fetch_assoc()) {

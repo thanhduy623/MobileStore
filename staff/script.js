@@ -474,16 +474,9 @@ document.getElementById('findText').addEventListener('input', function() {
                 // Nếu có, hiển thị user_box
                 userBox.style.display = 'flex';
             } else {
-                // Ngược lại, ẩn đi user_box
+                // lại, ẩn đi user_box
                 userBox.style.display = 'none';
             }
         }
     });
 });
-
-document.getElementById("profile").addEventListener('click', function() {
-    JS.connectToPHP("../main/loadAccount.php","", function(xhr) {
-        var response = JSON.parse(xhr.responseText);
-        window.location.href = "../profile?username=" + btoa(response[3]) + "&view=" + btoa(response[1]);
-    })
-})

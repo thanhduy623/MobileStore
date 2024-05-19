@@ -346,7 +346,7 @@ main.scroll{
     height: 100%;
     display: flex;
     flex-direction: row;
-    background: url('background/homepagebackgroundv3.png');
+    background: url('../assets/background.png');
     background-size: cover;
 }
 

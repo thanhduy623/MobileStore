@@ -1,86 +1,5 @@
-var orderProductLabels = ['2024-05-11', '2024-05-12', '2024-05-13', '2024-05-14', '2024-05-15', '2024-05-16', '2024-05-17'];
-var orderProductData = {
-    labels: orderProductLabels,
-    datasets: [
-        {
-            label: 'Số lượng đơn hàng',
-            data: [15, 20, 13, 18, 17, 16, 21],
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1
-        },
-        {
-            label: 'Số lượng sản phẩm bán ra',
-            data: [30, 35, 28, 40, 37, 33, 45],
-            backgroundColor: 'rgba(255, 206, 86, 0.2)',
-            borderColor: 'rgba(255, 206, 86, 1)',
-            borderWidth: 1
-        }
-    ]
-};
+import * as JS from '../main/mainJS.js';
 
-var number_of_order_and_product_chart = {
-    type: 'bar',
-    data: orderProductData,
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-};
-
-var number_of_order_and_product_chart = new Chart(
-    document.getElementById('number_of_order_and_product_chart'),
-    number_of_order_and_product_chart
-);
-
-// Existing chart configuration
-var labels = ['2024-05-11', '2024-05-12', '2024-05-13', '2024-05-14', '2024-05-15', '2024-05-16', '2024-05-17'];
-var data = {
-    labels: labels,
-    datasets: [{
-        label: 'Tổng giá tiền (VND)',
-        data: [1200000, 1500000, 1300000, 1600000, 1700000, 1400000, 1800000],
-        backgroundColor: [
-            'rgba(192, 192, 192, 0.2)',
-            'rgba(192, 192, 192, 0.2)',
-            'rgba(192, 192, 192, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(192, 192, 192, 0.2)',
-            'rgba(192, 192, 192, 0.2)',
-            'rgba(192, 192, 192, 0.2)'
-        ],
-        borderColor: [
-            'rgba(192, 192, 192, 1)',
-            'rgba(192, 192, 192, 1)',
-            'rgba(192, 192, 192, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(192, 192, 192, 1)',
-            'rgba(192, 192, 192, 1)',
-            'rgba(192, 192, 192, 1)'
-        ],
-        borderWidth: 1
-    }]
-};
-
-var config = {
-    type: 'bar',
-    data: data,
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-};
-
-var total_amount_received_chart = new Chart(
-    document.getElementById('total_amount_received_chart'),
-    config
-);
 
 // Page Load
 $(document).ready(function() {
@@ -100,8 +19,6 @@ $(document).ready(function() {
                 if(scriptUrl != 'Index.js'){
                     loadScript(scriptUrl);
                 }   
-                
-                // window.history.replaceState({ path: pageUrl }, '', pageUrl);
             },
             error: function(xhr, status, error) {
                 console.error("Error loading page:", error);
@@ -126,8 +43,6 @@ $(document).ready(function() {
                 if(scriptUrl != 'Index.js'){
                     loadScript(scriptUrl);
                 }   
-                
-                // window.history.replaceState({ path: pageUrl }, '', pageUrl);
             },
             error: function(xhr, status, error) {
                 console.error("Error loading page:", error);
@@ -147,6 +62,8 @@ $(document).ready(function() {
                 console.error("Error:", exception);
             });
     }
+
+    loadBill();
 });
 
 function scrollToTop() {
@@ -156,25 +73,100 @@ function scrollToTop() {
     });
 }
 
-function OrderDetalsModal(){
+function OrderDetalsModal() {
     var statistics_box = document.querySelectorAll('.statistics_box');
     var order_details_modal = document.getElementById('order_details_modal');
     var cancel = document.getElementById('cancel');
     statistics_box.forEach(btn => {
-        btn.addEventListener('click', function(){
+        btn.addEventListener('click', function() {
             order_details_modal.style.display = 'block';
             document.body.style.overflow = "hidden";
         });
     });
-    cancel.addEventListener('click', function(){
+    cancel.addEventListener('click', function() {
         order_details_modal.style.display = 'none';
         document.body.style.overflow = "auto";
-    })
-    window.addEventListener('click', function(event){
-        if(event.target === order_details_modal){
+    });
+    window.addEventListener('click', function(event) {
+        if (event.target === order_details_modal) {
             order_details_modal.style.display = 'none';
             document.body.style.overflow = "auto";
         }
-    })  
+    });
 }
 OrderDetalsModal();
+
+function loadBill() {
+    JS.connectToPHP("../ReportsandStatistics/ReportsandStatistics.php","process=getBillDetails", function(xhr) {
+        var response = JSON.parse(xhr.responseText);
+        var orders = response[1];
+        var sum = 0; 
+        var count = 0;
+        for (var i = 0; i < orders.length; i++) {
+            var order = orders[i];
+            console.log(order)
+
+            var statisticsBox = document.createElement("div");
+            statisticsBox.classList.add("statistics_box");
+
+            var idBill = document.createElement("p");
+            idBill.id = "b_st_maDH";
+            idBill.textContent = order.idBill;
+
+            var quantity = document.createElement("p");
+            quantity.id = "b_st_so_luong";
+            quantity.textContent = order.item + " | " + order.items;
+
+            var total = document.createElement("p");
+            total.id = "b_st_tien_ban";
+            total.textContent = order.total;
+
+            var created = document.createElement("p");
+            created.id = "b_st_thoigian";
+            created.textContent = order.created;
+
+            statisticsBox.appendChild(idBill);
+            statisticsBox.appendChild(quantity);
+            statisticsBox.appendChild(total);
+            statisticsBox.appendChild(created);
+
+            document.getElementById("list").appendChild(statisticsBox);
+
+            sum = sum + Number(order.profit);
+            count = i;
+        }
+
+        document.getElementById("listBill").textContent = "Danh sách đơn hàng (" + (count + 1) +") - Tổng doanh thu: " + sum
+
+        // Tạo một phần tử div mới
+var productItem = document.createElement("div");
+productItem.classList.add("product_item", "margin_bottom");
+
+// Tạo các phần tử p bên trong productItem và đặt nội dung cho chúng
+var productId = document.createElement("p");
+productId.classList.add("product_id");
+productId.innerHTML = "<strong>ID sản phẩm:</strong> IP0001";
+
+var quantity = document.createElement("p");
+quantity.classList.add("quanity");
+quantity.innerHTML = "<strong>Số lượng:</strong> 2";
+
+var price = document.createElement("p");
+price.classList.add("price");
+price.innerHTML = "<strong>Đơn giá:</strong> 1000000";
+
+var sum = document.createElement("p");
+sum.classList.add("sum");
+sum.innerHTML = "<strong>Tổng tiền:</strong> 2000000";
+
+// Thêm các phần tử con vào productItem
+productItem.appendChild(productId);
+productItem.appendChild(quantity);
+productItem.appendChild(price);
+productItem.appendChild(sum);
+
+// Lấy đối tượng cha và thêm productItem vào nó
+var orderDetailsContent = document.querySelector(".order_details_modal_content");
+orderDetailsContent.appendChild(productItem);
+    })
+}

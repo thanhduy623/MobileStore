@@ -132,3 +132,40 @@ export function loadPic(folder, name, frame) {
 
     input.click();
 }
+
+
+export function loadAccount() {
+    var name = document.getElementById('name');
+    var role = document.getElementById('role');
+    var avatar = document.getElementById('avatar');
+
+    connectToPHP("../main/loadAccount.php", "", function(xhr) {
+        var response = JSON.parse(xhr.responseText);
+        name.textContent = response[0];
+        role.textContent = response[1];
+        avatar.src = response[2];
+    })
+
+    logout(); 
+    seeInfo();  
+}
+
+function logout() {
+    var logout = document.getElementById("logout");
+    logout.addEventListener('click', function(e) {
+        connectToPHP("../main/logout.php","", function(xhr) {
+            window.location.href = xhr.responseText;
+        })
+    })
+}
+
+function seeInfo() {
+    document.getElementById("profile").addEventListener('click', function() {
+        connectToPHP("../main/loadAccount.php","", function(xhr) {
+            var response = JSON.parse(xhr.responseText);
+            var view = "admin";
+            if(response[1] != "Quản lí") {view = "staff"}
+            window.location.href = "../profile?username=" + btoa(response[3]) + "&view=" + btoa(view);
+        })
+    })
+}

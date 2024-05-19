@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Báo cáo và thống kê</title>
-    <link rel="stylesheet" href="../main/style.css">
+    <link rel="stylesheet" href="../main//style.css">
     <link rel="shortcut icon" href="../assets/logo-icon.svg"> 
 </head>
 <body>
@@ -108,7 +108,6 @@
         <div class="view_order contain1">
             <Span>Chế độ xem</Span>
             <div class="view_by_day" id="view_by_day">Ngày</div>
-            <div class="view_by_month" id="view_by_month">Tháng</div>
             <div class="view_by_specific active" id="view_by_specific">Tùy chọn</div>
         </div>
 
@@ -120,34 +119,22 @@
 
         <div class="midTitle">Thống kê chi tiết</div>
         <div class="chart-container">
+            <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
+
             <canvas id="total_amount_received_chart" width="400" height="200"></canvas>
             <div class="chart-title">Biểu đồ Tổng giá tiền bán theo mốc thời gian tùy chọn.</div>
-            <canvas id="number_of_order_and_product_chart" width="400" height="200"></canvas>
-            <div class="chart-title">Biểu đồ Số lượng đơn hàng và sản phẩm bán ra theo mốc thời gian tùy chọn.</div>
         </div>
 
-        <div class="midTitle margin_bottom">Danh sách đơn hàng</div>
+        <div class="midTitle margin_bottom" id="listBill">Danh sách đơn hàng (X)</div>
         <div class="statistics_header_helper">
-            <p id="st_maDH">Mã đơn hàng</p>
+            <p id="st_maDH">Mã đơn</p>
             <p id="st_so_luong">Số lượng SP</p>
             <p id="st_tien_ban">Tổng tiền bán</p>
-            <p id="st_doanh_thu">Doanh thu</p>
             <p id="st_thoigian">Thời gian</p>
         </div>
-        <div class="statistics_main_content">
-            <div class="statistics_box" id="statistics_box">
-                <p id="b_st_maDH">00001</p>
-                <p id="b_st_so_luong">25</p>
-                <p id="b_st_tien_ban">500000000</p>
-                <p id="b_st_doanh_thu">300000000</p>
-                <p id="b_st_thoigian">01/01/2004</p>
-                <div class="statistics_delete">   
-                    <button type="button" class="delete_transaction_btn" id="delete_transaction_btn">
-                        <img src="../assets/trash.svg" alt="">
-                    </button>
-                </div>
-            </div>
-        </div>
+
+        <div class="statistics_main_content" id="list"></div>
+
         <div class="order_details_modal" id="order_details_modal">
             <div class="order_details_modal_container">
                 <div class="order_details_modal_header">
@@ -173,6 +160,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" class="indexScript"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js" class="indexScript"></script>
     <script src="../Script.js" class="indexScript"></script>
-    <script src="ReportsandStatisticsBySpecific.js"></script>
+    <script src="ReportsandStatisticsBySpecific.js" type="module"></script>
 </body>
 </html>

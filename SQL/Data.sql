@@ -104,6 +104,8 @@ create table DETAIL
     PRIMARY KEY (idBill, idProduct),
     FOREIGN KEY (idBill) REFERENCES BILL(idBill)
 );
+ALTER TABLE DETAIL
+MODIFY COLUMN quantity BIGINT;
 insert into DETAIL (idBill, idProduct, quantity) values 
 ("240518001", "IP0001", 3),
 ("240518001", "MA0001", 5),
@@ -170,4 +172,68 @@ BEGIN
     
     RETURN new_code;
 END$$
+DELIMITER ;
+
+-- THỐNG KÊ HÔM NAY -----------------------------------------------------------
+DELIMITER //
+
+CREATE PROCEDURE GetBillDetails()
+BEGIN
+    DECLARE current_date_prefix VARCHAR(7);
+    
+    -- Tạo tiền tố cho idBill từ ngày hiện tại (YYMMDD)
+    SET current_date_prefix = DATE_FORMAT(CURDATE(), '%y%m%d');
+
+    -- Truy vấn lấy các hóa đơn có idBill khớp với ngày hiện tại
+    SELECT 
+        b.idBill,
+        COUNT(d.idBill) AS item,
+        SUM(d.quantity) AS items,
+        b.total,
+        SUM(p.price * d.quantity - p.cost * d.quantity) AS profit,
+        b.created
+    FROM 
+        BILL b
+    JOIN 
+        DETAIL d ON b.idBill = d.idBill
+    JOIN 
+        PRODUCT p ON d.idProduct = p.idProduct
+    WHERE 
+        b.idBill REGEXP CONCAT('^', current_date_prefix, '[0-9]{3}$')
+    GROUP BY 
+        b.idBill, b.total, b.created;
+END //
+
+DELIMITER ;
+
+-- Gọi hàm lưu trữ để kiểm tra kết quả
+-- CALL GetBillDetails();
+
+
+
+-- THỐNG KÊ TÍCH LŨY ---------------------------------------------------------------------
+DELIMITER //
+
+CREATE PROCEDURE GetBillDetailsTime(IN startDate DATE, IN endDate DATE)
+BEGIN
+    -- Truy vấn lấy các hóa đơn trong khoảng thời gian từ startDate đến endDate
+    SELECT 
+        b.idBill,
+        COUNT(d.idBill) AS item,
+        SUM(d.quantity) AS items,
+        b.total,
+        SUM(p.price * d.quantity - p.cost * d.quantity) AS profit,
+        b.created
+    FROM 
+        BILL b
+    JOIN 
+        DETAIL d ON b.idBill = d.idBill
+    JOIN 
+        PRODUCT p ON d.idProduct = p.idProduct
+    WHERE 
+        b.created BETWEEN startDate AND endDate
+    GROUP BY 
+        b.idBill, b.total, b.created;
+END //
+
 DELIMITER ;

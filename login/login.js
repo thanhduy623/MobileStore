@@ -104,8 +104,7 @@ function handle(xhr) {
         }
         document.cookie = "user= " + encodeURIComponent(username) + expires + "; path=/MobileStore/";
     }
-
-    window.location.href = "./staff/index.html";
+    window.location.href = "Home/index.html";
 }
 
 function checkSession() {
