@@ -16,8 +16,6 @@
             $query = "CALL GetBillDetails()";
             $stmt = $conn->prepare($query);
             $stmt->execute();
-            $stmt = $conn->prepare($query);
-            $stmt->execute();
             $result = $stmt->get_result();
             
 

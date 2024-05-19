@@ -1,4 +1,9 @@
 import * as JS from '../main/mainJS.js';
+document.addEventListener('DOMContentLoaded', function() {
+    JS.checkSession(function() {});
+})
+
+
 // Lấy giá trị của biến username từ query parameters
 var queryParams = new URLSearchParams(window.location.search);
 var username = atob(queryParams.get('username'));

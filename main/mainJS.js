@@ -1,8 +1,32 @@
-import * as MENU from './menu.js';
+export function checkSession() {
+    connectToPHP("../main/checkSession.php","", function(xhr) {
+        var response = JSON.parse(xhr.responseText);
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    MENU.menuClick();
-});
+        if(response[0] == false) {
+            alert(response[1]);
+            window.location.href = '../index.html';
+            return;
+        }
+
+        if(response[1][4] == -1) {
+            alert("Tài khoản của bạn hiện đang bị khóa");
+            window.location.href = '../index.html';
+            return;
+        }
+
+        if(response[1][4] == 0) {
+            alert("Vui lòng đổi mật khẩu lần đầu...");
+            window.location.href = '../login/login.php';
+            return;
+        }
+
+        alert("1")
+        document.getElementById("user").src = response[1][3];
+        document.getElementById("avatar").src = response[1][3];
+        document.getElementById("name").src = response[1][1];
+        document.getElementById("role").src = response[1][2];
+    })
+}
 
 //Kết nối tới PHP
 export function connectToPHP(path, data, callback) {

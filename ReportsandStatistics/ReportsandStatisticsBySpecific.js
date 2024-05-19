@@ -10,67 +10,67 @@ getBillDetailsTime(formattedDate, formattedDate)
 
 
 // AJAXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-$(document).ready(function() {
-    $("#view_by_day").on("click", function(event) {
-        event.preventDefault(); 
-        var pageUrl = "ReportsandStatistics/ReportsandStatistics.html";
-        $.ajax({
-            url: pageUrl,
-            type: "GET",
-            dataType: "html",
-            success: function(response) {
-                var newMainContent = $(response).filter("main");
-                $("main").replaceWith(newMainContent);
-                document.title = $(response).filter("title").text();
-                $("script:not(#indexScript)").remove();
-                var scriptUrl = pageUrl.replace('.html', '.js');
-                if(scriptUrl != 'Index.js'){
-                    loadScript(scriptUrl);
-                }   
-            },
-            error: function(xhr, status, error) {
-                console.error("Error loading page:", error);
-            }
-        });
-        scrollToTop();
-    });
+// $(document).ready(function() {
+//     $("#view_by_day").on("click", function(event) {
+//         event.preventDefault(); 
+//         var pageUrl = "ReportsandStatistics/ReportsandStatistics.html";
+//         $.ajax({
+//             url: pageUrl,
+//             type: "GET",
+//             dataType: "html",
+//             success: function(response) {
+//                 var newMainContent = $(response).filter("main");
+//                 $("main").replaceWith(newMainContent);
+//                 document.title = $(response).filter("title").text();
+//                 $("script:not(#indexScript)").remove();
+//                 var scriptUrl = pageUrl.replace('.html', '.js');
+//                 if(scriptUrl != 'Index.js'){
+//                     loadScript(scriptUrl);
+//                 }   
+//             },
+//             error: function(xhr, status, error) {
+//                 console.error("Error loading page:", error);
+//             }
+//         });
+//         scrollToTop();
+//     });
 
-    $("#view_by_month").on("click", function(event) {
-        event.preventDefault(); 
-        var pageUrl = "ReportsandStatistics/ReportsandStatisticsByMonth.html";
-        $.ajax({
-            url: pageUrl,
-            type: "GET",
-            dataType: "html",
-            success: function(response) {
-                var newMainContent = $(response).filter("main");
-                $("main").replaceWith(newMainContent);
-                document.title = $(response).filter("title").text();
-                $("script:not(#indexScript)").remove();
-                var scriptUrl = pageUrl.replace('.html', '.js');
-                if(scriptUrl != 'Index.js'){
-                    loadScript(scriptUrl);
-                }   
-            },
-            error: function(xhr, status, error) {
-                console.error("Error loading page:", error);
-            }
-        });
-        scrollToTop();
-    });
+//     $("#view_by_month").on("click", function(event) {
+//         event.preventDefault(); 
+//         var pageUrl = "ReportsandStatistics/ReportsandStatisticsByMonth.html";
+//         $.ajax({
+//             url: pageUrl,
+//             type: "GET",
+//             dataType: "html",
+//             success: function(response) {
+//                 var newMainContent = $(response).filter("main");
+//                 $("main").replaceWith(newMainContent);
+//                 document.title = $(response).filter("title").text();
+//                 $("script:not(#indexScript)").remove();
+//                 var scriptUrl = pageUrl.replace('.html', '.js');
+//                 if(scriptUrl != 'Index.js'){
+//                     loadScript(scriptUrl);
+//                 }   
+//             },
+//             error: function(xhr, status, error) {
+//                 console.error("Error loading page:", error);
+//             }
+//         });
+//         scrollToTop();
+//     });
 
-    function loadScript(scriptUrl) {
-        console.log("Loading script:", scriptUrl);
-        $.getScript(scriptUrl)
-            .done(function(script, textStatus) {
-                console.log("Script loaded successfully:", scriptUrl);
-            })
-            .fail(function(jqxhr, settings, exception) {
-                console.error("Failed to load script:", scriptUrl);
-                console.error("Error:", exception);
-            });
-    }
-});
+//     function loadScript(scriptUrl) {
+//         console.log("Loading script:", scriptUrl);
+//         $.getScript(scriptUrl)
+//             .done(function(script, textStatus) {
+//                 console.log("Script loaded successfully:", scriptUrl);
+//             })
+//             .fail(function(jqxhr, settings, exception) {
+//                 console.error("Failed to load script:", scriptUrl);
+//                 console.error("Error:", exception);
+//             });
+//     }
+// });
 
 function scrollToTop() {
     window.scrollTo({

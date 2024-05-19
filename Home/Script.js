@@ -1,12 +1,12 @@
 import * as JS from '../main/mainJS.js';
-import * as MENU from '../main/menu.js';
-
-MENU.menuClick()
+document.addEventListener('DOMContentLoaded', function() {
+    JS.checkSession(function() {});
+})
 
 // Mobile Devices Menu
 var menu = document.querySelector('#menu-icon');
 var btnmenu = menu.querySelector('img');
-var initialSrc = "assets/menu.svg";
+var initialSrc = "../assets/menu.svg";
 var navigation = document.querySelector('.navigation');
 let isOpen = false;
 menu.addEventListener('click', () => {
@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             indicator.style.transform = translateXValue;
         }
-        JS.loadAccount();
     }
     adjustIndicatorPosition();
     window.addEventListener("resize", adjustIndicatorPosition);
@@ -123,78 +122,78 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-//Page Load
-$(document).ready(function() {
-    $(document).on("click", ".list a", function(event) {
-        event.preventDefault(); 
-        var pageUrl = $(this).attr("href");
-        $.ajax({
-            url: pageUrl,
-            type: "GET",
-            dataType: "html",
-            success: function(response) {
-                var newMainContent = $(response).filter("main");
-                $("main").replaceWith(newMainContent);
-                document.title = $(response).filter("title").text();
-                $("script:not(.indexScript)").remove();
-                var scriptUrl = pageUrl.replace('.html', '.js');
-                if (scriptUrl != 'Index.js') {
-                    loadScript(scriptUrl);
-                }
-                var windowWidth = window.innerWidth;
-                if (windowWidth <= 1090) { 
-                    btnmenu.src = initialSrc; 
-                    navigation.classList.toggle('open');
-                }
-                // window.history.pushState({ path: pageUrl }, '', pageUrl);
-            },
-            error: function(xhr, status, error) {
-                console.error("Error loading page:", error);
-            }
-        });
-    });
+// //Page Load
+// $(document).ready(function() {
+//     $(document).on("click", ".list a", function(event) {
+//         event.preventDefault(); 
+//         var pageUrl = $(this).attr("href");
+//         $.ajax({
+//             url: pageUrl,
+//             type: "GET",
+//             dataType: "html",
+//             success: function(response) {
+//                 var newMainContent = $(response).filter("main");
+//                 $("main").replaceWith(newMainContent);
+//                 document.title = $(response).filter("title").text();
+//                 $("script:not(.indexScript)").remove();
+//                 var scriptUrl = pageUrl.replace('.html', '.js');
+//                 if (scriptUrl != 'Index.js') {
+//                     loadScript(scriptUrl);
+//                 }
+//                 var windowWidth = window.innerWidth;
+//                 if (windowWidth <= 1090) { 
+//                     btnmenu.src = initialSrc; 
+//                     navigation.classList.toggle('open');
+//                 }
+//                 // window.history.pushState({ path: pageUrl }, '', pageUrl);
+//             },
+//             error: function(xhr, status, error) {
+//                 console.error("Error loading page:", error);
+//             }
+//         });
+//     });
 
-    $(document).on("click", ".user_menu", function(event) {
-        event.preventDefault(); 
-        var pageUrl = $(this).attr("href");
-        $.ajax({
-            url: pageUrl,
-            type: "GET",
-            dataType: "html",
-            success: function(response) {
-                var newMainContent = $(response).filter("main");
-                $("main").replaceWith(newMainContent);
-                document.title = $(response).filter("title").text();
-                $("script:not(.indexScript)").remove();
-                var scriptUrl = pageUrl.replace('.html', '.js');
-                if (scriptUrl != 'Index.js') {
-                    loadScript(scriptUrl);
-                }
-                user_modal.style.display = 'none';
-                document.querySelector('.user_frame').classList.remove('active1');
-            },
-            error: function(xhr, status, error) {
-                console.error("Error loading page:", error);
-            }
-        });
-    });    
+//     $(document).on("click", ".user_menu", function(event) {
+//         event.preventDefault(); 
+//         var pageUrl = $(this).attr("href");
+//         $.ajax({
+//             url: pageUrl,
+//             type: "GET",
+//             dataType: "html",
+//             success: function(response) {
+//                 var newMainContent = $(response).filter("main");
+//                 $("main").replaceWith(newMainContent);
+//                 document.title = $(response).filter("title").text();
+//                 $("script:not(.indexScript)").remove();
+//                 var scriptUrl = pageUrl.replace('.html', '.js');
+//                 if (scriptUrl != 'Index.js') {
+//                     loadScript(scriptUrl);
+//                 }
+//                 user_modal.style.display = 'none';
+//                 document.querySelector('.user_frame').classList.remove('active1');
+//             },
+//             error: function(xhr, status, error) {
+//                 console.error("Error loading page:", error);
+//             }
+//         });
+//     });    
 
-    function loadScript(scriptUrl) {
-        console.log("Loading script:", scriptUrl);
-        $.getScript(scriptUrl)
-            .done(function(script, textStatus) {
-                console.log("Script loaded successfully:", scriptUrl);
-            })
-            .fail(function(jqxhr, settings, exception) {
-                console.error("Failed to load script:", scriptUrl);
-                console.error("Error:", exception);
-            });
-    }
+//     function loadScript(scriptUrl) {
+//         console.log("Loading script:", scriptUrl);
+//         $.getScript(scriptUrl)
+//             .done(function(script, textStatus) {
+//                 console.log("Script loaded successfully:", scriptUrl);
+//             })
+//             .fail(function(jqxhr, settings, exception) {
+//                 console.error("Failed to load script:", scriptUrl);
+//                 console.error("Error:", exception);
+//             });
+//     }
 
-    $(document).ajaxComplete(function() {
+//     $(document).ajaxComplete(function() {
          
-    });
-});
+//     });
+// });
 
 
 // Toggle Password

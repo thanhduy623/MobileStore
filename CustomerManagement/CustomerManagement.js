@@ -1,4 +1,7 @@
 import * as JS from '../main/mainJS.js';
+document.addEventListener('DOMContentLoaded', function() {
+    JS.checkSession(function() {});
+})
 
 
 document.addEventListener('DOMContentLoaded', loadCustomer)

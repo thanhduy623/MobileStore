@@ -1,4 +1,7 @@
 import * as JS from '../main/mainJS.js';
+document.addEventListener('DOMContentLoaded', function() {
+    JS.checkSession(function() {});
+})
 
 // Category
 document.querySelectorAll('.category_card').forEach(item => {
@@ -104,46 +107,46 @@ window.addEventListener('click', function(event){
     }
 })  
 
-// Page Load
-$(document).ready(function() {
-    $("#transaction_btn").on("click", function(event) {
-        event.preventDefault(); 
-        var pageUrl = "ProductManagement/Transaction.html";
-        $.ajax({
-            url: pageUrl,
-            type: "GET",
-            dataType: "html",
-            success: function(response) {
-                var newMainContent = $(response).filter("main");
-                $("main").replaceWith(newMainContent);
-                document.title = $(response).filter("title").text();
-                $("script:not(#indexScript)").remove();
-                var scriptUrl = pageUrl.replace('.html', '.js');
-                if(scriptUrl != 'Index.js'){
-                    loadScript(scriptUrl);
-                }   
+// // Page Load
+// $(document).ready(function() {
+//     $("#transaction_btn").on("click", function(event) {
+//         event.preventDefault(); 
+//         var pageUrl = "ProductManagement/Transaction.html";
+//         $.ajax({
+//             url: pageUrl,
+//             type: "GET",
+//             dataType: "html",
+//             success: function(response) {
+//                 var newMainContent = $(response).filter("main");
+//                 $("main").replaceWith(newMainContent);
+//                 document.title = $(response).filter("title").text();
+//                 $("script:not(#indexScript)").remove();
+//                 var scriptUrl = pageUrl.replace('.html', '.js');
+//                 if(scriptUrl != 'Index.js'){
+//                     loadScript(scriptUrl);
+//                 }   
                 
-                // window.history.replaceState({ path: pageUrl }, '', pageUrl);
-            },
-            error: function(xhr, status, error) {
-                console.error("Error loading page:", error);
-            }
-        });
-        scrollToTop();
-    });
+//                 // window.history.replaceState({ path: pageUrl }, '', pageUrl);
+//             },
+//             error: function(xhr, status, error) {
+//                 console.error("Error loading page:", error);
+//             }
+//         });
+//         scrollToTop();
+//     });
 
-    function loadScript(scriptUrl) {
-        console.log("Loading script:", scriptUrl);
-        $.getScript(scriptUrl)
-            .done(function(script, textStatus) {
-                console.log("Script loaded successfully:", scriptUrl);
-            })
-            .fail(function(jqxhr, settings, exception) {
-                console.error("Failed to load script:", scriptUrl);
-                console.error("Error:", exception);
-            });
-    }
-});
+//     function loadScript(scriptUrl) {
+//         console.log("Loading script:", scriptUrl);
+//         $.getScript(scriptUrl)
+//             .done(function(script, textStatus) {
+//                 console.log("Script loaded successfully:", scriptUrl);
+//             })
+//             .fail(function(jqxhr, settings, exception) {
+//                 console.error("Failed to load script:", scriptUrl);
+//                 console.error("Error:", exception);
+//             });
+//     }
+// });
 
 function scrollToTop() {
     window.scrollTo({
