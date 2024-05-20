@@ -1,6 +1,38 @@
 import * as JS from '../main/mainJS.js';
 document.addEventListener('DOMContentLoaded', function() {
-    JS.checkSession(function() {});
+    connectToPHP("../main/checkSession.php","", function(xhr) {
+        var response = JSON.parse(xhr.responseText);
+
+        if(response[0] == false) {
+            alert(response[1]);
+            window.location.href = '../index.html';
+            return;
+        }
+
+        if(response[1][4] == -1) {
+            alert("Tài khoản của bạn hiện đang bị khóa");
+            window.location.href = '../index.html';
+            return;
+        }
+
+        if(response[1][4] == 0) {
+            alert("Vui lòng đổi mật khẩu lần đầu...");
+            window.location.href = '../staff/active.html?username=' + btoa(response[1][0]);
+            return;
+        }
+
+        document.getElementById("user").value = response[1][3];
+        document.getElementById("avatar").src = response[1][3];
+        document.getElementById("name").value = response[1][1];
+        document.getElementById("role").value = response[1][2];
+        
+        document.getElementById("profile").addEventListener('click', function() {
+            window.location.href = "../profile?username=" + btoa(response[1][0]) + "&view=" + btoa("staff");
+        })
+        document.getElementById("logout").addEventListener('click', function() {
+            window.location.href = '../index.html';
+        })
+    })
 })
 
 // Mobile Devices Menu
@@ -13,7 +45,7 @@ menu.addEventListener('click', () => {
     if (isOpen) {
         btnmenu.src = initialSrc; 
     } else {
-        btnmenu.src = "assets/close.svg"; 
+        btnmenu.src = "../assets/close.svg"; 
     }
     isOpen = !isOpen; 
     navigation.classList.toggle('open');

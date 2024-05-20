@@ -113,24 +113,10 @@ insert into DETAIL (idBill, idProduct, quantity) values
 ("240518002", "AP0001", 10);
 
 
-insert into STAFF (username, fullname, email, gender, dateBirth, phone, roled, pwd, actived, img) 
-values
-(
-	"admin",
-	"Quản trị viên",
-    "admin@gmail.com",
-    "Nam",
-    "2004/01/01",
-    "0000000000",
-    "Quản lý",
-    "$2y$10$931OhhXYyK9kXsVDJg.agOR01FaPCW1V35afsWXHCSbwCKtdADgrG",
-    1,
-    "../avatar/admin.png"
-);
 
 
 -- ID TỰ ĐỘNG HÓA ĐƠN -------------------------------------------------------------------------
-DELIMITER $$
+DELIMITER $
 
 -- Tạo hàm generate_bill_code
 CREATE FUNCTION generate_bill_code(prefix_param VARCHAR(6)) RETURNS VARCHAR(9)

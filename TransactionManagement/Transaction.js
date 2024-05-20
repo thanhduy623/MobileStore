@@ -94,9 +94,9 @@ document.getElementById("transaction_received_money").addEventListener('input', 
 function addTransaction() {
     create_transaction_modal.style.display = 'block';
     document.body.style.overflow = "hidden";
-
     document.getElementById("transaction_date").valueAsDate = new Date();
     document.getElementById("create").addEventListener('click', transaction)
+    
     clear();
     createID();
     document.getElementById("transaction_customer_phone_number").focus();
@@ -127,6 +127,22 @@ function createID() {
         document.getElementById("transaction_id").value = response[1]
     })
 }
+
+
+function getList() {
+    JS.connectToPHP("../ProductManagement/product.php","process=load", function(xhr) {
+        var response = JSON.parse(xhr.responseText);
+
+        var dataList = document.getElementById('product_ids');
+        for (var i = 0; i < response.length; i++) {
+            var product = response[i];
+            var option = document.createElement('option');
+            option.value = product.idProduct + "-" + product.nameProduct;;
+            dataList.appendChild(option);
+        }            
+    })
+}
+
 
 function getCustomer() {
     var phone = document.getElementById("transaction_customer_phone_number");
@@ -190,6 +206,10 @@ function createItem() {
         return;
     }
 
+    if (id.indexOf("-") !== -1) {
+        id = id.substring(0, id.indexOf("-"));
+    }
+
 
     //Check trùng
     var isDuplicate = false;
@@ -237,8 +257,8 @@ function compute() {
     var repay = document.getElementById("transaction_return_money");
     var recieved = document.getElementById("transaction_received_money");
 
-    if(total.value == 0) {repay.value = 0; return;}
-    if(recieved.value < total.value) {repay.value = 0; return;}
+    if(parseInt(total.value, 10) == 0) {repay.value = 0; return;}
+    if(parseInt(recieved.value, 10) < parseInt(total.value, 10)) {repay.value = 0; return;}
 
     repay.value = parseInt(recieved.value, 10) - parseInt(total.value, 10)
 }
@@ -308,7 +328,6 @@ function transaction() {
     var phone = document.getElementById("transaction_customer_phone_number");
     var name = document.getElementById("transaction_customer_name");
     var addess = document.getElementById("transaction_customer_address");
-
     if(phone.value.length == 0) {
         alert("Vui lòng nhập số điện thoại khách hàng");
         phone.focus();
@@ -344,7 +363,7 @@ function transaction() {
         productInfoArray.push([productId, productQuantity]);
     }
 
-
+    
     // Thêm giao dịch
     var data =  "idBill=" + idBill.value +
                 "&phone=" + phone.value +
@@ -358,9 +377,11 @@ function transaction() {
         if(JSON.parse(xhr.responseText)[0]) {alert(JSON.parse(xhr.responseText)[1])}
         loadTran();
     })
-
     document.getElementById("cancel").click();
 }
+
+
+
 
 function cancel() {
     create_transaction_modal.style.display = 'none';
@@ -430,6 +451,8 @@ function loadTran() {
             transactionBox.addEventListener('click', seeDetail)
         }
     })
+
+    getList();
 }
 
 function seeDetail() {
@@ -497,26 +520,19 @@ function seeDetail() {
 }
 
 function find() {
-    var x = document.getElementById("find").value;
-
-    // Kiểm tra xem x có rỗng không
-    if (x === "") {
-        // Nếu x rỗng, hiển thị tất cả các phần tử có lớp transaction_box
-        document.querySelectorAll(".transaction_box").forEach(function(transactionBox) {
-            transactionBox.style.display = "flex";
-        });
-    } else {
-        // Nếu x không rỗng, ẩn tất cả các phần tử có lớp transaction_box
-        document.querySelectorAll(".transaction_box").forEach(function(transactionBox) {
-            transactionBox.style.display = "none";
-        });
-
-        // Hiển thị các phần tử có chứa lớp find và giá trị tương ứng
-        document.querySelectorAll(".find").forEach(function(element) {
-            if (element.innerText.includes(x)) {
-                // Nếu giá trị của phần tử chứa giá trị của x, hiển thị phần tử cha của nó
-                element.closest(".transaction_box").style.display = "flex";
+    var searchText = document.getElementById('find').value.trim().toLowerCase();
+    var transactionBoxes = document.querySelectorAll('.transaction_box');
+    var i = 0;
+    transactionBoxes.forEach(function(transactionBox) {
+        var uHoTen = transactionBox.querySelector('#b_tr_kh_hang').textContent.toLowerCase();
+        if (searchText === "") {
+            transactionBox.style.display = 'flex';
+        } else {
+            if (uHoTen.includes(searchText)) {
+                transactionBox.style.display = 'flex';
+            } else {
+                transactionBox.style.display = 'none';
             }
-        });
-    }
+        }
+    });
 }

@@ -82,8 +82,8 @@ function loadBill() {
     JS.connectToPHP("../ReportsandStatistics/ReportsandStatistics.php","process=getBillDetails", function(xhr) {
         var response = JSON.parse(xhr.responseText);
         var orders = response[1];
-        var sum = 0; 
-        var count = 0;
+        var sums = 0; 
+        var count = orders.length;
         for (var i = 0; i < orders.length; i++) {
             var order = orders[i];
 
@@ -113,11 +113,20 @@ function loadBill() {
 
             document.getElementById("list").appendChild(statisticsBox);
 
-            sum = sum + Number(order.profit);
-            count = i;
+            sums = sums + Number(order.profit);
         }
 
-        document.getElementById("listBill").textContent = "Danh sách đơn hàng (" + (count + 1) +") - Tổng doanh thu: " + sum
+        // Hiển thị tổng doanh thu
+        JS.connectToPHP("../main/checkSession.php", "", function(xhr) {
+            var response = JSON.parse(xhr.responseText);
+
+            var role = response[1][2];
+            if (role == "Quản lý") {
+                document.getElementById("listBill").textContent = "Danh sách đơn hàng (" + count +") - Tổng doanh thu: " + sums
+            } else {
+                document.getElementById("listBill").textContent = "Danh sách đơn hàng (" + count +" đơn hàng)"
+            }
+        });
 
         // Tạo một phần tử div mới
 var productItem = document.createElement("div");

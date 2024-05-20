@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DongDuy</title>
+    <title>Nhân viên</title>
     <link rel="stylesheet" href="../main/style.css">
     <link rel="shortcut icon" href="#"> 
 </head>
 <body>
     <div class="header_cover"><h1>d</h1></div>
     <header>
-        <a href="#" class="logo">
+        <a href="Index.html" class="logo">
             <img src="../assets/logo.svg" alt="" id="logo">
-            <!-- <span>FourDu</span> -->
         </a>
 
         <ul class="navigation">
-            <li class="list">
+            <li class="list ">
                 <a href="../Home/index.html">
                     <img src="../assets/home.svg" alt="" id="home">
                     <span>Trang chủ</span>
@@ -57,7 +56,9 @@
 
         <div class="menu">
             <a href="#" id="guide" class="guide"><img src="../assets/compass.svg" alt=""></a>
-            <a href="#" id="user" class="user"><img src="../assets/person.svg" alt=""></a>
+            <div class="user_frame">
+                <img id="user" class="user" src="../avatar/admin.png" alt="">
+            </div>
             <div id="menu-icon"><img src="../assets/menu.svg" alt=""></div>
         </div>
 
@@ -65,30 +66,30 @@
             <div class="user_modal_content">
                 <div id="basic_info" class="basic_info">
                     <div class="contain1">
-                        <img src="../assets/background.jpg" alt="" id="avatar">
+                        <img src="../avatar/admin.png" alt="" id="avatar">
                         <div class="contain2">
                             <p id="name" class="name">Dong Duy</p>
                             <p id="role" class="role">Quản trị viên</p>
                         </div>
                     </div>
                 </div>
-                <div id="profile" class="profile">
+                <div id="profile" class="profile user_menu" href="PersonalInformation/PersonalInformation.html">
                     <img src="../assets/person-circle-outline.svg" alt="">
                     <span>Xem hồ sơ</span>
                 </div>
-                <div id="account" class="account">
+                <div id="account" class="account user_menu">
                     <img src="../assets/at-outline.svg" alt="">
                     <span>Quản lý tài khoản</span>
                 </div>
-                <div id="setting" class="setting">
+                <div id="setting" class="setting user_menu">
                     <img src="../assets/settings-outline.svg" alt="">
                     <span>Cài đặt</span>
                 </div>
-                <div id="help" class="help">
+                <div id="help" class="help user_menu">
                     <img src="../assets/help-circle-outline.svg" alt="">
                     <span>Trợ giúp và hỗ trợ</span>
                 </div>
-                <div id="themes" class="themes">
+                <div id="themes" class="themes user_menu">
                     <img src="../assets/moon-outline.svg" alt="">
                     <span>Giao diện</span>
                 </div>
@@ -98,7 +99,6 @@
                 </div>
             </div>
         </div>
-        
     </header>
 
     <main>

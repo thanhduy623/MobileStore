@@ -68,44 +68,66 @@ function behaviorManagement() {
     }
 }
 
+document.getElementById("back").addEventListener('click', function() {
+    window.location.href = '../Home/index.html';
+})
+
 
 //Cập nhật thông tin các trường theo database
 function loadInformation(username) {
     var path = "../profile/inforStaff.php";
     var data = "username=" + encodeURIComponent(username) + "&process=loadInformation"
-    JS.connectToPHP(path, data, function(xhr){
+    JS.connectToPHP(path, data, async function(xhr){
         var response = JSON.parse(xhr.responseText);
 
         document.getElementById("infor_name").value = response.fullname.substring(response.fullname.lastIndexOf(" ") + 1);
         document.getElementById("infor_surname").value = response.fullname.substring(0, response.fullname.lastIndexOf(" "));
         document.getElementById("infor_phone").value = response.phone;
         document.getElementById("infor_email").value = response.email;
-        document.getElementById("infor_date").value = response.dateBirth.slice(9,10);
-        document.getElementById("infor_month").value = response.dateBirth.slice(6,7);
-        document.getElementById("infor_year").value = response.dateBirth.slice(0,4);
+        document.getElementById("infor_date").value = response.dateBirth.slice(9, 10);
+        document.getElementById("infor_month").value = response.dateBirth.slice(6, 7);
+        document.getElementById("infor_year").value = response.dateBirth.slice(0, 4);
         document.getElementById("change_role_select").value = response.roled;
-        
-        //Avatar
-        username = response.email.split('@')[0];
-        document.getElementById("infor_avatar").src = "../avatar/" + username + ".png"
 
+        // Avatar
+        username = response.email.split('@')[0];
+        var link = "../avatar/" + username + ".png";
+        
+        async function checkFileExistence(url) {
+            try {
+                const response = await fetch(url);
+                return response.ok;
+            } catch (error) {
+                console.error("Error fetching the file:", error);
+                return false;
+            }
+        }
+
+        async function updateAvatar() {
+            const avatarImg = document.getElementById("infor_avatar");
+            const fileExists = await checkFileExistence(link);
+            avatarImg.src = fileExists ? link : "../avatar/admin.png";
+        }
+
+        // Gọi hàm updateAvatar để kiểm tra và cập nhật ảnh đại diện
+        await updateAvatar();
 
         // Giới tính
         var genders = document.querySelectorAll('input[name="gender"]');
         genders.forEach(function(gender) {
-            if(gender.value === response.gender) {
+            if (gender.value === response.gender) {
                 gender.checked = true;
             }
         });
 
-        //Trạng thái tài khoản
-        if(response.actived == 1) {
-            document.querySelector("#deactivate_account_btn button").textContent = "Vô hiệu khóa tài khoản";
+        // Trạng thái tài khoản
+        if (response.actived == 1) {
+            document.querySelector("#deactivate_account_btn button").textContent = "Vô hiệu hóa tài khoản";
         }
-        if(response.actived == -1) {
+        if (response.actived == -1) {
             document.querySelector("#deactivate_account_btn button").textContent = "Kích hoạt lại tài khoản";
         }
-    })
+    });
 }
 
 

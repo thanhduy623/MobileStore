@@ -183,7 +183,7 @@ function load_create(data) {
     });
 
     var sum = 0;
-    var count = 0;
+    var count = data.length;
     var dateList = [];
     var totalList = [];
     var profitList = [];
@@ -218,15 +218,21 @@ function load_create(data) {
         document.getElementById("list").appendChild(statisticsBox);
 
         sum = sum + Number(order.profit);
-        count = i;
-        
-        dateList.push(order.created)
+        dateList.push(order.idBill)
         totalList.push(order.total)
         profitList.push(order.profit)
     }
 
-    document.getElementById("listBill").textContent = "Danh sách đơn hàng (" + (count + 1) +") - Tổng doanh thu: " + sum
-
+    // Hiển thị tổng doanh thu
+    JS.connectToPHP("../main/checkSession.php", "", function(xhr) {
+        var response = JSON.parse(xhr.responseText);
+        var role = response[1][2];
+        if (role == "Quản lý") {
+            document.getElementById("listBill").textContent = "Danh sách đơn hàng (" + count +") - Tổng doanh thu: " + sum
+        } else {
+            document.getElementById("listBill").textContent = "Danh sách đơn hàng (" + count +" đơn hàng)"
+        }
+    });
     return [dateList, totalList, profitList]
 }
 
@@ -243,31 +249,42 @@ function createCanvas(dataList) {
 
     var columnGap = 40;
     var columnWidth = (canvasWidth - (columnGap * (totalList.length + 1))) / totalList.length;
-
+    
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
-    for (var i = 0; i < totalList.length; i++) {
-        var x = columnGap * (i + 1) + columnWidth * i;
+    JS.connectToPHP("../main/checkSession.php", "", function(xhr) {
+        var response = JSON.parse(xhr.responseText);
 
-        // Tính tỷ lệ của profitList so với totalList
-        var profitRatio = profitList[i] / totalList[i];
+        var role = response[1][2];
+        if (role == "Quản lý") {
+            for (var i = 0; i < totalList.length; i++) {
+                var x = columnGap * (i + 1) + columnWidth * i;
+        
+                // Tính tỷ lệ của profitList so với totalList
+                var profitRatio = profitList[i] / totalList[i];
+        
+                // Tính chiều cao của cột totalList
+                var totalHeight = canvasHeight;
+        
+                // Tính chiều cao của cột profitList
+                var profitHeight = totalHeight * profitRatio;
+        
+                // Vẽ cột totalList
+                ctx.fillStyle = "rgba(255, 182, 193, 0.7)"; // Màu sắc pastel
+                ctx.fillRect(x, canvasHeight - totalHeight, columnWidth, totalHeight);
+        
+                // Vẽ cột profitList
+                ctx.fillStyle = "rgba(152, 251, 152, 0.7)"; // Màu sắc pastel
+                ctx.fillRect(x, canvasHeight - profitHeight, columnWidth, profitHeight);
+        
+                // Vẽ nhãn ngày
+                ctx.fillStyle = "black";
+                ctx.fillText(dateList[i], x + columnWidth / 2, canvasHeight - 10);
+            }
+        }
+    });
+    
+    
 
-        // Tính chiều cao của cột totalList
-        var totalHeight = canvasHeight;
-
-        // Tính chiều cao của cột profitList
-        var profitHeight = totalHeight * profitRatio;
-
-        // Vẽ cột totalList
-        ctx.fillStyle = "rgba(255, 182, 193, 0.7)"; // Màu sắc pastel
-        ctx.fillRect(x, canvasHeight - totalHeight, columnWidth, totalHeight);
-
-        // Vẽ cột profitList
-        ctx.fillStyle = "rgba(152, 251, 152, 0.7)"; // Màu sắc pastel
-        ctx.fillRect(x, canvasHeight - profitHeight, columnWidth, profitHeight);
-
-        // Vẽ nhãn ngày
-        ctx.fillStyle = "black";
-        ctx.fillText(dateList[i], x + columnWidth / 2, canvasHeight - 10);
-    }
+    
 }

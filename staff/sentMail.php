@@ -42,7 +42,7 @@
             $encryptedExpires = base64_encode($expires);
 
             // Tạo liên kết an toàn với các thông tin đã mã hóa
-            $activationLink = "http://localhost/MobileStore/staff/actived_0.php?username=$encryptedUsername&expires=$encryptedExpires";
+            $activationLink = "http://localhost/MobileStore/staff/active.html?username=$encryptedUsername&expires=$encryptedExpires";
             $content =  "Chào " . $name . ",<br><br>" .
                         "Đây là tin nhắn tự động đến từ Four Du Store!<br><br>" .
                         "Vui lòng chọn vào <a href=\"$activationLink\">đây</a> để kích hoạt tài khoản.";

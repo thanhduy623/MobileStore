@@ -28,9 +28,6 @@
                 return;
             }
             
-            JS.connectToPHP(path, data, function(xhr) {
-                alert("a");
-            });
 
         });
     </script>

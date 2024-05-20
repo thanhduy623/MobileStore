@@ -1,3 +1,22 @@
+import * as JS from '../main/mainJS.js';
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM fully loaded and parsed");
+    checkSession();
+
+    JS.connectToPHP("../main/checkSession.php", "", function(xhr) {
+        var response = JSON.parse(xhr.responseText);
+        console.log("Response from checkSession.php:", response);
+
+        if(response[0]) {
+            document.getElementById("user").src = response[1][3];
+            document.getElementById("avatar").src = response[1][3];
+            document.getElementById("name").textContent = response[1][1];
+            document.getElementById("role").textContent = response[1][2];
+        }
+    });
+});
+
 export function checkSession() {
     connectToPHP("../main/checkSession.php","", function(xhr) {
         var response = JSON.parse(xhr.responseText);
@@ -14,17 +33,27 @@ export function checkSession() {
             return;
         }
 
-        if(response[1][4] == 0) {
+        
+        let firstTimeCheck = sessionStorage.getItem('firstTimeCheck') || 'false';
+
+        if (response[1][4] == 0 && firstTimeCheck === 'false') {
             alert("Vui lòng đổi mật khẩu lần đầu...");
-            window.location.href = '../login/login.php';
+            sessionStorage.setItem('firstTimeCheck', 'true');
+            window.location.href = '../staff/active.html?username=' + btoa(response[1][0]);
             return;
         }
 
-        alert("1")
         document.getElementById("user").src = response[1][3];
         document.getElementById("avatar").src = response[1][3];
-        document.getElementById("name").src = response[1][1];
-        document.getElementById("role").src = response[1][2];
+        document.getElementById("name").value = response[1][1];
+        document.getElementById("role").value = response[1][2];
+
+        document.getElementById("profile").addEventListener('click', function() {
+            window.location.href = "../profile?username=" + btoa(response[1][0]) + "&view=" + btoa("staff");
+        })
+        document.getElementById("logout").addEventListener('click', function() {
+            window.location.href = '../index.html';
+        })
     })
 }
 

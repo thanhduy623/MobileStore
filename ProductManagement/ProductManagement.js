@@ -3,6 +3,10 @@ document.addEventListener('DOMContentLoaded', function() {
     JS.checkSession(function() {});
 })
 
+if (document.getElementById('role').value === "Bán hàng"){
+    alert("HELLO")
+}
+
 // Category
 document.querySelectorAll('.category_card').forEach(item => {
     item.addEventListener('click', event => {
@@ -174,6 +178,7 @@ document.getElementById("upload_product_btn").addEventListener('click', function
 document.getElementById("save_change_product").addEventListener('click', saveChange);
 
 ///////////////////////////////////////////////////////////////////////
+
 function loadProduct() {
     JS.connectToPHP("../ProductManagement/product.php","process=load", function(xhr) {
         var response = JSON.parse(xhr.responseText);
@@ -320,7 +325,7 @@ function createItem(id, name, cost, price, type, img, box) {
     newItem.innerHTML = `
         <div class="product_name" id="product_name_${id}">${name}</div>
         <img src="${img}" alt="">
-        <div class="number_code">${id}</div>
+        <div class="number_code">${atob(price)}</div>
         <div class="product_detail">
             <div class="product_code manager">
                 <img id="barcode-${id}" class="barcode" src="" alt="">
@@ -333,12 +338,19 @@ function createItem(id, name, cost, price, type, img, box) {
     `;
     // Chèn phần tử mới vào phần tử cha đã được xác định
     box.appendChild(newItem);
-
-    // Thêm sự kiện nút sửa/xóa
-    newItem.querySelector('.product_edit').addEventListener('click', eventClickEdit);
-    newItem.querySelector('.product_delete').addEventListener('click', function(event) {
-        eventClickDelete(event, newItem);
-    });
+    JS.connectToPHP("../main/checkSession.php","", function(xhr) {
+        var response = JSON.parse(xhr.responseText);
+        
+        var role = response[1][2];
+        if (role == "Quản lý") {
+            // Thêm sự kiện nút sửa/xóa
+            newItem.querySelector('.product_edit').addEventListener('click', eventClickEdit);
+            newItem.querySelector('.product_delete').addEventListener('click', function(event) {
+            eventClickDelete(event, newItem);
+            });
+        }   
+    })
+    
 
     // Tạo mã vạch và đặt vào phần tử chứa mã vạch
     createBarcode("123456", "barcode-" + id);

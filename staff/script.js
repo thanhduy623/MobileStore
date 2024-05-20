@@ -1,7 +1,22 @@
 import * as JS from '../main/mainJS.js';
+
 document.addEventListener('DOMContentLoaded', function() {
-    JS.checkSession(function() {});
-})
+    console.log("DOM fully loaded and parsed");
+    checkSession();
+
+    JS.connectToPHP("../main/checkSession.php", "", function(xhr) {
+        var response = JSON.parse(xhr.responseText);
+        console.log("Response from checkSession.php:", response);
+
+        if(response[0]) {
+            document.getElementById("user").src = response[1][3];
+            document.getElementById("avatar").src = response[1][3];
+            document.getElementById("name").textContent = response[1][1];
+            document.getElementById("role").textContent = response[1][2];
+        }
+    });
+});
+
 
 // Mobile devices menu
 const menu = document.querySelector('#menu-icon');
@@ -326,21 +341,7 @@ btnAvatar.addEventListener('click', function(event){
     input.click();
 })
 
-document.addEventListener("DOMContentLoaded", function() {
-    var name = document.getElementById('name');
-    var role = document.getElementById('role');
-    var avatar = document.getElementById('avatar');
 
-    JS.connectToPHP("../main/loadAccount.php", "", function(xhr) {
-        var response = JSON.parse(xhr.responseText);
-        name.textContent = response[0];
-        role.textContent = response[1];
-        avatar.src = response[2];
-    })
-
-    loadStaff();
-    logout();   
-});
 
 
 function logout() {
@@ -351,7 +352,6 @@ function logout() {
         })
     })
 }
-
 
 
 function loadStaff() {
@@ -369,6 +369,19 @@ function loadStaff() {
         }
     });
 }
+
+// Lấy thông tin từ session nếu không phải quản lý không cho vào quản lý nhân viên
+JS.connectToPHP("../main/checkSession.php","", function(xhr) {
+    var response = JSON.parse(xhr.responseText);
+    
+    var role = response[1][2];
+    if (role != "Quản lý") {
+        alert("Bạn không có quyền vào trang này")
+        window.location.href = "../Home/index.html";
+        return;
+    }
+    loadStaff();
+})
 
 // Hàm gói lại để bảo vệ giá trị của i
 function createLineStaff(num, name, email, roled) {
@@ -460,13 +473,12 @@ function createDeleteHandler(username, email, name) {
 // Thêm sự kiện input vào ô findText
 document.getElementById('findText').addEventListener('input', function() {
     var searchText = this.value.trim().toLowerCase(); // Chuyển đổi kí tự nhập vào thành chữ thường để so sánh dễ dàng hơn
-    
+
     // Lặp qua tất cả các user_box
     var userBoxes = document.querySelectorAll('.user_box');
     userBoxes.forEach(function(userBox) {
         // Lấy nội dung của u_ho_ten và chuyển đổi thành chữ thường
         var uHoTen = userBox.querySelector('#u_ho_ten').textContent.toLowerCase();
-        
         // Kiểm tra xem searchText có rỗng không
         if (searchText === "") {
             // Nếu searchText rỗng, hiển thị tất cả các user_box

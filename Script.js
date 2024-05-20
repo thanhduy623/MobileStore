@@ -8,7 +8,7 @@ menu.addEventListener('click', () => {
     if (isOpen) {
         btnmenu.src = initialSrc; 
     } else {
-        btnmenu.src = "assets/close.svg"; 
+        btnmenu.src = "../assets/close.svg"; 
     }
     isOpen = !isOpen; 
     navigation.classList.toggle('open');
