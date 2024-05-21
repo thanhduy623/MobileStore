@@ -58,7 +58,7 @@ document.getElementById("btnSubmit").addEventListener('click', function() {
         //Thất bại
         if(!response[0]) {
             alert(response[1]);
-            return;
+            // return;
         }
 
         if(response[0]) {

@@ -412,13 +412,21 @@ function createLineStaff(num, name, email, roled) {
     innerUChucVu.textContent = roled;
     uChucVu.appendChild(innerUChucVu);
     userBox.appendChild(uChucVu);
+
+    // Tạo nút khóa
+    var lockBtn = document.createElement("button");
+    lockBtn.type = "button";
+    lockBtn.classList.add("edit_btn");
+    var lockImg = document.createElement("img");
+    lockImg.src = "../assets/lock.png";
+    lockBtn.appendChild(lockImg);
     
     // Tạo nút chỉnh sửa
     var editBtn = document.createElement("button");
     editBtn.type = "button";
     editBtn.classList.add("edit_btn");
     var editImg = document.createElement("img");
-    editImg.src = "../assets/create-outline.svg";
+    editImg.src = "../assets/edit.png";
     editBtn.appendChild(editImg);
 
     // Tạo nút xóa
@@ -432,6 +440,7 @@ function createLineStaff(num, name, email, roled) {
     // Tạo div chứa nút chỉnh sửa và xóa
     var editDelete = document.createElement("div");
     editDelete.classList.add("edit_delete");
+    editDelete.appendChild(lockBtn);
     editDelete.appendChild(editBtn);
     editDelete.appendChild(deleteBtn);
     userBox.appendChild(editDelete);
@@ -440,9 +449,12 @@ function createLineStaff(num, name, email, roled) {
     var username = email.split('@').shift();
 
     // Gán sự kiện click cho nút chỉnh sửa
+    lockBtn.addEventListener('click', createLockHandler(username));
+
+    // Gán sự kiện click cho nút chỉnh sửa
     editBtn.addEventListener('click', createEditHandler(username));
 
-    // Gán sự kiện click cho nút xóa
+    // Gán sự kiện click cho nút gửi mail
     deleteBtn.addEventListener('click', createDeleteHandler(username, email, name));
 
     // Thêm userBox vào listStaff
@@ -457,6 +469,13 @@ function createEditHandler(username) {
     };
 }
 
+function createLockHandler(username) {
+    return function() {
+        JS.connectToPHP("../staff/lock.php", "username=" + username, function(xhr){
+            alert(JSON.parse(xhr.responseText)[1]);
+        })
+    };
+}
 
 function createDeleteHandler(username, email, name) {
     return function() {

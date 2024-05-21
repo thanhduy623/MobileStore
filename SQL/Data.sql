@@ -1,5 +1,5 @@
 DROP DATABASE IF EXISTS STORE;
-
+ 
 create database STORE;
 use STORE;
 
@@ -24,7 +24,6 @@ insert into STAFF (username, fullname, email, gender, dateBirth, phone, roled, p
 values
 ("admin", "Quản trị viên", "admin@gmail.com", "Nam", "2004/01/01", "0000000000", "Quản lý", "$2y$10$931OhhXYyK9kXsVDJg.agOR01FaPCW1V35afsWXHCSbwCKtdADgrG", 1, "../avatar/admin.png"),
 ("staff", "Nhân viên", "staff@gmail.com", "Nữ", "2004/01/02", "0000000000", "Bán hàng", "$2y$10$931OhhXYyK9kXsVDJg.agOR01FaPCW1V35afsWXHCSbwCKtdADgrG", 1, "../avatar/admin.png");
-
 
 
 -- SẢN PHẨM -------------------------------------------------------------------------
@@ -52,7 +51,9 @@ values
 ("ID0001", "Ipad pro 11inch", 18000000, 21000000, "iPad", "../product/ID0001.png", 72, 32, 40),
 ("AP0001", "Airpods pro 1", 3000000, 5000000, "AirPods", "../product/AP0001.png",  99, 32, 67),
 ("AW0001", "Apple Watch SE 44mm", 5000000, 7000000, "Apple Watch", "../product/IP0004.png", 32, 2, 30),
+("AT0001", "Airtag", 5000000, 7000000, "AirTag", "../product/IP0004.png", 32, 2, 30),
 ("AV0001", "Apple Vision Pro", 100000000, 130000000, "Apple Vision", "../product/IP0004.png", 74, 24, 50);
+select * from product;
 
 
 
@@ -87,25 +88,24 @@ create table BILL
 );
 
 insert into BILL values
-("240518001", "Nguyễn Thanh Duy", "Kiên Giang", "0834828525", "2024/05/18", 1000000),
-("240518002", "Nguyễn Quốc Duy", "Kiên Giang", "0363733898", "2024/05/18", 2000000),
-("240518003", "Nguyễn Thanh Duy", "Kiên Giang", "0834828525", "2024/05/18", 3000000),
+("240518001", "Nguyễn Thanh Duy", "Kiên Giang", "0834828525", "2024/05/20", 1000000),
+("240518002", "Nguyễn Quốc Duy", "Kiên Giang", "0363733898", "2024/05/20", 2000000),
+("240518003", "Nguyễn Thanh Duy", "Kiên Giang", "0834828525", "2024/05/20", 3000000),
 ("240517001", "Khưu Trùng Dương", "Kiên Giang", "0364912107", "2024/05/17", 4000000);
 
 -- CHI TIẾT -------------------------------------------------------------------------
 
-
 create table DETAIL 
 (
-	idBill		varchar(12),
+	idBill		varchar(9),
     idProduct	varchar(10),
-    quantity	int,
+    quantity	BIGINT,
 	
     PRIMARY KEY (idBill, idProduct),
-    FOREIGN KEY (idBill) REFERENCES BILL(idBill)
+    FOREIGN KEY (idBill) REFERENCES BILL(idBill),
+    FOREIGN KEY (idProduct) REFERENCES PRODUCT(idProduct)
 );
-ALTER TABLE DETAIL
-MODIFY COLUMN quantity BIGINT;
+
 insert into DETAIL (idBill, idProduct, quantity) values 
 ("240518001", "IP0001", 3),
 ("240518001", "MA0001", 5),
@@ -113,10 +113,8 @@ insert into DETAIL (idBill, idProduct, quantity) values
 ("240518002", "AP0001", 10);
 
 
-
-
 -- ID TỰ ĐỘNG HÓA ĐƠN -------------------------------------------------------------------------
-DELIMITER $
+DELIMITER $$
 
 -- Tạo hàm generate_bill_code
 CREATE FUNCTION generate_bill_code(prefix_param VARCHAR(6)) RETURNS VARCHAR(9)

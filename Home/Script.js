@@ -1,6 +1,6 @@
 import * as JS from '../main/mainJS.js';
 document.addEventListener('DOMContentLoaded', function() {
-    connectToPHP("../main/checkSession.php","", function(xhr) {
+    JS.connectToPHP("../main/checkSession.php","", function(xhr) {
         var response = JSON.parse(xhr.responseText);
 
         if(response[0] == false) {

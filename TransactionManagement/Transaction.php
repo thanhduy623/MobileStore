@@ -144,6 +144,23 @@
             exit();
         }
 
+        try {
+            $query = "UPDATE PRODUCT SET selled = selled + ?, remain = remain - ? WHERE idProduct = ?";
+            $stmt = $conn->prepare($query);
+
+            // Duyệt qua các sản phẩm
+            $productInfoArray = json_decode($_POST['detail'], true);
+            foreach ($productInfoArray as $productInfo) {
+                $stmt->bind_param("iis", $productInfo[1], $productInfo[1], $productInfo[0]);
+                $stmt->execute();
+            }
+            
+        } catch (Exception $e) {
+            echo json_encode([false, "Thêm giao dịch thất bại"]);
+            exit();
+        }
+
+
         echo json_encode([true, "Thêm giao dịch thành công"]);
     }
 

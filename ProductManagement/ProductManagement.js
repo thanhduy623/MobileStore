@@ -298,7 +298,7 @@ switch(type) {
         createItem(id, name, cost, price, type, img, document.getElementById("containVision"));
         break;
     case "AirPods":
-        createItem(id, name, cost, price, type, img, document.getElementById("containAirtag"));
+        createItem(id, name, cost, price, type, img, document.getElementById("containAirpods"));
         break;
     case "AirTag":
         createItem(id, name, cost, price, type, img, document.getElementById("containAirtag"));
@@ -353,7 +353,7 @@ function createItem(id, name, cost, price, type, img, box) {
     
 
     // Tạo mã vạch và đặt vào phần tử chứa mã vạch
-    createBarcode("123456", "barcode-" + id);
+    createBarcode(id, "barcode-" + id);
 }
 
 function createBarcode(id, barcode) {

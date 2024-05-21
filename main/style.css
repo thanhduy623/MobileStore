@@ -1423,6 +1423,12 @@ input[type="radio"] {
     display: flex;
     justify-self: center;
     margin-bottom: 10px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block; /* hoặc inline-block tùy thuộc vào ngữ cảnh */
+    width: 100%; /* Đặt chiều rộng phù hợp cho phần tử */
 }
 
 .product_box img{

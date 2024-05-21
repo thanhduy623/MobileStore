@@ -26,8 +26,14 @@
     }
 
     if($process === "changePWD") {
-        //4. Thay đổi phân quyền
+        //5. Thay đổi phân quyền
         changePWD();
+        exit();
+    }
+
+    if($process === "delete") {
+        //6. Xóa nhân viên
+        delete();
         exit();
     }
 
@@ -136,6 +142,7 @@
         exit();
     }
 
+    // 5. Đổi mật khẩu
     function changePWD() {
         $username = $_POST['username'];
         $pwd = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
@@ -149,4 +156,31 @@
         echo("Đã đổi mật khẩu thành công");
         exit();
     }
-?>
+
+    // 6. Xóa tài khoản
+    function delete() {
+        $username = $_POST['username'];
+        include "../main/connectSQL.php";
+        $conn = connectDB();
+
+    
+        $query = "SELECT * FROM STAFF WHERE username = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        
+        if ($row['actived'] == 1) {
+            echo json_encode([false, "Không thể xóa do tài khoản đang hoạt động"]);
+            exit();
+        }
+
+        $query = "DELETE FROM STAFF WHERE username = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        echo json_encode([true, "Xóa thành công"]);
+        exit();
+    }
+ ?>

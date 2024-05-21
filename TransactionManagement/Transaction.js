@@ -200,24 +200,28 @@ function createItem() {
         return;
     }
 
+    if (id.indexOf("-") !== -1) {
+        id = id.substring(0, id.indexOf("-"));
+    }
+
     //Kiểm tra đầu vào
     if(nu.length == 0 || nu < 1) {
         alert("Số lượng phải lớn hơn 0");
         return;
     }
 
-    if (id.indexOf("-") !== -1) {
-        id = id.substring(0, id.indexOf("-"));
-    }
-
-
     //Check trùng
     var isDuplicate = false;
     Array.from(document.getElementsByClassName("b_product_id")).forEach(function(productIdElement) {
         if(productIdElement.textContent == id) {
-            alert("Sản phẩm bị trùng, vui lòng kiểm tra lại");
-            isDuplicate = true;
-            return;
+            //Không cập nhật lại
+            if (!window.confirm("Sản phẩm đã có trong danh sách, bạn có muốn cật nhật lại?")) {
+                isDuplicate = true;
+                return;
+            }
+
+            //Cập nhật lại
+            document.getElementById("product_list_box_" + id).remove();
         }
     });
     if(isDuplicate) {return}
@@ -249,6 +253,8 @@ function createItem() {
 
         //Thêm đối tượng
         addItem(id, response[1].nameProduct, response[1].price, nu);
+        document.getElementById("transaction_product_id").value = "";
+        document.getElementById("transaction_product_quanity").value = 1;
     })
 }
 
@@ -318,6 +324,10 @@ function deleteItem(id, price) {
     document.getElementById("product_list_box_" + id).remove();
     document.getElementById("transaction_total").value = document.getElementById("transaction_total").value - price;
     compute();
+
+    JS.connectToPHP("../TransactionManagement/Transaction.php", data, function(xhr) {
+        var response = JSON.parse(xhr.responseText);
+    })
 }
 
 function transaction() {

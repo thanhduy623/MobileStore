@@ -69,7 +69,7 @@ function behaviorManagement() {
 }
 
 document.getElementById("back").addEventListener('click', function() {
-    window.location.href = '../Home/index.html';
+    window.location.href = '../staff/index.html';
 })
 
 
@@ -170,12 +170,13 @@ document.getElementById("change_avatar").addEventListener('click', function(){
             reader.onload = function() 
             {
                 var imageData = reader.result;
-                var path = "../staff/uploadAvatar.php";
+                var path = "../staff/uploadAvatarSave.php";
                 var data = 'email=' + encodeURIComponent(document.getElementById("infor_email").value) +
                            '&image=' + encodeURIComponent(imageData);
                 JS.connectToPHP(path, data, function(xhr) {
                     //Cập nhật ảnh mới
                     document.getElementById("infor_avatar").src = xhr.responseText;
+                    location.reload();
                 });
             };
         }
@@ -270,7 +271,19 @@ function changeRoled(username) {
 
 
 function deleteAccount(username) {
-    alert("Không thể xóa nhân viên");
+
+    if (!window.confirm('Bạn có chắc chắn muốn xóa tài khoản này không?')) {return;}
+
+    var path =  "../profile/inforStaff.php";
+    var data =  "username=" + username +
+                "&process=delete";
+
+    JS.connectToPHP(path, data, function(xhr) {
+        var response = JSON.parse(xhr.responseText);
+        if(!response[0]) {alert(response[1]); return;}
+        alert(response[1]);
+        document.getElementById("back").click();
+    });
 }
 
 function changePWD() {
