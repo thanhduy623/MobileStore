@@ -42,9 +42,23 @@ function loadCustomer() {
     
             // Thêm userBox vào container
             container.appendChild(userBox);
+
+            (function(cus) {
+                userBox.addEventListener('click', function() {
+                    detailCustomer(cus.phone, cus.fullName, cus.address);
+                });
+            })(cus);
         }
-    })
+    });
 }
+
+function detailCustomer(sdt, hoTen, diaChi) {
+    window.location.href = "../CustomerDetail/index.html?" +
+                           "inf1=" + encodeURIComponent(sdt) +
+                           "&inf2=" + encodeURIComponent(hoTen) +
+                           "&inf3=" + encodeURIComponent(diaChi);
+}
+
 
 function find() {
     var sdt = document.getElementById("find").value;

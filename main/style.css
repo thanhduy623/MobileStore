@@ -1062,7 +1062,7 @@ input[type="radio"] {
     justify-content: center;
 }
 
-.staff_information_content{
+.staff_information_content, .customer_information_content{
     display: flex;
     flex-direction: column;
     padding: 0px 10% 0 0%;
@@ -1070,7 +1070,7 @@ input[type="radio"] {
     z-index: 0;
 }
 
-.staff_information_content input{
+.staff_information_content input, .customer_information_content input{
     margin-bottom: 15px;
     height: 45px;
     width: 100%;
@@ -1080,7 +1080,7 @@ input[type="radio"] {
     font-size: 1em;
 }
 
-.staff_information_content span{
+.staff_information_content span, .customer_information_content span{
     font-size: 0.9em;
 }
 
@@ -1423,12 +1423,6 @@ input[type="radio"] {
     display: flex;
     justify-self: center;
     margin-bottom: 10px;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block; /* hoặc inline-block tùy thuộc vào ngữ cảnh */
-    width: 100%; /* Đặt chiều rộng phù hợp cho phần tử */
 }
 
 .product_box img{
@@ -2028,6 +2022,10 @@ input[type="radio"] {
                                                     
                                                     
 ====================================================================================================================================*/
+.margin_bottom2{
+    margin-bottom: 45px;
+}
+
 .transaction_header_helper{
     display: flex;
     padding: 0px 26px 6px 26px;
@@ -2043,6 +2041,10 @@ input[type="radio"] {
     width: 20%;
 }
 
+#cus_ma{
+    width: 25%;
+}
+
 #tr_kh_hang{
     width: 35%;
 }
@@ -2051,8 +2053,16 @@ input[type="radio"] {
     width: 25%;
 }
 
+#cus_ngay{
+    width: 30%;
+}
+
 #tr_tongtien{
     width: 25%;
+}
+
+#cus_tongtien{
+    width: 30%;
 }
 
 .transaction_main_content{
@@ -2091,6 +2101,11 @@ input[type="radio"] {
     padding-left: 0px;
 }
 
+#b_cus_ma{
+    width: 25%;
+    padding-left: 15px;
+}
+
 #b_tr_kh_hang{
     width: 35%;
     padding-right: 15px;
@@ -2103,12 +2118,23 @@ input[type="radio"] {
     padding-right: 15px;
 }
 
+#b_cus_ngay{
+    outline: none;
+    border: none;
+    width: 30%;
+    padding-right: 15px;
+}
+
 #b_tr_ngay::-webkit-calendar-picker-indicator {
     display: none;
 }
 
 #b_tr_tongtien{
     width: 25%;
+}
+
+#b_cus_tongtien{
+    width: 30%;
 }
 
 .transaction_delete{
@@ -2209,6 +2235,19 @@ input[type="radio"] {
 
 #c_u_sdt{
     width: 25%;
+}
+
+.customer_avatar{
+    width: 250px;
+    height: 250px;  
+    border-radius: 180px;
+    border: 3px solid #ccc;
+}
+
+.customer_infor_details{
+    width: 55%;
+    display: flex;
+    margin-left: 10px;
 }
 
 /* ======================================================================================================================================

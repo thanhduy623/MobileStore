@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giao dịch</title>
-    <link rel="stylesheet" href="../main/style.css">
-    <link rel="shortcut icon" href="assets/logo-icon.svg"> 
+    <title>Thông tin khách hàng</title>
+    <link rel="stylesheet" href="../main//style.css">
+    <link rel="shortcut icon" href="../assets/logo-icon.svg"> 
 </head>
 <body>
     <header>
@@ -32,13 +32,13 @@
                     <span>Sản phẩm</span>
                 </a>
             </li>
-            <li class="list active">
+            <li class="list">
                 <a href="../TransactionManagement/index.html">
                     <img src="../assets/cart.svg" alt="" id="transaction">
                     <span>Giao dịch</span>
                 </a>
             </li>
-            <li class="list">
+            <li class="list active">
                 <a href="../CustomerManagement/index.html">
                     <img src="../assets/chatbubbles.svg" alt="" id="client">
                     <span>Khách hàng</span>
@@ -71,7 +71,7 @@
                             <p id="role" class="role">Quản trị viên</p>
                         </div>
                     </div>
-                </div>transaction_customer_name
+                </div>
                 <div id="profile" class="profile">
                     <img src="../assets/person-circle-outline.svg" alt="">
                     <span>Xem hồ sơ</span>
@@ -101,82 +101,40 @@
     </header>
 
     <main>
-        
-
-        <div class="create_transaction_modal" id="create_transaction_modal">
-            <div id="create_transaction_container" class="create_transaction_container">
-                <div class="create_transaction_header">
-                    <p>Tạo giao dịch mới</p>
-                </div>
-                <div class="create_transaction_content">
-                    <div>
-                        <div class="contain1">
-                            <div>   
-                                <span><strong>Mã giao dịch</strong></span>
-                                <input type="text" name="transaction_id" id="transaction_id" readonly>
-                            </div>
-                            <div>
-                                <span><strong>Ngày tạo</strong></span>
-                                <input type="date" name="transaction_date" id="transaction_date" readonly>
-                            </div>
-                            
-                        </div>
-                        
-                        <div class="margin_bottom"><span><strong>Thông tin khách hàng</strong></span></div>
-                        <div class="">
-                            <span>Số điện thoại</span>
-                            <input type="text" name="transaction_customer" id="transaction_customer_phone_number">
-                            <span>Họ tên</span>
-                            <input type="text" name="transaction_customer" id="transaction_customer_name" readonly>
-                            <span>Địa chỉ</span>
-                            <input type="text" name="transaction_customer" id="transaction_customer_address" readonly>
-                        </div>
-
-                        <div class="margin_bottom">
-                            <span><strong>Thông tin Sản phẩm</strong></span>
-                        </div>
-                        <div class="contain1">
-                            <div class="contain2 div45">
-                                <span>Mã sản phẩm</span>
-                                <input type="text" name="transaction_product_id" id="transaction_product_id" list="product_ids">
-                                <datalist id="product_ids"></datalist>
-                            </div>
-                            <div class="contain2 div25">
-                                <span>Số lượng</span>
-                                <div class="contain1 space_between">
-                                    <input type="number" name="transaction_product_quanity" id="transaction_product_quanity">
-                                    <button id="addItem" class="plus-button">+</button>
-                                </div>
-                            </div>
-                        </div>                        
-                        <span>Danh mục sản phẩm</span>
-                        <div class="transaction_product_list" id="transaction_product_list">
-                        </div>
-
-                        <span><strong>Tổng tiền</strong></span>
-                        <input type="number" name="transaction_total" id="transaction_total" value="0" readonly>
-
-                        <span><strong>Tiền khách đưa</strong></span>
-                        <input type="number" name="transaction_received_money" id="transaction_received_money"  value="0">
-
-                        <span><strong>Tiền thối lại</strong></span>
-                        <input type="number" name="transaction_return_money" id="transaction_return_money" class="margin_bottom_zero" value="0" readonly>
-
-
-                    </div>
-                </div>
-                <div class="create_transaction_footer">
-                    <div class="contain1 create_cancel">
-                        <button class="cancel" id="cancel">Hủy</button>
-                        <button class="create" id="create">Tạo</button>
-                    </div>  
-                </div>
+        <div class="customer_header">
+            <a href="CustomerManagement.html" class="title">Khách hàng</a>
+            <div class="path">
+                <a href="#">Khách hàng •</a> 
+                <a href="#">Thông tin</a> 
+                <a href="#"></a> 
             </div>
         </div>
-
-        <!-- hehe -->
+        <div id="customer_information_content" class="customer_information_content">
+            <div class="midTitle">
+                <span>Thông tin khách hàng</span>
+            </div>
+            <div class="contain1 margin_bottom2">
+                <img id="customer_infor_avatar" src="../assets/logo_square.png" alt="" class="customer_avatar">
+                <div class="contain2 center_element customer_infor_details">
+                    <span>Tên</span>
+                    <input type="text" id="customer_name" readonly>
+                    <span>Số điện thoại</span>
+                    <input type="text" id="customer_phone" readonly>
+                    <span>Địa chỉ</span>
+                    <input type="text" id="customer_address" readonly>
+                </div>
+            </div>
+            <div class="smallTitle margin_bottom">Lịch sử giao dịch</div>
+            <div class="transaction_header_helper">
+                <p id="cus_ma">Mã giao dịch</p>
+                <p id="cus_ngay">Ngày tạo</p>
+                <p id="cus_tongtien">Tổng tiền</p>
+            </div>
+            <div id="transaction_main_content" class="transaction_main_content">
+            </div>
+        </div>
         <div class="transaction_details_modal" id="transaction_details_modal">
-            <div class="transaction_details_container">
+            <div id="transaction_details_container" class="transaction_details_container">
                 <div class="transaction_details_header">
                     <p>Chi tiết hóa đơn</p>
                 </div>
@@ -188,11 +146,14 @@
                                 <input type="text" name="transaction_details_id" id="transaction_details_id" value="123456" readonly>
                             </div>
                             <div>
-                                <span><strong>Khách hàng</strong></span>
+                                <span><strong>Số điện thoại</strong></span>
                                 <input type="text" name="transaction_details_date" id="transaction_details_date" readonly>
                             </div>
                         </div>
                         
+                        <span><strong>Họ và tên khách hàng</strong></span>
+                        <input type="text" name="transaction_details_total" id="transaction_details_name" readonly>
+
                         <span><strong>Tổng tiền</strong></span>
                         <input type="number" name="transaction_details_total" id="transaction_details_total" readonly>
                                               
@@ -206,37 +167,12 @@
                     </div>  
                 </div>
             </div>
-        </div>
-
-
-        <a href="#" class="title">Giao dịch</a>
-            <div class="path">
-                <a href="#">Sản phẩm •</a> 
-                <a href="#">Danh sách giao dịch</a> 
-            </div>
-        <div class="contain3">
-            <div class="search_btn">
-                <img src="../assets/search.svg" alt="">
-                <input type="text" id="find" placeholder="Tìm kiếm">
-            </div>
-            <div class="create_account_btn" id="create_transaction_btn">
-                <img src="../assets/add.svg" alt="">
-                <span>Tạo giao dịch</span>
-            </div>
-        </div>
-        <div class="transaction_header_helper">
-            <p id="tr_ma">Mã giao dịch</p>
-            <p id="tr_ngay">Ngày tạo</p>
-            <p id="tr_kh_hang">Tên khách hàng</p>
-            <p id="tr_tongtien">Tổng tiền</p>
-        </div>
-        <div id="transaction_main_content" class="transaction_main_content"></div>
+        </div>  
     </main>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" class="indexScript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js" class="indexScript"></script>
     <script src="../Script.js" class="indexScript"></script>
-    <script src="Transaction.js" type="module"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="customer_information.js" type="module"></script>
+    <!-- <script src="../CustomerManagement/CustomerManagement.js" type="module"></script> -->
 </body>
 </html>

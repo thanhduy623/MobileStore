@@ -546,3 +546,21 @@ function find() {
         }
     });
 }
+
+
+document.getElementById("transaction_total").addEventListener('click', printer)
+
+// function printer() {
+//     var element = document.getElementById("create_transaction_container");
+//     console.log('Element height:', element.offsetHeight);
+//     console.log('Element width:', element.offsetWidth);
+//     console.log('Element content:', element.innerHTML);
+
+//     html2pdf(element, {
+//         margin: 1,
+//         filename: 'transaction.pdf',
+//         image: { type: 'jpeg', quality: 0.98 },
+//         html2canvas: { scale: 2, scrollX: 0, scrollY: 0, windowWidth: document.documentElement.offsetWidth, windowHeight: document.documentElement.offsetHeight },
+//         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+//     });
+// }

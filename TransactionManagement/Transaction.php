@@ -30,7 +30,10 @@
     if($process === "loadDetail") {
         loadDetail();
     }
-
+    
+    if($process === "detailCus") {
+        detail_cus();
+    }
 
     function createId() {
         try {
@@ -215,5 +218,28 @@
             echo json_encode([false, "Lấy dữ liệu giao dịch thất bại"]);
             exit();
         }
+    }
+
+    function detail_cus() {
+
+        $conn = connectDB();
+        $query = "SELECT b.idBill, b.fullname, b.address, b.phone, b.created, b.total,
+                d.idProduct, d.quantity
+                FROM BILL b
+                JOIN DETAIL d ON b.idBill = d.idBill
+                WHERE b.idBill = ?";
+
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $_POST['id']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Tạo mảng để lưu trữ kết quả
+        $billDetails = array();
+        while ($row = $result->fetch_assoc()) {
+            $billDetails[] = $row;
+        }
+
+        echo json_encode($billDetails);
     }
 ?>
