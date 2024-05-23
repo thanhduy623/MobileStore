@@ -61,24 +61,20 @@ function loadBill() {
             transactionBox.appendChild(bCusNgay);
             transactionBox.appendChild(bCusTongtien);
 
-
             document.getElementById("transaction_main_content").appendChild(transactionBox);
-            transactionBox.addEventListener('click', seeDetail(bill.idBill))
+            transactionBox.addEventListener('click', seeDetail(bill.idBill, bill.created))
         }
     })
 }
 
-function seeDetail(idBill) {
+function seeDetail(bill, date) {
     return function() {
-        alert(idBill)
-        var data =  "id=" + idBill +
-                    "&process=detailCus"
-        JS.connectToPHP("../TransactionManagement/Transaction.php", data, function(xhr) {
-            var response = JSON.parse(xhr.responseText);
-            for (var i = response.length -1; i >= 0; i--) {
-                var bill = response[i];
-                console.log(bill)
-            }
-        })
+
+        var cus = document.getElementById("customer_name").value.trim().split(' ');
+        cus = cus[cus.length - 1] + " - " + document.getElementById("customer_phone").value;
+
+        window.open('../TransactionManagement/Bill.html?id=' + encodeURIComponent(bill) + 
+                                                        "&cus=" + encodeURIComponent(cus) +
+                                                        "&date=" + encodeURIComponent(date));
     }
 }

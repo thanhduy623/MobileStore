@@ -316,8 +316,12 @@ function addItem(id, name, price, num) {
     // Thêm khối transaction_product_list_box vào transaction_product_list
     productList.appendChild(productBox);
 
-    var sum = document.getElementById("transaction_total")
-    sum.value = parseInt(sum.value, 10) + price * num;
+    var sum = 0
+    Array.from(document.getElementsByClassName("b_product_total")).forEach(function(element) {
+        var value = parseFloat(element.textContent.trim());
+        sum += value;
+    });
+    document.getElementById("transaction_total").value = sum;
 }
 
 function deleteItem(id, price) {
@@ -387,10 +391,15 @@ function transaction() {
         if(JSON.parse(xhr.responseText)[0]) {alert(JSON.parse(xhr.responseText)[1])}
         loadTran();
     })
+
+    printer(
+        document.getElementById('transaction_id').value,
+        document.getElementById('transaction_customer_name').value.trim().split(' ').pop() + " - " +
+        document.getElementById('transaction_customer_phone_number').value,
+        document.getElementById('transaction_date').value
+    )
     document.getElementById("cancel").click();
 }
-
-
 
 
 function cancel() {
@@ -470,8 +479,9 @@ function seeDetail() {
     document.body.style.overflow = "hidden";
 
     var id = this.id.split('-')[0];
+    var date = this.id.split('-')[1];
     document.getElementById("transaction_details_id").value = id;
-    document.getElementById("transaction_details_date").value = this.id.split('-')[1];
+    document.getElementById("transaction_details_date").value = date;
     document.getElementById("transaction_details_total").value = this.id.split('-')[2]; 
     
     
@@ -483,8 +493,7 @@ function seeDetail() {
         var response = JSON.parse(xhr.response)
         for (var i = 0; i < response.length; i++) {
             var detail = response[i];
-            createLineItem(detail.idProduct, detail.nameProduct, detail.quantity, detail.price)
-            
+            createLineItem(detail.idProduct, detail.nameProduct, detail.quantity, detail.price);            
         }
     })
 
@@ -547,20 +556,8 @@ function find() {
     });
 }
 
-
-document.getElementById("transaction_total").addEventListener('click', printer)
-
-// function printer() {
-//     var element = document.getElementById("create_transaction_container");
-//     console.log('Element height:', element.offsetHeight);
-//     console.log('Element width:', element.offsetWidth);
-//     console.log('Element content:', element.innerHTML);
-
-//     html2pdf(element, {
-//         margin: 1,
-//         filename: 'transaction.pdf',
-//         image: { type: 'jpeg', quality: 0.98 },
-//         html2canvas: { scale: 2, scrollX: 0, scrollY: 0, windowWidth: document.documentElement.offsetWidth, windowHeight: document.documentElement.offsetHeight },
-//         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-//     });
-// }
+function printer(bill, cus, date) {
+    window.open('../TransactionManagement/Bill.html?id=' + encodeURIComponent(bill) + 
+                                                "&cus=" + encodeURIComponent(cus) +
+                                                "&date=" + encodeURIComponent(date));
+}

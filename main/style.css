@@ -1423,6 +1423,10 @@ input[type="radio"] {
     display: flex;
     justify-self: center;
     margin-bottom: 10px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .product_box img{
@@ -2790,3 +2794,83 @@ input[type="radio"] {
 }
 
 
+/* ======================================================================================================================================
+
+
+                                                      HOA DON
+                                                    
+                                                    
+=========================================================================================================================================*/
+
+
+
+.bill_store_title{
+    display: flex;
+    right: 0;
+    text-align: end;
+}
+
+.bill_store_title #bill_logo_span{
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.bill_store_title #bill_address{
+    font-size: 0.8em;
+}
+
+.center_bill{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 350px;
+}
+
+.bill_content{
+    display: flex;
+    flex-direction: column;
+}
+
+.bill_logo{
+    height: auto;
+    width: 25px;
+    /* margin-bottom: 10px; */
+}
+
+.bill_prodcut_details{
+    display: flex;
+}
+
+.bill_sl{
+    width: 15%;
+}
+
+.bill_dongia{
+    width: 40%;
+    text-align: end;
+}
+
+.bill_thanhtien{
+    width: 45%;
+    margin-right: auto;
+    text-align: end;
+}
+
+.itali{
+    font-style: italic
+}
+
+.bill_product_name {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    margin-bottom: -20px;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+}

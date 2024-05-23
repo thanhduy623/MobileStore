@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hóa đơn</title>
+    <link rel="stylesheet" href="../main/style.css">
+    <link rel="shortcut icon" href="assets/logo-icon.svg"> 
+</head>
+<body class="center">
+    <div id="printer_bill" class="center_bill">
+        <div class="contain1 space_between margin_bottom">
+            <img src="../assets/logo-icon.svg" alt="" class="bill_logo">
+            <div class="bill_store_title contain2">
+                <span id="bill_logo_span">FourDu Store</span>
+                <span id="bill_address">19 Nguyễn Hữu Thọ, Q7</span>
+            </div>
+        </div>
+
+        <div class="midTitle center margin_bottom">
+            <span>Hóa đơn</span>
+        </div>
+        <div class="bill_content">
+            <div class="contain2 margin_bottom">
+                <div>
+                    <span>Ngày tạo:</span>
+                    <span id="date">01/01/2024</span>
+                </div>
+                <div>   
+                    <span>Mã giao dịch:</span>
+                    <span id="id">0001</span>
+                </div>
+                <div>
+                    <span>Khách hàng:</span>
+                    <span id="customer">0362010101-Duong-nhabe</span>
+                </div>
+            </div>
+
+            <div class="margin_bottom">
+                <span><strong>Danh mục Sản phẩm:</strong></span>
+                <div id="list_detail"></div>
+            </div>   
+            <div class="space_between margin_bottom">
+                <span><strong>Tổng tiền:</strong></span>
+                <span><strong id="total">20000000</strong></span>
+            </div></br>    
+            <span class="itali">Cảm ơn quý khách đã sử dụng dịch vụ!</span>            
+        </div>
+    </div>
+</body>
+<script src="Bill.js" type="module"></script>
+<script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+</html>

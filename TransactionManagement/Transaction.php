@@ -100,7 +100,7 @@
     }
 
     function addCustomer() {
-        
+        //Gộp code rồi
     }
 
 
@@ -221,13 +221,22 @@
     }
 
     function detail_cus() {
-
         $conn = connectDB();
-        $query = "SELECT b.idBill, b.fullname, b.address, b.phone, b.created, b.total,
-                d.idProduct, d.quantity
-                FROM BILL b
-                JOIN DETAIL d ON b.idBill = d.idBill
-                WHERE b.idBill = ?";
+        $query = "
+            SELECT 
+                BILL.total,
+                DETAIL.quantity,
+                PRODUCT.nameProduct,
+                PRODUCT.price
+            FROM 
+                BILL
+            JOIN 
+                DETAIL ON BILL.idBill = DETAIL.idBill
+            JOIN 
+                PRODUCT ON DETAIL.idProduct = PRODUCT.idProduct
+            WHERE 
+                BILL.idBill = ?
+        ";
 
         $stmt = $conn->prepare($query);
         $stmt->bind_param("s", $_POST['id']);
