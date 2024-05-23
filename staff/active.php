@@ -30,7 +30,7 @@
 
     function active1() {
         try {
-            $actived = 0;
+            $actived = 1;
             $username = $_POST['username'];
             $pwd = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
             
